@@ -1,0 +1,8 @@
+# IB Portal Module
+# This folder contains the Introducing Broker (IB) portal functionality
+# Structure:
+# - admin/ : IB admin pages and components
+# - user/ : IB user/client pages and components
+# - components/ : Shared IB components
+# - ui/ : UI components specific to IB portal
+
