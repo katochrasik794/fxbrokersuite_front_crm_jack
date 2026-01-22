@@ -138,12 +138,12 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
 
   return (
     <>
-      {/* Header Bar - Fixed with rounded corners and shadow */}
+      {/* Header Bar - Fixed with backdrop blur */}
       {/* On mobile: full width, On desktop: starts after sidebar */}
-      <div className={`bg-white fixed top-0 left-0 right-0 lg:right-0 z-40 transition-all duration-300 ${sidebarCollapsed ? 'lg:left-[80px]' : 'lg:left-[240px]'}`}>
-        <div className="mx-1.5 md:mx-2 mt-1.5 mb-2">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="flex justify-between items-center px-2 md:px-3 lg:px-4 py-1.5 md:py-2 lg:py-2.5">
+      <div className={`bg-white/80 backdrop-blur-md border-b border-gray-100 fixed top-0 left-0 right-0 lg:right-0 z-40 transition-all duration-300 ${sidebarCollapsed ? 'lg:left-[80px]' : 'lg:left-[240px]'}`}>
+        <div className="w-full">
+          <div className="bg-transparent">
+            <div className="flex justify-between items-center px-4 py-3">
               {/* Left side - Sidebar toggle, Logo, Grid icon, User name */}
               <div className="flex items-center gap-2 md:gap-3 lg:gap-4 flex-1 min-w-0">
                 {/* Mobile hamburger - only on mobile */}

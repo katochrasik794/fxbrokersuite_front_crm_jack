@@ -1,4 +1,21 @@
 import { useState } from 'react'
+import { 
+  Activity, 
+  Filter, 
+  X, 
+  Search, 
+  TrendingUp, 
+  TrendingDown, 
+  Clock, 
+  Download, 
+  ExternalLink,
+  ChevronRight,
+  Brain,
+  Target,
+  StopCircle,
+  PlayCircle
+} from 'lucide-react'
+import PageHeader from '../../components/PageHeader'
 
 function SignalCentre() {
   const [selectedFilter, setSelectedFilter] = useState('person')
@@ -165,359 +182,334 @@ function SignalCentre() {
     }
   ]
 
+  const categories = [
+    'Asset Class',
+    'Regions',
+    'Themes',
+    'FX Groups',
+    'Commodity Types',
+    'Stock Sectors'
+  ]
+
+  const categoryOptions = {
+    'Asset Class': ['Stocks', 'Cryptocurrencies', 'Commodities', 'Indices', 'FX'],
+    'Regions': ['North America', 'Europe', 'Asia Pacific', 'Emerging Markets'],
+    'Themes': ['Technology', 'Green Energy', 'Finance', 'Healthcare'],
+    'FX Groups': ['Majors', 'Minors', 'Exotics'],
+    'Commodity Types': ['Energy', 'Metals', 'Agriculture'],
+    'Stock Sectors': ['Technology', 'Financials', 'Healthcare', 'Consumer Discretionary']
+  }
+
+  const toggleOption = (option) => {
+    if (selectedOptions.includes(option)) {
+      setSelectedOptions(selectedOptions.filter(item => item !== option))
+    } else {
+      setSelectedOptions([...selectedOptions, option])
+    }
+  }
+
   return (
-    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 overflow-x-hidden">
-      <div className="w-full max-w-[95%] mx-auto">
-        <h1 className="mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '400' }}>
-          Signal Centre
-        </h1>
+    <div className="flex-1 space-y-6">
+      <PageHeader 
+        title="Signal Centre" 
+        subtitle="AI-driven trade ideas and technical analysis"
+        icon={Activity}
+      />
 
-        {/* Installation Links Section */}
-        <div className="w-full bg-[#F6F7F9] py-10 px-4">
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Installation Links Section */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100 shadow-sm">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* MT4 CARD */}
+          <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Download className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
+              MT4 Signal Centre
+            </h3>
+            <p className="text-gray-600 mb-6 text-sm">
+              Download and install the Signal Centre expert advisor for MetaTrader 4.
+            </p>
+            <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-8 rounded-xl transition-all shadow-sm hover:shadow-blue-200">
+              <Download className="w-4 h-4" />
+              Download
+            </button>
+          </div>
 
-    {/* MT4 CARD */}
-    <div className="bg-white border border-gray-200 rounded-lg py-10 px-6 flex flex-col items-center text-center shadow-sm">
-      <h3
-        className="mb-6"
-        style={{
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "20px",
-          color: "#000000",
-          fontWeight: "400",
-        }}
-      >
-        MT4 Signal Centre Installation Link
-      </h3>
+          {/* MT5 CARD */}
+          <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Download className="w-8 h-8 text-indigo-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
+              MT5 Signal Centre
+            </h3>
+            <p className="text-gray-600 mb-6 text-sm">
+              Download and install the Signal Centre expert advisor for MetaTrader 5.
+            </p>
+            <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-8 rounded-xl transition-all shadow-sm hover:shadow-indigo-200">
+              <Download className="w-4 h-4" />
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
 
-      <button
-        className="bg-white border border-gray-300 text-blue-600 hover:bg-gray-100 font-semibold py-2 px-10 rounded-lg transition"
-        style={{
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "14px",
-          fontWeight: "600",
-        }}
-      >
-        Download
-      </button>
-    </div>
-
-    {/* MT5 CARD */}
-    <div className="bg-white border border-gray-200 rounded-lg py-10 px-6 flex flex-col items-center text-center shadow-sm">
-      <h3
-        className="mb-6"
-        style={{
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "20px",
-          color: "#000000",
-          fontWeight: "400",
-        }}
-      >
-        MT5 Signal Centre Installation Link
-      </h3>
-
-      <button
-        className="bg-white border border-gray-300 text-blue-600 hover:bg-gray-100 font-semibold py-2 px-10 rounded-lg transition"
-        style={{
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "14px",
-          fontWeight: "600",
-        }}
-      >
-        Download
-      </button>
-    </div>
-  </div>
-</div>
-
-
-        {/* AI-Driven Trade Ideas Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-          {/* Header Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      {/* AI-Driven Trade Ideas Section */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => setIsFilterModalOpen(true)}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors" 
-                style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600', color: '#000000' }}
+                className="px-4 py-2 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 rounded-xl transition-all duration-200 flex items-center gap-2 font-medium shadow-sm"
               >
-                FILTERS
+                <Filter className="w-4 h-4" />
+                Filters
               </button>
               
-              {/* Filter Icons - Rectangular Premium Style */}
-              <div className="flex items-center gap-2">
+              {/* Filter Icons */}
+              <div className="flex items-center gap-1 bg-gray-100/80 p-1 rounded-xl">
                 <button
                   onClick={() => setSelectedFilter('person-star')}
-                  className={`px-3 py-2 rounded-lg flex items-center justify-center transition-colors ${
-                    selectedFilter === 'person-star' ? 'bg-gray-800' : 'bg-gray-200'
+                  className={`p-2 rounded-lg transition-all duration-200 ${
+                    selectedFilter === 'person-star' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
+                  title="All Signals"
                 >
-                  <svg className={`w-5 h-5 ${selectedFilter === 'person-star' ? 'text-white' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
+                  <Activity className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setSelectedFilter('person')}
-                  className={`px-3 py-2 rounded-lg flex items-center justify-center transition-colors ${
-                    selectedFilter === 'person' ? 'bg-gray-800' : 'bg-gray-200'
+                  className={`p-2 rounded-lg transition-all duration-200 ${
+                    selectedFilter === 'person' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
+                  title="Expert Signals"
                 >
-                  <svg className={`w-5 h-5 ${selectedFilter === 'person' ? 'text-white' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                  <Target className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setSelectedFilter('star')}
-                  className={`px-3 py-2 rounded-lg flex items-center justify-center transition-colors ${
-                    selectedFilter === 'star' ? 'bg-gray-800' : 'bg-gray-200'
+                  className={`p-2 rounded-lg transition-all duration-200 ${
+                    selectedFilter === 'star' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'
                   }`}
+                  title="AI Signals"
                 >
-                  <svg className={`w-5 h-5 ${selectedFilter === 'star' ? 'text-white' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
+                  <Brain className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              {/* Search Icon */}
-              <button className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-800">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search assets..." 
+                  className="pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-full sm:w-64"
+                />
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
 
-              {/* AI-Driven Trade Ideas Label */}
-              <div className="flex items-center gap-2 px-3 py-2 bg-orange-100 rounded-lg">
-                <svg className="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span className="text-orange-600 font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}>
-                  AI-Driven Trade Ideas
+              <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-orange-50 border border-orange-100 rounded-xl">
+                <Brain className="w-4 h-4 text-orange-600" />
+                <span className="text-orange-700 text-sm font-semibold">
+                  AI-Driven Ideas
                 </span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Trade Signal Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {tradeSignals.map((signal) => (
-              <div key={signal.id} className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow">
-                {/* Card Header */}
-                <div className="flex items-center gap-2 mb-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-lg ${
-                    signal.asset === 'XRP' || signal.asset === 'ETH' ? 'bg-blue-100' : 
-                    signal.asset === 'Litecoin' ? 'bg-gray-100' : 
-                    signal.asset === 'BTC' ? 'bg-orange-100' :
-                    signal.asset === 'BRENT' ? 'bg-black text-white' :
-                    signal.asset === 'XAG/USD' ? 'bg-gray-200' :
-                    'bg-blue-50'
-                  }`}>
-                    {signal.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className="font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '13px', color: '#000000', fontWeight: '600' }}>
-                        {signal.asset}
-                      </span>
-                      <span className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                        {signal.type}
-                      </span>
-                    </div>
-                  </div>
+        {/* Trade Signal Cards Grid */}
+        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {tradeSignals.map((signal) => (
+            <div key={signal.id} className="group bg-white border border-gray-100 rounded-2xl p-4 hover:shadow-md transition-all duration-300 hover:border-blue-100 relative overflow-hidden">
+              <div className={`absolute top-0 right-0 w-16 h-16 rounded-bl-full opacity-10 transition-opacity group-hover:opacity-20 ${
+                signal.tradeColor === 'red' ? 'bg-red-500' : 'bg-green-500'
+              }`} />
+              
+              {/* Card Header */}
+              <div className="flex items-start gap-3 mb-4 relative z-10">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-sm ${
+                  signal.asset === 'XRP' || signal.asset === 'ETH' ? 'bg-blue-50 text-blue-600' : 
+                  signal.asset === 'Litecoin' ? 'bg-gray-50 text-gray-600' : 
+                  signal.asset === 'BTC' ? 'bg-orange-50 text-orange-600' :
+                  signal.asset === 'BRENT' ? 'bg-gray-900 text-white' :
+                  signal.asset === 'XAG/USD' ? 'bg-gray-100 text-gray-600' :
+                  'bg-indigo-50 text-indigo-600'
+                }`}>
+                  {signal.icon}
                 </div>
-
-                {/* Trade Type Button */}
-                <button className={`mb-2 px-2 py-0.5 rounded text-xs font-semibold ${
-                  signal.tradeColor === 'red' 
-                    ? 'bg-red-100 text-red-700' 
-                    : 'bg-green-100 text-green-700'
-                }`} style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '600' }}>
-                  {signal.tradeType}
-                </button>
-
-                {/* Trade Details */}
-                <div className="space-y-1 mb-2">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>Entry</span>
-                    <span className="font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: '#000000', fontWeight: '600' }}>{signal.entry}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-gray-900 truncate">
+                      {signal.asset}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      signal.tradeColor === 'red' 
+                        ? 'bg-red-50 text-red-600 border border-red-100' 
+                        : 'bg-green-50 text-green-600 border border-green-100'
+                    }`}>
+                      {signal.tradeType}
+                    </span>
                   </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>Target</span>
-                    <span className="font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: '#000000', fontWeight: '600' }}>{signal.target}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>Stop</span>
-                    <span className="font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: '#000000', fontWeight: '600' }}>{signal.stop}</span>
-                  </div>
-                </div>
-
-                {/* Chart and Confidence Visual */}
-                <div className="flex items-center gap-2 mb-2">
-                  {/* Mini Chart */}
-                  <div className="flex-1 h-8 flex items-end gap-0.5">
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={i}
-                        className={`flex-1 rounded-t ${
-                          signal.chartDirection === 'down' ? 'bg-red-400' : 'bg-green-400'
-                        }`}
-                        style={{ height: `${Math.random() * 60 + 20}%` }}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Confidence Meter */}
-                  <div className="flex items-end gap-0.5 h-8">
-                    {[...Array(4)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-1.5 bg-blue-500 rounded-t"
-                        style={{ height: `${(i + 1) * 18 + 15}%` }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Expiry and Learn More */}
-                <div className="flex items-center justify-between pt-2 border-t border-gray-200">
-                  <span className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                    Expires {signal.expiry}
+                  <span className="text-xs text-gray-500 font-medium">
+                    {signal.type}
                   </span>
-                  <button className="px-2 py-1 bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold rounded transition-colors" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '600' }}>
-                    LEARN MORE
-                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Trade Details */}
+              <div className="space-y-2 mb-4 bg-gray-50/50 rounded-xl p-3 border border-gray-50">
+                <div className="flex justify-between text-xs items-center">
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <PlayCircle className="w-3.5 h-3.5" />
+                    <span>Entry</span>
+                  </div>
+                  <span className="font-mono font-medium text-gray-900">{signal.entry}</span>
+                </div>
+                <div className="flex justify-between text-xs items-center">
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <Target className="w-3.5 h-3.5" />
+                    <span>Target</span>
+                  </div>
+                  <span className="font-mono font-medium text-gray-900">{signal.target}</span>
+                </div>
+                <div className="flex justify-between text-xs items-center">
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <StopCircle className="w-3.5 h-3.5" />
+                    <span>Stop</span>
+                  </div>
+                  <span className="font-mono font-medium text-gray-900">{signal.stop}</span>
+                </div>
+              </div>
+
+              {/* Chart and Confidence Visual */}
+              <div className="flex items-center gap-3 mb-4 h-12">
+                {/* Mini Chart */}
+                <div className="flex-1 h-full flex items-end gap-1 pb-1 border-b border-gray-100">
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`flex-1 rounded-t-sm transition-all duration-500 ${
+                        signal.chartDirection === 'down' 
+                          ? 'bg-gradient-to-t from-red-100 to-red-400 group-hover:from-red-200 group-hover:to-red-500' 
+                          : 'bg-gradient-to-t from-green-100 to-green-400 group-hover:from-green-200 group-hover:to-green-500'
+                      }`}
+                      style={{ height: `${Math.random() * 60 + 20}%` }}
+                    />
+                  ))}
+                </div>
+
+                {/* Confidence Meter */}
+                <div className="w-12 h-full flex items-end gap-0.5 pb-1 border-b border-gray-100">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-full bg-blue-200 rounded-t-sm"
+                      style={{ height: `${(i + 1) * 20 + 10}%` }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Expiry and Learn More */}
+              <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>{signal.expiry}</span>
+                </div>
+                <button className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+                  Details
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Filter Modal */}
       {isFilterModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setIsFilterModalOpen(false)}>
-          <div className="bg-gray-100 rounded-lg w-full max-w-2xl mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            {/* Close Button */}
-            <div className="flex justify-end p-4">
+        <div className="fixed inset-0 bg-gray-900/30 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setIsFilterModalOpen(false)}>
+          <div className="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-gray-100 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-100">
+              <div className="flex items-center gap-2">
+                <Filter className="w-5 h-5 text-gray-500" />
+                <h3 className="text-lg font-bold text-gray-900">Filter Signals</h3>
+              </div>
               <button
                 onClick={() => setIsFilterModalOpen(false)}
-                className="text-gray-800 hover:text-black transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Main Content */}
-            <div className="flex border-t border-gray-300">
+            <div className="flex h-[400px]">
               {/* Left Pane - Filter Categories */}
-              <div className="w-1/3 border-r border-gray-300 p-4">
-                <div className="space-y-3">
-                  <div
-                    onClick={() => setSelectedCategory('Asset Class')}
-                    className={`cursor-pointer ${selectedCategory === 'Asset Class' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Asset Class' ? '600' : '400' }}
-                  >
-                    Asset Class
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Regions')}
-                    className={`cursor-pointer ${selectedCategory === 'Regions' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Regions' ? '600' : '400' }}
-                  >
-                    Regions
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Themes')}
-                    className={`cursor-pointer ${selectedCategory === 'Themes' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Themes' ? '600' : '400' }}
-                  >
-                    Themes
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('FX Groups')}
-                    className={`cursor-pointer ${selectedCategory === 'FX Groups' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'FX Groups' ? '600' : '400' }}
-                  >
-                    FX Groups
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Commodity Types')}
-                    className={`cursor-pointer ${selectedCategory === 'Commodity Types' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Commodity Types' ? '600' : '400' }}
-                  >
-                    Commodity Types
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Stock Sectors')}
-                    className={`cursor-pointer ${selectedCategory === 'Stock Sectors' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Stock Sectors' ? '600' : '400' }}
-                  >
-                    Stock Sectors
-                  </div>
+              <div className="w-1/3 border-r border-gray-100 bg-gray-50/50 p-2 overflow-y-auto">
+                <div className="space-y-1">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                        selectedCategory === category 
+                          ? 'bg-white text-blue-600 shadow-sm' 
+                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
                 </div>
               </div>
 
               {/* Right Pane - Options/Checkboxes */}
-              <div className="flex-1 p-4">
-                {selectedCategory === 'Asset Class' && (
-                  <div className="space-y-3">
-                    {['Stocks', 'Cryptocurrencies', 'Commodities', 'Indices', 'FX'].map((option) => (
-                      <label key={option} className="flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={selectedOptions.includes(option)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedOptions([...selectedOptions, option])
-                            } else {
-                              setSelectedOptions(selectedOptions.filter(item => item !== option))
-                            }
-                          }}
-                          className="w-4 h-4 text-[#00A896] border-gray-300 rounded focus:ring-[#00A896]"
-                        />
-                        <span className="ml-3 text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400' }}>
-                          {option}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                )}
-                {selectedCategory !== 'Asset Class' && (
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400' }}>
-                    No options available for this category
-                  </div>
-                )}
+              <div className="flex-1 p-4 overflow-y-auto">
+                <div className="space-y-3">
+                  {categoryOptions[selectedCategory]?.map((option) => (
+                    <label key={option} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors border border-transparent hover:border-gray-100">
+                      <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                        selectedOptions.includes(option)
+                          ? 'bg-blue-600 border-blue-600 text-white'
+                          : 'border-gray-300 bg-white'
+                      }`}>
+                        {selectedOptions.includes(option) && <X className="w-3 h-3 rotate-45" />}
+                      </div>
+                      <input
+                        type="checkbox"
+                        className="hidden"
+                        checked={selectedOptions.includes(option)}
+                        onChange={() => toggleOption(option)}
+                      />
+                      <span className="text-sm font-medium text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="border-t border-gray-300 p-4 flex items-center justify-between">
-              <div className="text-[#00A896]" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}>
-                Results: 1635
-              </div>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setIsFilterModalOpen(false)}
-                  className="px-6 py-2 border border-gray-400 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-colors"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}
-                >
-                  CANCEL
-                </button>
-                <button
-                  onClick={() => {
-                    // Apply filters logic here
-                    setIsFilterModalOpen(false)
-                  }}
-                  className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}
-                >
-                  APPLY
-                </button>
-              </div>
+            <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setSelectedOptions([])
+                  setIsFilterModalOpen(false)
+                }}
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Reset
+              </button>
+              <button
+                onClick={() => setIsFilterModalOpen(false)}
+                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-blue-200 transition-all"
+              >
+                Apply Filters
+              </button>
             </div>
           </div>
         </div>

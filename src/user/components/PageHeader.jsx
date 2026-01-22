@@ -7,22 +7,24 @@
  */
 export default function PageHeader({ icon: Icon, title, subtitle }) {
   return (
-    <div className="mb-6">
-      <div className="flex items-center gap-3 mb-2">
+    <div className="mb-8">
+      <div className="flex items-center gap-4 mb-3">
         {Icon && (
-          <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
-            <Icon size={20} className="text-dark-base" />
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 shadow-lg shadow-blue-600/20 flex items-center justify-center flex-shrink-0 text-white">
+            <Icon size={24} />
           </div>
         )}
-        <h1 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-          {title}
-        </h1>
+        <div>
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="text-gray-500 text-sm mt-1 font-medium">
+              {subtitle}
+            </p>
+          )}
+        </div>
       </div>
-      {subtitle && (
-        <p className="text-gray-600 text-sm ml-[52px]">
-          {subtitle}
-        </p>
-      )}
     </div>
   );
 }

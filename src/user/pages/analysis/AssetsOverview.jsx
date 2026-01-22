@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { 
+  BarChart2, 
+  Search, 
+  Filter, 
+  Columns, 
+  ArrowUp, 
+  ArrowDown, 
+  ChevronRight,
+  X,
+  Check
+} from 'lucide-react';
+import PageHeader from '../../components/PageHeader';
 
 function AssetsOverview() {
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState('Asset Class')
-  const [selectedOptions, setSelectedOptions] = useState([])
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
-  const [isColumnsModalOpen, setIsColumnsModalOpen] = useState(false)
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('Asset Class');
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [isColumnsModalOpen, setIsColumnsModalOpen] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState({
     'All': false,
     'Price Trend': true,
@@ -18,14 +30,14 @@ function AssetsOverview() {
     'Change (3M)': false,
     'Change (6M)': false,
     'Change (1Y)': false
-  })
+  });
 
   const assets = [
     {
       id: 1,
       ticker: 'SRCE',
       name: '1st Source Corp',
-      logo: '1st SRCE',
+      logo: 'SRCE',
       price: '$61.51',
       opportunity: 'Bearish',
       opportunityBar: { red: 70, orange: 20, green: 10 },
@@ -63,7 +75,7 @@ function AssetsOverview() {
       id: 3,
       ticker: '3i Group',
       name: '3i Group PLC',
-      logo: '3 3i Group...',
+      logo: '3i',
       price: 'p3260.11',
       opportunity: 'Bearish',
       opportunityBar: { red: 65, orange: 20, green: 15 },
@@ -82,7 +94,7 @@ function AssetsOverview() {
       id: 4,
       ticker: 'MMM',
       name: '3M Co',
-      logo: '3M MMM',
+      logo: 'MMM',
       price: '$166.96',
       opportunity: 'Bullish',
       opportunityBar: { red: 10, orange: 20, green: 70 },
@@ -101,7 +113,7 @@ function AssetsOverview() {
       id: 5,
       ticker: 'EGHT',
       name: '8X8 Inc',
-      logo: '8x8 EGHT',
+      logo: 'EGHT',
       price: '$1.87',
       opportunity: 'Bearish',
       opportunityBar: { red: 75, orange: 15, green: 10 },
@@ -116,514 +128,362 @@ function AssetsOverview() {
       change1D: '-2.36%',
       changeColor: 'red'
     }
-  ]
+  ];
 
   const getSentimentColor = (sentiment) => {
-    if (sentiment === 'Bullish') return 'text-green-600'
-    if (sentiment === 'Bearish') return 'text-red-600'
-    return 'text-gray-600'
-  }
+    if (sentiment === 'Bullish') return 'text-emerald-600 bg-emerald-50';
+    if (sentiment === 'Bearish') return 'text-rose-600 bg-rose-50';
+    return 'text-gray-600 bg-gray-50';
+  };
 
   const getTrendColor = (trend) => {
-    if (trend.includes('Bullish')) return 'text-green-600'
-    if (trend.includes('Bearish')) return 'text-red-600'
-    return 'text-gray-600'
-  }
+    if (trend.includes('Bullish')) return 'text-emerald-600';
+    if (trend.includes('Bearish')) return 'text-rose-600';
+    return 'text-gray-600';
+  };
 
   const handleSort = (key) => {
-    let direction = 'asc'
+    let direction = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
-      direction = 'desc'
+      direction = 'desc';
     }
-    setSortConfig({ key, direction })
-  }
+    setSortConfig({ key, direction });
+  };
 
   const sortedAssets = [...assets].sort((a, b) => {
-    if (!sortConfig.key) return 0
+    if (!sortConfig.key) return 0;
 
-    let aValue, bValue
+    let aValue, bValue;
 
     switch (sortConfig.key) {
       case 'asset':
-        aValue = a.name.toLowerCase()
-        bValue = b.name.toLowerCase()
-        break
+        aValue = a.name.toLowerCase();
+        bValue = b.name.toLowerCase();
+        break;
       case 'price':
-        aValue = parseFloat(a.price.replace(/[^0-9.]/g, ''))
-        bValue = parseFloat(b.price.replace(/[^0-9.]/g, ''))
-        break
+        aValue = parseFloat(a.price.replace(/[^0-9.]/g, ''));
+        bValue = parseFloat(b.price.replace(/[^0-9.]/g, ''));
+        break;
       case 'opportunity':
-        aValue = a.opportunity
-        bValue = b.opportunity
-        break
+        aValue = a.opportunity;
+        bValue = b.opportunity;
+        break;
       case 'priceTrend':
-        aValue = a.priceTrendValue
-        bValue = b.priceTrendValue
-        break
+        aValue = a.priceTrendValue;
+        bValue = b.priceTrendValue;
+        break;
       case 'newsSentiment':
-        aValue = a.newsSentimentValue
-        bValue = b.newsSentimentValue
-        break
+        aValue = a.newsSentimentValue;
+        bValue = b.newsSentimentValue;
+        break;
       case 'volatility':
-        aValue = a.volatility
-        bValue = b.volatility
-        break
+        aValue = a.volatility;
+        bValue = b.volatility;
+        break;
       case 'newsVolume':
-        aValue = a.newsVolume
-        bValue = b.newsVolume
-        break
+        aValue = a.newsVolume;
+        bValue = b.newsVolume;
+        break;
       case 'change1D':
-        aValue = parseFloat(a.change1D.replace(/[^0-9.-]/g, ''))
-        bValue = parseFloat(b.change1D.replace(/[^0-9.-]/g, ''))
-        break
+        aValue = parseFloat(a.change1D.replace(/[^0-9.-]/g, ''));
+        bValue = parseFloat(b.change1D.replace(/[^0-9.-]/g, ''));
+        break;
       default:
-        return 0
+        return 0;
     }
 
-    if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1
-    if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1
-    return 0
-  })
+    if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  const filterCategories = [
+    'Asset Class', 'Sectors', 'Regions', 'Price Trend', 'News Sentiment', 'Opportunity'
+  ];
+
+  const filterOptions = {
+    'Asset Class': ['Equities', 'Forex', 'Commodities', 'Cryptocurrencies', 'Indices'],
+    'Sectors': ['Technology', 'Healthcare', 'Finance', 'Energy', 'Consumer Discretionary'],
+    'Regions': ['North America', 'Europe', 'Asia Pacific', 'Latin America'],
+    'Price Trend': ['Very Bullish', 'Bullish', 'Neutral', 'Bearish', 'Very Bearish'],
+    'News Sentiment': ['Very Bullish', 'Bullish', 'Neutral', 'Bearish', 'Very Bearish'],
+    'Opportunity': ['Bullish', 'Bearish']
+  };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 overflow-x-hidden">
-      <div className="w-full max-w-[95%] mx-auto">
-        <h1 className="mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '400' }}>
-          Assets Overview
-        </h1>
+    <div className="min-h-screen bg-slate-50 pb-12">
+      <PageHeader 
+        title="Assets Overview" 
+        subtitle="Analyze market assets with real-time data and sentiment analysis"
+        icon={BarChart2}
+      />
 
-        {/* Main Content Card */}
-        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-          {/* Control Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-            <button 
-              onClick={() => setIsFilterModalOpen(true)}
-              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors" 
-              style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600', color: '#000000' }}
-            >
-              FILTERS
-            </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          
+          {/* Controls */}
+          <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-xl">
+            <div className="flex gap-3 w-full sm:w-auto">
+              <button 
+                onClick={() => setIsFilterModalOpen(true)}
+                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
+              >
+                <Filter className="w-4 h-4" />
+                Filters
+              </button>
+              <button 
+                onClick={() => setIsColumnsModalOpen(true)}
+                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
+              >
+                <Columns className="w-4 h-4" />
+                Columns
+              </button>
+            </div>
 
-            {/* Search Bar */}
-            <div className="flex-1 relative">
+            <div className="relative w-full sm:max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search assets..."
-                className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A896] focus:border-transparent outline-none"
-                style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
+                className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
               />
-              <svg className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
             </div>
-
-            {/* COLUMNS Dropdown */}
-            <button 
-              onClick={() => setIsColumnsModalOpen(true)}
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
-            >
-              <span style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600', color: '#000000' }}>
-                COLUMNS
-              </span>
-              <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
           </div>
 
-          {/* Table Container with Horizontal Scroll */}
-          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-            <div className="min-w-[800px]">
-              {/* Table Headers */}
-              <div className="grid grid-cols-8 gap-6 pb-3 border-b border-gray-200 mb-4 px-2" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '600', color: '#000000' }}>
-                <div
-                  onClick={() => handleSort('asset')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Asset
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'asset' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'asset' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('price')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Price
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'price' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'price' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('opportunity')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Opportunity
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'opportunity' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'opportunity' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('priceTrend')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Price Trend
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'priceTrend' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'priceTrend' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('newsSentiment')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  News Sentiment
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'newsSentiment' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'newsSentiment' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('volatility')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Volatility
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'volatility' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'volatility' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('newsVolume')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  News Volume
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'newsVolume' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'newsVolume' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-                <div
-                  onClick={() => handleSort('change1D')}
-                  className="flex items-center gap-1 cursor-pointer hover:text-gray-600 transition-colors"
-                >
-                  Change (1D)
-                  <svg className={`w-3 h-3 transition-transform ${sortConfig.key === 'change1D' ? 'opacity-100' : 'opacity-30'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sortConfig.key === 'change1D' && sortConfig.direction === 'desc' ? "M19 9l-7 7-7-7" : "M5 15l7-7 7 7"} />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Asset Rows */}
-              <div className="space-y-3">
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-gray-100">
+                  {[
+                    { key: 'asset', label: 'Asset' },
+                    { key: 'price', label: 'Price' },
+                    { key: 'opportunity', label: 'Opportunity' },
+                    { key: 'priceTrend', label: 'Price Trend' },
+                    { key: 'newsSentiment', label: 'News Sentiment' },
+                    { key: 'volatility', label: 'Volatility' },
+                    { key: 'newsVolume', label: 'News Volume' },
+                    { key: 'change1D', label: 'Change (1D)' },
+                  ].map((col) => (
+                    <th 
+                      key={col.key}
+                      onClick={() => handleSort(col.key)}
+                      className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100/50 transition-colors whitespace-nowrap"
+                    >
+                      <div className="flex items-center gap-2">
+                        {col.label}
+                        <div className="flex flex-col">
+                          <ArrowUp className={`w-2 h-2 ${sortConfig.key === col.key && sortConfig.direction === 'asc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                          <ArrowDown className={`w-2 h-2 ${sortConfig.key === col.key && sortConfig.direction === 'desc' ? 'text-blue-600' : 'text-gray-300'}`} />
+                        </div>
+                      </div>
+                    </th>
+                  ))}
+                  <th className="px-6 py-4"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
                 {sortedAssets.map((asset) => (
-                  <div key={asset.id} className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow">
-                    <div className="grid grid-cols-8 gap-6 items-center px-2">
-                  {/* Asset */}
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center text-xs font-semibold flex-shrink-0" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '9px', color: '#000000', fontWeight: '600' }}>
-                      {asset.logo}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-semibold truncate" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', color: '#000000', fontWeight: '600' }}>
-                        {asset.name}
+                  <tr key={asset.id} className="hover:bg-gray-50/50 transition-colors group">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold shadow-sm">
+                          {asset.logo}
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">{asset.name}</div>
+                          <div className="text-xs text-gray-500">{asset.ticker}</div>
+                        </div>
                       </div>
-                      <div className="text-xs text-gray-500 truncate" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                        {asset.ticker}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-gray-900">
+                      {asset.price}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-1.5">
+                        <span className={`inline-flex px-2 py-0.5 rounded-md text-xs font-medium ${
+                          asset.opportunity === 'Bullish' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
+                        }`}>
+                          {asset.opportunity}
+                        </span>
+                        <div className="flex h-1.5 w-24 rounded-full overflow-hidden bg-gray-100">
+                          <div className="bg-rose-500" style={{ width: `${asset.opportunityBar.red}%` }}></div>
+                          <div className="bg-amber-500" style={{ width: `${asset.opportunityBar.orange}%` }}></div>
+                          <div className="bg-emerald-500" style={{ width: `${asset.opportunityBar.green}%` }}></div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Price */}
-                  <div style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', color: '#000000', fontWeight: '400' }}>
-                    {asset.price}
-                  </div>
-
-                  {/* Opportunity */}
-                  <div className="min-w-0">
-                    <div className={`text-xs mb-1 ${getSentimentColor(asset.opportunity)}`} style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '600' }}>
-                      {asset.opportunity}
-                    </div>
-                    <div className="flex h-1.5 rounded overflow-hidden">
-                      <div className="bg-red-500" style={{ width: `${asset.opportunityBar.red}%` }}></div>
-                      <div className="bg-orange-500" style={{ width: `${asset.opportunityBar.orange}%` }}></div>
-                      <div className="bg-green-500" style={{ width: `${asset.opportunityBar.green}%` }}></div>
-                    </div>
-                  </div>
-
-                  {/* Price Trend */}
-                  <div className="min-w-0">
-                    <div className={`text-xs ${getTrendColor(asset.priceTrend)}`} style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '600' }}>
-                      {asset.priceTrend}
-                    </div>
-                    <div className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                      {asset.priceTrendValue}
-                    </div>
-                  </div>
-
-                  {/* News Sentiment */}
-                  <div className="min-w-0">
-                    <div className={`text-xs ${getSentimentColor(asset.newsSentiment)}`} style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '600' }}>
-                      {asset.newsSentiment}
-                    </div>
-                    <div className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                      {asset.newsSentimentValue}
-                    </div>
-                  </div>
-
-                  {/* Volatility */}
-                  <div className="min-w-0">
-                    <div className="text-xs text-gray-600 mb-1" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>
-                      {asset.volatility}
-                    </div>
-                    <div className="relative w-full h-1.5 bg-gray-200 rounded-full">
-                      <div
-                        className={`absolute top-0 h-1.5 bg-gray-400 rounded-full ${
-                          asset.volatilityPosition === 'left' ? 'w-1/3' :
-                          asset.volatilityPosition === 'center' ? 'w-2/3 left-1/6' :
-                          'w-2/3 right-0'
-                        }`}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {/* News Volume */}
-                  <div className="min-w-0">
-                    <div className="text-xs text-gray-600 mb-1" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>
-                      {asset.newsVolume}
-                    </div>
-                    <div className="relative w-full h-1.5 bg-gray-200 rounded-full">
-                      <div
-                        className={`absolute top-0 h-1.5 bg-gray-400 rounded-full ${
-                          asset.newsVolumePosition === 'left' ? 'w-1/3' :
-                          asset.newsVolumePosition === 'center' ? 'w-2/3 left-1/6' :
-                          'w-2/3 right-0'
-                        }`}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {/* Change (1D) */}
-                  <div className="flex items-center justify-between gap-2">
-                    <span className={`text-xs font-semibold whitespace-nowrap ${asset.changeColor === 'green' ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', fontWeight: '600' }}>
-                      {asset.change1D}
-                    </span>
-                    <button className="px-2 py-1 bg-gray-600 hover:bg-gray-700 text-white text-xs font-semibold rounded transition-colors whitespace-nowrap flex-shrink-0" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '600' }}>
-                      LEARN MORE
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-            </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className={`text-sm font-medium ${getTrendColor(asset.priceTrend)}`}>
+                        {asset.priceTrend}
+                      </div>
+                      <div className="text-xs text-gray-400 mt-0.5">Score: {asset.priceTrendValue}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className={`text-sm font-medium ${getSentimentColor(asset.newsSentiment).split(' ')[0]}`}>
+                        {asset.newsSentiment}
+                      </div>
+                      <div className="text-xs text-gray-400 mt-0.5">Score: {asset.newsSentimentValue}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-600 mb-1.5">{asset.volatility}</div>
+                      <div className="relative w-24 h-1.5 bg-gray-100 rounded-full">
+                        <div className={`absolute top-0 h-1.5 bg-gray-400 rounded-full ${
+                          asset.volatilityPosition === 'left' ? 'w-1/3 left-0' :
+                          asset.volatilityPosition === 'center' ? 'w-1/3 left-1/3' :
+                          'w-1/3 right-0'
+                        }`}></div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-600 mb-1.5">{asset.newsVolume}</div>
+                      <div className="relative w-24 h-1.5 bg-gray-100 rounded-full">
+                        <div className={`absolute top-0 h-1.5 bg-gray-400 rounded-full ${
+                          asset.newsVolumePosition === 'left' ? 'w-1/3 left-0' :
+                          asset.newsVolumePosition === 'center' ? 'w-1/3 left-1/3' :
+                          'w-1/3 right-0'
+                        }`}></div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`font-semibold ${asset.changeColor === 'green' ? 'text-emerald-600' : 'text-rose-600'}`}>
+                        {asset.change1D}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <button className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Details <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      {/* Filter Modal - Same as Signal Centre */}
+      {/* Filter Modal */}
       {isFilterModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setIsFilterModalOpen(false)}>
-          <div className="bg-gray-100 rounded-lg w-full max-w-2xl mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            {/* Close Button */}
-            <div className="flex justify-end p-4">
-              <button
-                onClick={() => setIsFilterModalOpen(false)}
-                className="text-gray-800 hover:text-black transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm" onClick={() => setIsFilterModalOpen(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-200" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-gray-900">Filter Assets</h3>
+              <button onClick={() => setIsFilterModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <X className="w-5 h-5 text-gray-500" />
               </button>
             </div>
-
-            {/* Main Content */}
-            <div className="flex border-t border-gray-300">
-              {/* Left Pane - Filter Categories */}
-              <div className="w-1/3 border-r border-gray-300 p-4">
-                <div className="space-y-3">
-                  <div
-                    onClick={() => setSelectedCategory('Asset Class')}
-                    className={`cursor-pointer ${selectedCategory === 'Asset Class' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Asset Class' ? '600' : '400' }}
+            
+            <div className="flex h-[400px]">
+              {/* Categories */}
+              <div className="w-1/3 bg-gray-50 border-r border-gray-100 p-2 overflow-y-auto">
+                {filterCategories.map(category => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                      selectedCategory === category 
+                        ? 'bg-white text-blue-600 shadow-sm' 
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    }`}
                   >
-                    Asset Class
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Regions')}
-                    className={`cursor-pointer ${selectedCategory === 'Regions' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Regions' ? '600' : '400' }}
-                  >
-                    Regions
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Themes')}
-                    className={`cursor-pointer ${selectedCategory === 'Themes' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Themes' ? '600' : '400' }}
-                  >
-                    Themes
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('FX Groups')}
-                    className={`cursor-pointer ${selectedCategory === 'FX Groups' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'FX Groups' ? '600' : '400' }}
-                  >
-                    FX Groups
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Commodity Types')}
-                    className={`cursor-pointer ${selectedCategory === 'Commodity Types' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Commodity Types' ? '600' : '400' }}
-                  >
-                    Commodity Types
-                  </div>
-                  <div
-                    onClick={() => setSelectedCategory('Stock Sectors')}
-                    className={`cursor-pointer ${selectedCategory === 'Stock Sectors' ? 'text-[#00A896]' : 'text-gray-700'}`}
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: selectedCategory === 'Stock Sectors' ? '600' : '400' }}
-                  >
-                    Stock Sectors
-                  </div>
-                </div>
+                    {category}
+                  </button>
+                ))}
               </div>
 
-              {/* Right Pane - Options/Checkboxes */}
-              <div className="flex-1 p-4">
-                {selectedCategory === 'Asset Class' && (
-                  <div className="space-y-3">
-                    {['Stocks', 'Cryptocurrencies', 'Commodities', 'Indices', 'FX'].map((option) => (
-                      <label key={option} className="flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={selectedOptions.includes(option)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedOptions([...selectedOptions, option])
-                            } else {
-                              setSelectedOptions(selectedOptions.filter(item => item !== option))
-                            }
-                          }}
-                          className="w-4 h-4 text-[#00A896] border-gray-300 rounded focus:ring-[#00A896]"
-                        />
-                        <span className="ml-3 text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400' }}>
-                          {option}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                )}
-                {selectedCategory !== 'Asset Class' && (
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400' }}>
-                    No options available for this category
-                  </div>
-                )}
+              {/* Options */}
+              <div className="w-2/3 p-6 overflow-y-auto">
+                <div className="space-y-2">
+                  {filterOptions[selectedCategory]?.map(option => (
+                    <label key={option} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group">
+                      <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
+                        selectedOptions.includes(option) 
+                          ? 'bg-blue-600 border-blue-600 text-white' 
+                          : 'border-gray-300 bg-white group-hover:border-blue-400'
+                      }`}>
+                        {selectedOptions.includes(option) && <Check className="w-3.5 h-3.5" />}
+                      </div>
+                      <input 
+                        type="checkbox" 
+                        className="hidden"
+                        checked={selectedOptions.includes(option)}
+                        onChange={() => {
+                          if (selectedOptions.includes(option)) {
+                            setSelectedOptions(prev => prev.filter(item => item !== option));
+                          } else {
+                            setSelectedOptions(prev => [...prev, option]);
+                          }
+                        }}
+                      />
+                      <span className="text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="border-t border-gray-300 p-4 flex items-center justify-between">
-              <div className="text-[#00A896]" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}>
-                Results: 1635
-              </div>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setIsFilterModalOpen(false)}
-                  className="px-6 py-2 border border-gray-400 rounded-lg bg-white text-gray-700 hover:bg-gray-50 transition-colors"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}
-                >
-                  CANCEL
-                </button>
-                <button
-                  onClick={() => {
-                    setIsFilterModalOpen(false)
-                  }}
-                  className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}
-                >
-                  APPLY
-                </button>
-              </div>
+            <div className="p-6 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
+              <button 
+                onClick={() => setIsFilterModalOpen(false)}
+                className="px-5 py-2.5 text-gray-600 font-medium hover:bg-gray-200 rounded-xl transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => setIsFilterModalOpen(false)}
+                className="px-5 py-2.5 bg-blue-600 text-white font-medium hover:bg-blue-700 rounded-xl shadow-sm hover:shadow transition-all"
+              >
+                Apply Filters
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* COLUMNS Modal */}
+      {/* Columns Modal */}
       {isColumnsModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setIsColumnsModalOpen(false)}>
-          <div className="bg-gray-100 rounded-lg w-full max-w-sm mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-300">
-              <div className="flex items-center gap-2">
-                <span style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', fontWeight: '600', color: '#000000' }}>
-                  COLUMNS
-                </span>
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                </svg>
-              </div>
-              <button
-                onClick={() => setIsColumnsModalOpen(false)}
-                className="text-gray-800 hover:text-black transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm" onClick={() => setIsColumnsModalOpen(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-gray-900">Manage Columns</h3>
+              <button onClick={() => setIsColumnsModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <X className="w-5 h-5 text-gray-500" />
               </button>
             </div>
-
-            {/* Column List */}
-            <div className="p-4 max-h-96 overflow-y-auto">
+            
+            <div className="p-6 max-h-[400px] overflow-y-auto">
               <div className="space-y-2">
-                {Object.keys(visibleColumns).map((column) => (
-                  <div key={column} className="flex items-center justify-between p-2 hover:bg-gray-200 rounded transition-colors">
-                    <label className="flex items-center gap-3 cursor-pointer flex-1">
-                      <input
-                        type="checkbox"
-                        checked={visibleColumns[column]}
-                        onChange={(e) => {
-                          if (column === 'All') {
-                            const allChecked = !visibleColumns[column]
-                            const newState = {}
-                            Object.keys(visibleColumns).forEach(key => {
-                              newState[key] = allChecked
-                            })
-                            setVisibleColumns(newState)
-                          } else {
-                            setVisibleColumns({
-                              ...visibleColumns,
-                              [column]: e.target.checked,
-                              'All': false
-                            })
-                          }
-                        }}
-                        className="w-4 h-4 text-[#00A896] border-gray-300 rounded focus:ring-[#00A896]"
-                      />
-                      <span style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', color: '#000000' }}>
-                        {column}
-                      </span>
-                    </label>
-                    <div className="cursor-move p-1">
-                      <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                      </svg>
+                {Object.keys(visibleColumns).map(column => (
+                  <label key={column} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group">
+                    <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
+                      visibleColumns[column] 
+                        ? 'bg-blue-600 border-blue-600 text-white' 
+                        : 'border-gray-300 bg-white group-hover:border-blue-400'
+                    }`}>
+                      {visibleColumns[column] && <Check className="w-3.5 h-3.5" />}
                     </div>
-                  </div>
+                    <input 
+                      type="checkbox" 
+                      className="hidden"
+                      checked={visibleColumns[column]}
+                      onChange={() => {
+                        setVisibleColumns(prev => ({
+                          ...prev,
+                          [column]: !prev[column]
+                        }));
+                      }}
+                    />
+                    <span className="text-gray-700">{column}</span>
+                  </label>
                 ))}
               </div>
-            </div>
-
-            {/* DONE Button */}
-            <div className="p-4 border-t border-gray-300 flex justify-center">
-              <button
-                onClick={() => setIsColumnsModalOpen(false)}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
-                style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '600' }}
-              >
-                DONE
-              </button>
             </div>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default AssetsOverview
+export default AssetsOverview;

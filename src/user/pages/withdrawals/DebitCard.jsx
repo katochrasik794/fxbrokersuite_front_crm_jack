@@ -1,58 +1,68 @@
+import React from 'react';
+import PageHeader from '../../components/PageHeader';
+import { CreditCard, AlertCircle } from 'lucide-react';
+
 function DebitCard() {
   return (
-    <div className="min-h-screen p-4 sm:p-6 overflow-x-hidden" style={{ background: 'linear-gradient(to right, #E5E7EB 0%, #FFFFFF 20%, #FFFFFF 80%, #E5E7EB 100%)' }}>
-      <div className="w-full max-w-full sm:max-w-[80%] mx-auto">
-        <h1 className="mb-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '400' }}>
-          Withdraw Using Your Debit or Credit Card
-        </h1>
+    <div className="space-y-6">
+      <PageHeader 
+        title="Withdraw via Card" 
+        subtitle="Withdraw funds to your debit or credit card"
+        icon={CreditCard}
+      />
 
-        {/* Card Logos and Information */}
-        <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 text-center">
+      {/* Card Logos and Information */}
+      <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          
           {/* Card Logos */}
-          <div className="flex items-center justify-center gap-4 sm:gap-8 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-8 mb-8 p-6 bg-gray-50/50 rounded-xl border border-gray-100">
             {/* VISA */}
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-12 bg-blue-600 rounded flex items-center justify-center mb-2">
-                <span className="text-white font-bold text-xl" style={{ fontFamily: 'Roboto, sans-serif', fontWeight: '700' }}>VISA</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-24 h-14 bg-blue-600 rounded-lg shadow-sm flex items-center justify-center transform hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-2xl tracking-wider">VISA</span>
               </div>
             </div>
             
             {/* Mastercard */}
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-12 flex items-center justify-center mb-2 relative">
-                <div className="relative" style={{ width: '50px', height: '30px' }}>
-                  <div className="absolute w-7 h-7 bg-red-500 rounded-full" style={{ left: '0px', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}></div>
-                  <div className="absolute w-7 h-7 bg-orange-500 rounded-full" style={{ left: '7px', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-24 h-14 bg-gray-800 rounded-lg shadow-sm flex items-center justify-center relative overflow-hidden transform hover:scale-105 transition-transform">
+                <div className="flex items-center justify-center -space-x-4">
+                  <div className="w-8 h-8 bg-red-500 rounded-full opacity-90"></div>
+                  <div className="w-8 h-8 bg-orange-400 rounded-full opacity-90"></div>
                 </div>
               </div>
-              <span className="text-xs text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', fontWeight: '400' }}>mastercard</span>
+              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Mastercard</span>
             </div>
             
             {/* Maestro */}
-            <div className="flex flex-col items-center">
-              <div className="w-20 h-12 flex items-center justify-center mb-2 relative">
-                <div className="relative" style={{ width: '50px', height: '30px' }}>
-                  <div className="absolute w-7 h-7 bg-red-500 rounded-full" style={{ left: '0px', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}></div>
-                  <div className="absolute w-7 h-7 bg-blue-500 rounded-full" style={{ left: '7px', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-24 h-14 bg-gray-800 rounded-lg shadow-sm flex items-center justify-center relative overflow-hidden transform hover:scale-105 transition-transform">
+                <div className="flex items-center justify-center -space-x-4">
+                  <div className="w-8 h-8 bg-red-500 rounded-full opacity-90"></div>
+                  <div className="w-8 h-8 bg-blue-500 rounded-full opacity-90"></div>
                 </div>
               </div>
-              <span className="text-xs text-gray-600" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', fontWeight: '400' }}>maestro</span>
+              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Maestro</span>
             </div>
           </div>
 
           {/* Information Text */}
-          <div className="space-y-4">
-            <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#4B5156', fontWeight: '400', lineHeight: '1.5' }}>
-              fxbrokersuite follows a strict return to source policy, in all instances where applicable, all monies paid out by fxbrokersuite will be paid back to the source from where they originated from.
-            </p>
-            <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#4B5156', fontWeight: '400', lineHeight: '1.5' }}>
-              To make a withdrawal to a card, a deposit must first be made from a card and the details must be saved on this platform.
-            </p>
+          <div className="space-y-6 max-w-2xl mx-auto">
+            <div className="flex gap-4 p-4 bg-blue-50 text-blue-800 rounded-xl border border-blue-100">
+              <AlertCircle className="w-6 h-6 shrink-0 mt-0.5" />
+              <div className="space-y-2 text-sm leading-relaxed">
+                <p>
+                  <span className="font-semibold">Return to Source Policy:</span> fxbrokersuite follows a strict return to source policy. In all instances where applicable, all monies paid out by fxbrokersuite will be paid back to the source from where they originated.
+                </p>
+                <p>
+                  To make a withdrawal to a card, a deposit must first be made from that card and the details must be saved on this platform.
+                </p>
+              </div>
+            </div>
           </div>
-          </div>
-        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default DebitCard
+export default DebitCard;

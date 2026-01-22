@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Wallet, AlertCircle, CheckCircle, Copy, ArrowRight, ShieldCheck, DollarSign, CreditCard } from 'lucide-react'
 import withdrawalService from '../../../services/withdrawal.service'
 import authService from '../../../services/auth.js'
 import Swal from 'sweetalert2'
+import PageHeader from '../../components/PageHeader'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -342,315 +344,315 @@ function Crypto() {
   }, [amount, selectedAccount, accountType]);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 overflow-x-hidden relative" style={{ background: 'linear-gradient(to right, #E5E7EB 0%, #FFFFFF 20%, #FFFFFF 80%, #E5E7EB 100%)' }}>
+    <div className="space-y-6">
+      <PageHeader
+        title="Crypto Withdrawal"
+        subtitle="Withdraw funds securely to your crypto wallet"
+        icon={Wallet}
+      />
+      
       {/* Loading State */}
-      {kycLoading && (
-        <div className="absolute inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40 flex items-center justify-center">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600">Checking verification status...</p>
-          </div>
-        </div>
-      )}
-
-      {/* Blur Overlay - Show when KYC is not approved */}
-      {!kycLoading && !isKYCApproved && (
-        <div className="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40 flex items-center justify-center p-4">
-          {/* KYC Verification Modal */}
-          <div className="bg-white rounded-lg shadow-2xl p-6 sm:p-8 w-full max-w-lg sm:max-w-xl md:max-w-2xl border border-gray-200">
+        {kycLoading && (
+          <div className="absolute inset-0 bg-white/50 backdrop-blur-sm z-50 flex items-center justify-center">
             <div className="text-center">
-              {/* Icon */}
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mb-4">
-                <svg className="h-8 w-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+              <p className="text-gray-600 font-medium">Checking verification status...</p>
+            </div>
+          </div>
+        )}
+
+        {/* KYC Warning Overlay */}
+        {!kycLoading && !isKYCApproved && (
+          <div className="fixed inset-0 bg-white/80 backdrop-blur-md z-40 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 w-full max-w-lg text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-yellow-50 mb-6">
+                <AlertCircle className="h-8 w-8 text-yellow-600" />
               </div>
-              
-              {/* Title */}
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+              <h2 className="text-2xl font-bold text-slate-900 mb-3">
                 KYC Verification Required
               </h2>
-              
-              {/* Message */}
-              <p className="text-gray-600 mb-6">
+              <p className="text-slate-600 mb-8 leading-relaxed">
                 To proceed with withdrawals, please complete your KYC (Know Your Customer) verification. This is required for security and regulatory compliance.
               </p>
-              
-              {/* Button */}
               <button
                 onClick={() => navigate('/user/verification')}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base border border-blue-600 py-3 rounded-lg transition-colors font-semibold text-base"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl transition-all font-semibold text-base shadow-lg shadow-blue-600/20"
               >
                 Go to KYC Verification
               </button>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className={`w-full max-w-[95%] mx-auto bg-white rounded-lg ${!isKYCApproved && !kycLoading ? 'opacity-50 pointer-events-none' : ''}`}>
-        <h1 className="text-left p-4 md:p-6 pb-0 mb-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '20px', color: '#000000', fontWeight: '400' }}>
-          Withdraw through Crypto
-        </h1>
-        <div className="w-full max-w-4xl mx-auto px-4 md:px-6 pb-4 md:pb-6">
-
-          {/* Main Form Container */}
-          <div className="bg-white rounded-lg p-4 border border-gray-200">
-            <form className="space-y-4" onSubmit={handleWithdraw}>
-              {/* Title */}
-              <h2 className="text-xl font-semibold text-gray-800">Withdraw from Account</h2>
-              <p className="text-gray-500 mt-1 text-sm">
-                Select a trading account to withdraw your money from
-              </p>
-
-              {/* Account List */}
-              <div className="max-h-60 overflow-y-auto space-y-2">
-                {/* Wallet Account */}
-                {wallet && (
-                  <div
-                    onClick={() => {
-                      setSelectedAccount({ ...wallet, type: 'wallet' })
-                      setAccountType('wallet')
-                    }}
-                    className={`border rounded-xl p-3 flex justify-between items-start cursor-pointer transition-all ${accountType === 'wallet' && selectedAccount?.id === wallet.id ? 'border-[#009688] bg-white shadow-sm ring-1 ring-[#009688]' : 'border-gray-300 bg-white hover:border-gray-400'
-                      }`}
-                  >
-                    <div>
-                      <p className="text-gray-800 font-medium">{wallet.wallet_number}</p>
-                      <div className="flex gap-2 mt-1">
-                        <span className="px-2 py-0.5 text-xs rounded-md bg-blue-100 text-blue-700">Wallet</span>
-                        <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-100 rounded-md text-xs">
-                          <img src="https://flagsapi.com/US/flat/24.png" className="w-4 h-4" alt="USD" />
-                          {wallet.currency || 'USD'}
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-8 ${!isKYCApproved && !kycLoading ? 'opacity-30 pointer-events-none' : ''}`}>
+          {/* Main Form Section */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+              <div className="p-6 border-b border-slate-50">
+                <h2 className="text-lg font-semibold text-slate-900">Withdrawal Details</h2>
+              </div>
+              
+              <div className="p-6">
+                <form onSubmit={handleWithdraw} className="space-y-6">
+                  {/* Account Selection */}
+                  <div className="space-y-4">
+                    <label className="block text-sm font-medium text-slate-700">Withdraw From</label>
+                    <div className="grid grid-cols-1 gap-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                      {/* Wallet Account */}
+                      {wallet && (
+                        <div
+                          onClick={() => {
+                            setSelectedAccount({ ...wallet, type: 'wallet' })
+                            setAccountType('wallet')
+                          }}
+                          className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all group ${
+                            accountType === 'wallet' && selectedAccount?.id === wallet.id 
+                              ? 'border-blue-600 bg-blue-50/30' 
+                              : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50'
+                          }`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex items-center gap-4">
+                              <div className={`p-2.5 rounded-lg ${
+                                accountType === 'wallet' && selectedAccount?.id === wallet.id 
+                                  ? 'bg-blue-100 text-blue-600' 
+                                  : 'bg-slate-100 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600'
+                              }`}>
+                                <Wallet className="w-6 h-6" />
+                              </div>
+                              <div>
+                                <p className="font-semibold text-slate-900">My Wallet</p>
+                                <p className="text-sm text-slate-500 font-mono mt-0.5">{wallet.wallet_number}</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-sm text-slate-500 mb-0.5">Available Balance</p>
+                              <p className="font-bold text-slate-900">{wallet.currency || 'USD'} {parseFloat(wallet.balance || 0).toFixed(2)}</p>
+                            </div>
+                          </div>
+                          {accountType === 'wallet' && selectedAccount?.id === wallet.id && (
+                            <div className="absolute top-4 right-4">
+                              <CheckCircle className="w-5 h-5 text-blue-600" />
+                            </div>
+                          )}
                         </div>
-                      </div>
-                      <p className="text-gray-600 text-sm mt-2">Balance: {wallet.currency || 'USD'} {parseFloat(wallet.balance || 0).toFixed(2)}</p>
-                    </div>
-                    <div className="flex items-center">
-                      <div className={`h-6 w-6 rounded-full border-2 flex items-center justify-center ${accountType === 'wallet' && selectedAccount?.id === wallet.id ? 'border-[#009688] bg-[#009688]' : 'border-gray-300'
-                        }`}>
-                        {accountType === 'wallet' && selectedAccount?.id === wallet.id && <div className="h-2.5 w-2.5 bg-white rounded-full"></div>}
-                      </div>
+                      )}
+
+                      {/* Trading Accounts */}
+                      {accounts.map(acc => (
+                        <div
+                          key={acc.id}
+                          onClick={() => {
+                            setSelectedAccount({ ...acc, type: 'trading' })
+                            setAccountType('trading')
+                          }}
+                          className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all group ${
+                            accountType === 'trading' && selectedAccount?.id === acc.id 
+                              ? 'border-blue-600 bg-blue-50/30' 
+                              : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50'
+                          }`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex items-center gap-4">
+                              <div className={`p-2.5 rounded-lg ${
+                                accountType === 'trading' && selectedAccount?.id === acc.id 
+                                  ? 'bg-blue-100 text-blue-600' 
+                                  : 'bg-slate-100 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600'
+                              }`}>
+                                <CreditCard className="w-6 h-6" />
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <p className="font-semibold text-slate-900">{acc.platform}</p>
+                                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-xs font-medium border border-slate-200">
+                                    {acc.account_type}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-slate-500 font-mono mt-0.5">{acc.account_number}</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-sm text-slate-500 mb-0.5">Available Balance</p>
+                              <p className="font-bold text-slate-900">{acc.currency} {parseFloat(acc.balance || 0).toFixed(2)}</p>
+                            </div>
+                          </div>
+                          {accountType === 'trading' && selectedAccount?.id === acc.id && (
+                            <div className="absolute top-4 right-4">
+                              <CheckCircle className="w-5 h-5 text-blue-600" />
+                            </div>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   </div>
-                )}
 
-                {/* Trading Accounts */}
-                {accounts.length === 0 && !wallet ? (
-                  <p className="text-center text-gray-500 py-4">No active accounts found.</p>
-                ) : (
-                  accounts.map(acc => (
-                    <div
-                      key={acc.id}
-                      onClick={() => {
-                        setSelectedAccount({ ...acc, type: 'trading' })
-                        setAccountType('trading')
-                      }}
-                      className={`border rounded-xl p-3 flex justify-between items-start cursor-pointer transition-all ${accountType === 'trading' && selectedAccount?.id === acc.id ? 'border-[#009688] bg-white shadow-sm ring-1 ring-[#009688]' : 'border-gray-300 bg-white hover:border-gray-400'
-                        }`}
-                    >
-                      <div>
-                        <p className="text-gray-800 font-medium">{acc.account_number}</p>
-                        <div className="flex gap-2 mt-1">
-                          <span className="px-2 py-0.5 text-xs rounded-md bg-gray-200">{acc.platform}</span>
-                          <span className="px-2 py-0.5 text-xs rounded-md bg-gray-200">{acc.account_type}</span>
-                          <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-100 rounded-md text-xs">
-                            <img src="https://flagsapi.com/US/flat/24.png" className="w-4 h-4" alt="USD" />
-                            {acc.currency}
-                          </div>
-                        </div>
-                        <p className="text-gray-600 text-sm mt-2">Balance: {acc.currency} {parseFloat(acc.balance || 0).toFixed(2)}</p>
-                        {accountType === 'trading' && selectedAccount?.id === acc.id && (acc.minimum_withdrawal !== null || acc.maximum_withdrawal !== null) && (
-                          <p className="text-gray-500 text-xs mt-1">
-                            Withdrawal limits: {acc.minimum_withdrawal ? `$${parseFloat(acc.minimum_withdrawal).toFixed(2)}` : '$0.00'} - {acc.maximum_withdrawal ? `$${parseFloat(acc.maximum_withdrawal).toFixed(2)}` : 'No maximum'}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex items-center">
-                        <div className={`h-6 w-6 rounded-full border-2 flex items-center justify-center ${accountType === 'trading' && selectedAccount?.id === acc.id ? 'border-[#009688] bg-[#009688]' : 'border-gray-300'
-                          }`}>
-                          {accountType === 'trading' && selectedAccount?.id === acc.id && <div className="h-2.5 w-2.5 bg-white rounded-full"></div>}
-                        </div>
-                      </div>
+                  {/* Network Selection */}
+                  <div className="space-y-4 pt-4 border-t border-slate-100">
+                    <label className="block text-sm font-medium text-slate-700">Network</label>
+                    <div className="grid grid-cols-3 gap-4">
+                      {['TRC20', 'ERC20', 'BEP20'].map((network) => (
+                        <button
+                          key={network}
+                          type="button"
+                          onClick={() => setSelectedNetwork(network)}
+                          className={`p-3 rounded-xl border-2 text-center transition-all ${
+                            selectedNetwork === network
+                              ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold'
+                              : 'border-slate-200 text-slate-600 hover:border-slate-300'
+                          }`}
+                        >
+                          USDT {network}
+                        </button>
+                      ))}
                     </div>
-                  ))
-                )}
-              </div>
+                  </div>
 
-              {/* Crypto Details Section */}
-              <h3 className="text-lg font-semibold mt-4">Destination Wallet</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm text-gray-600">Network</label>
-                  <select
-                    value={selectedNetwork}
-                    onChange={(e) => setSelectedNetwork(e.target.value)}
-                    className="w-full mt-1 p-2 border rounded-lg outline-none focus:border-[#009688]"
-                  >
-                    <option value="TRC20">USDT (TRC20)</option>
-                    <option value="ERC20">USDT (ERC20)</option>
-                    <option value="BEP20">USDT (BEP20)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-sm text-gray-600">Payment Method</label>
-                  {paymentMethods.length === 0 ? (
-                    <div className="mt-1 p-2 border border-amber-300 rounded-lg bg-amber-50">
-                      <p className="text-xs text-amber-700">
-                        No approved payment methods found. Please{' '}
-                        <Link to="/user/payment-details" className="underline font-semibold">
-                          add a payment method
-                        </Link>{' '}
-                        first.
+                  {/* Amount Input */}
+                  <div className="space-y-4">
+                    <label className="block text-sm font-medium text-slate-700">Amount</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <DollarSign className="h-5 w-5 text-slate-400" />
+                      </div>
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        className={`block w-full pl-11 pr-4 py-3.5 bg-white border ${
+                          amountError ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-blue-500 focus:ring-blue-500/20'
+                        } rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 transition-all`}
+                        placeholder="0.00"
+                        min="0"
+                        step="0.01"
+                      />
+                    </div>
+                    {amountError ? (
+                      <p className="text-sm text-red-600 flex items-center gap-1.5">
+                        <AlertCircle className="w-4 h-4" />
+                        {amountError}
                       </p>
-                    </div>
-                  ) : (
-                    <select
-                      value={selectedPaymentMethod?.id || ''}
-                      onChange={(e) => {
-                        const method = paymentMethods.find(pm => pm.id === parseInt(e.target.value))
-                        if (method) {
-                          setSelectedPaymentMethod(method)
-                          const details = typeof method.payment_details === 'string' 
-                            ? JSON.parse(method.payment_details) 
-                            : method.payment_details
-                          setCryptoAddress(details.walletAddress || details.wallet_address || '')
-                          // Update network to match selected payment method
-                          const methodType = method.payment_method?.toLowerCase() || ''
-                          if (methodType === 'usdt_trc20') setSelectedNetwork('TRC20')
-                          else if (methodType === 'usdt_erc20') setSelectedNetwork('ERC20')
-                          else if (methodType === 'usdt_bep20') setSelectedNetwork('BEP20')
-                        }
-                      }}
-                      className="w-full mt-1 p-2 border rounded-lg outline-none focus:border-[#009688]"
-                    >
-                      <option value="">Select payment method</option>
-                      {paymentMethods.map(pm => {
-                        const details = typeof pm.payment_details === 'string' 
-                          ? JSON.parse(pm.payment_details) 
-                          : pm.payment_details
-                        const address = details.walletAddress || details.wallet_address || ''
-                        const displayAddress = address.length > 20 
-                          ? `${address.substring(0, 10)}...${address.substring(address.length - 10)}` 
-                          : address
-                        const methodType = pm.payment_method?.toUpperCase().replace('_', ' ') || 'UNKNOWN'
-                        return (
-                          <option key={pm.id} value={pm.id}>
-                            {methodType} - {displayAddress}
-                          </option>
-                        )
-                      })}
-                    </select>
-                  )}
-                  {selectedPaymentMethod && (
-                    <p className="text-xs text-gray-500 mt-1">
-                      Selected: {cryptoAddress.length > 30 
-                        ? `${cryptoAddress.substring(0, 15)}...${cryptoAddress.substring(cryptoAddress.length - 15)}` 
-                        : cryptoAddress}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-
-              {/* Amount Section */}
-              <h3 className="text-lg font-semibold mt-4">Amount</h3>
-              <p className="text-gray-500 text-sm mt-1">
-                Transaction limit: {formatLimits()}
-              </p>
-
-              {/* Currency & Amount Input */}
-              <div className={`mt-2 border rounded-xl flex items-center p-3 bg-white ${amountError ? 'border-red-500' : ''}`}>
-                <div className="flex items-center gap-2">
-                  <img src="https://flagsapi.com/US/flat/24.png" className="w-5 h-5" alt="USD" />
-                  <span className="font-medium text-gray-700">USD</span>
-                </div>
-                <div className="ml-auto">
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="text-right bg-transparent outline-none w-32"
-                    placeholder="0.00"
-                  />
-                </div>
-              </div>
-              {amountError && (
-                <p className="text-red-600 text-sm mt-1">{amountError}</p>
-              )}
-
-              {/* Quick Amount Buttons */}
-              <div className="flex gap-3 mt-2 flex-wrap">
-                {["USD 10", "USD 50", "USD 100", "USD 500"].map((label) => (
-                  <button
-                    key={label}
-                    type="button"
-                    onClick={() => setAmount(label.split(' ')[1])}
-                    className="px-4 py-1.5 rounded-md border bg-white text-gray-700 hover:bg-gray-100 transition-colors text-sm"
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Password field */}
-              <p className="text-gray-700 mt-4">Enter your password to confirm this withdrawal</p>
-
-              <div className="mt-1 border rounded-xl p-3 flex items-center bg-white">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="outline-none w-full"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="ml-2"
-                >
-                  <svg
-                    className="w-5 h-5 text-gray-500 cursor-pointer"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    {showPassword ? (
-                      <path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
                     ) : (
-                      <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <p className="text-sm text-slate-500">
+                        Limits: {formatLimits()}
+                      </p>
                     )}
-                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                </button>
-              </div>
+                  </div>
 
-              {/* Info Notice */}
-              <div className="flex items-start gap-2 mt-2 text-gray-500 text-sm">
-                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M13 16h-1v-4h-1m1-4h.01" />
-                </svg>
-                <p>Your funds will be placed on hold until the transaction is fully processed.</p>
-              </div>
+                  {/* Password Input */}
+                  <div className="space-y-4">
+                    <label className="block text-sm font-medium text-slate-700">Password</label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="block w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all"
+                        placeholder="Enter your password to confirm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute inset-y-0 right-0 pr-4 flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+                      >
+                        {showPassword ? 'Hide' : 'Show'}
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Continue Button */}
-              <button
-                type="submit"
-                disabled={loading || !!amountError || !amount || parseFloat(amount) <= 0}
-                className={`w-full mt-3 py-2.5 rounded-lg font-semibold transition-colors ${!loading && !amountError && amount && parseFloat(amount) > 0
-                  ? 'bg-blue-600 hover:bg-blue-700 text-dark-base cursor-pointer'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  }`}
-              >
-                {loading ? 'Processing...' : 'Continue'}
-              </button>
-            </form>
+                  {/* Submit Button */}
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={loading || !!amountError || !amount || !password}
+                      className={`w-full py-4 px-6 rounded-xl text-white font-semibold text-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 ${
+                        loading || !!amountError || !amount || !password
+                          ? 'bg-slate-300 cursor-not-allowed shadow-none'
+                          : 'bg-blue-600 hover:bg-blue-700 hover:shadow-xl hover:-translate-y-0.5'
+                      }`}
+                    >
+                      {loading ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Confirm Withdrawal
+                          <ArrowRight className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Sidebar */}
+          <div className="space-y-6">
+            {/* Destination Wallet Card */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <Wallet className="w-5 h-5 text-blue-600" />
+                Destination Wallet
+              </h3>
+              
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <p className="text-xs text-slate-500 uppercase font-semibold mb-2">Wallet Address</p>
+                <div className="flex items-start gap-3">
+                  <p className="text-sm font-mono text-slate-700 break-all leading-relaxed">
+                    {cryptoAddress || 'Select a payment method to view address'}
+                  </p>
+                  {cryptoAddress && (
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(cryptoAddress)
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Copied!',
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
+                      }}
+                      className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+              
+              <div className="mt-4 flex items-center gap-2 text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <p>Ensure the network matches: <span className="font-bold">USDT-{selectedNetwork}</span></p>
+              </div>
+            </div>
+
+            {/* Important Info Card */}
+            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg shadow-blue-900/20 p-6 text-white">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5" />
+                Security Information
+              </h3>
+              <ul className="space-y-3 text-blue-50 text-sm">
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-300 mt-2 flex-shrink-0" />
+                  <p>Withdrawals are processed within 24 hours during business days.</p>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-300 mt-2 flex-shrink-0" />
+                  <p>Ensure your destination wallet supports USDT-{selectedNetwork}.</p>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-300 mt-2 flex-shrink-0" />
+                  <p>Two-factor authentication may be required for large withdrawals.</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   )
 }

@@ -459,8 +459,8 @@ function Dashboard() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen overflow-x-hidden">
-      <div className="px-4 sm:px-14 pb-4 mt-4 sm:pb-6 space-y-4 sm:space-y-6 max-w-full">
+    <div className="w-full pb-8">
+      <div className="px-4 md:px-8 mt-6 space-y-6 max-w-7xl mx-auto">
         {/* Page Header */}
         <PageHeader
           icon={LayoutDashboard}
@@ -477,21 +477,21 @@ function Dashboard() {
         </h2>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Total Balance Card */}
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 group-hover:bg-white/30 transition-all duration-300">
-                <MdOutlineAccountBalanceWallet className="text-white text-2xl" />
+              <div className="bg-blue-50 rounded-xl p-3 group-hover:scale-110 transition-transform duration-300">
+                <MdOutlineAccountBalanceWallet className="text-blue-600 text-2xl" />
               </div>
             </div>
-            <div className="text-white/80 text-xs font-medium mb-1">Total Balance</div>
-            <div className="text-white font-bold text-lg">
+            <div className="text-gray-500 text-xs font-medium mb-1 uppercase tracking-wide">Total Balance</div>
+            <div className="text-gray-900 font-bold text-xl">
               {summaryTotals.loading ? (
                 <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
                 </span>
               ) : (
                 `${summaryTotals.totalBalance.toFixed(2)} USD`
@@ -500,19 +500,19 @@ function Dashboard() {
           </div>
 
           {/* Total Credit Card */}
-          <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 group-hover:bg-white/30 transition-all duration-300">
-                <LuWallet className="text-white text-2xl" />
+              <div className="bg-purple-50 rounded-xl p-3 group-hover:scale-110 transition-transform duration-300">
+                <LuWallet className="text-purple-600 text-2xl" />
               </div>
             </div>
-            <div className="text-white/80 text-xs font-medium mb-1">Total Credit</div>
-            <div className="text-white font-bold text-lg">
+            <div className="text-gray-500 text-xs font-medium mb-1 uppercase tracking-wide">Total Credit</div>
+            <div className="text-gray-900 font-bold text-xl">
               {summaryTotals.loading ? (
                 <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
                 </span>
               ) : (
                 `${summaryTotals.totalCredit.toFixed(2)} USD`
@@ -521,19 +521,19 @@ function Dashboard() {
           </div>
 
           {/* Total Equity Card */}
-          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 group-hover:bg-white/30 transition-all duration-300">
-                <MdOutlineAccountBalanceWallet className="text-white text-2xl" />
+              <div className="bg-emerald-50 rounded-xl p-3 group-hover:scale-110 transition-transform duration-300">
+                <MdOutlineAccountBalanceWallet className="text-emerald-600 text-2xl" />
               </div>
             </div>
-            <div className="text-white/80 text-xs font-medium mb-1">Total Equity</div>
-            <div className="text-white font-bold text-lg">
+            <div className="text-gray-500 text-xs font-medium mb-1 uppercase tracking-wide">Total Equity</div>
+            <div className="text-gray-900 font-bold text-xl">
               {summaryTotals.loading ? (
                 <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
                 </span>
               ) : (
                 `${summaryTotals.totalEquity.toFixed(2)} USD`
@@ -542,19 +542,19 @@ function Dashboard() {
           </div>
 
           {/* Total Deposits Card */}
-          <div className="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 group-hover:bg-white/30 transition-all duration-300">
-                <RiArrowUpCircleLine className="text-white text-2xl" />
+              <div className="bg-teal-50 rounded-xl p-3 group-hover:scale-110 transition-transform duration-300">
+                <RiArrowUpCircleLine className="text-teal-600 text-2xl" />
               </div>
             </div>
-            <div className="text-white/80 text-xs font-medium mb-1">Total Deposits</div>
-            <div className="text-white font-bold text-lg">
+            <div className="text-gray-500 text-xs font-medium mb-1 uppercase tracking-wide">Total Deposits</div>
+            <div className="text-gray-900 font-bold text-xl">
               {summaryTotals.loading ? (
                 <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
                 </span>
               ) : (
                 `${summaryTotals.totalDeposits.toFixed(2)} USD`
@@ -563,19 +563,19 @@ function Dashboard() {
           </div>
 
           {/* Total Withdrawals Card */}
-          <div className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 group-hover:bg-white/30 transition-all duration-300">
-                <RiArrowDownCircleLine className="text-white text-2xl" />
+              <div className="bg-rose-50 rounded-xl p-3 group-hover:scale-110 transition-transform duration-300">
+                <RiArrowDownCircleLine className="text-rose-600 text-2xl" />
               </div>
             </div>
-            <div className="text-white/80 text-xs font-medium mb-1">Total Withdrawals</div>
-            <div className="text-white font-bold text-lg">
+            <div className="text-gray-500 text-xs font-medium mb-1 uppercase tracking-wide">Total Withdrawals</div>
+            <div className="text-gray-900 font-bold text-xl">
               {summaryTotals.loading ? (
                 <span className="inline-flex items-center gap-1">
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                  <span className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
                 </span>
               ) : (
                 `${summaryTotals.totalWithdrawals.toFixed(2)} USD`
@@ -595,7 +595,7 @@ function Dashboard() {
           </div>
 
           {/* Activity Card */}
-          <div className="bg-white border border-gray-200 rounded-lg w-full overflow-hidden">
+          <div className="bg-white border border-gray-100 rounded-2xl w-full overflow-hidden shadow-sm">
             {loadingActivities ? (
               <div className="flex items-center justify-center text-gray-500 text-sm p-6">
                 Loading activity…
@@ -607,11 +607,11 @@ function Dashboard() {
             ) : (
               <>
                 {/* Activity List */}
-                <div className="divide-y divide-gray-200">
+                <div className="divide-y divide-gray-100">
                   {recentActivities.map((item, index) => (
                     <div
                       key={item.id || index}
-                      className="p-4 hover:bg-gray-50 transition-colors"
+                      className="p-5 hover:bg-slate-50 transition-colors"
                     >
                       <div className="flex items-start justify-between gap-4">
                         {/* Left Section */}
@@ -638,7 +638,7 @@ function Dashboard() {
 
                         {/* Right Section - Status Badge */}
                         <div className="flex-shrink-0">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
                             Success
                           </span>
                         </div>
@@ -648,7 +648,7 @@ function Dashboard() {
                 </div>
 
                 {/* Footer */}
-                <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+                <div className="px-5 py-4 border-t border-gray-100 flex items-center justify-between">
                   <span className="text-gray-500 text-xs">
                     Showing last {recentActivities.length} results
                   </span>
@@ -657,7 +657,7 @@ function Dashboard() {
                       setActivityModalOpen(true);
                       loadActivityPage(1);
                     }}
-                    className="text-blue-600 hover:text-blue-700 text-xs font-medium transition-colors"
+                    className="text-blue-600 hover:text-blue-700 text-xs font-medium transition-colors hover:underline"
                   >
                     View all
                   </button>

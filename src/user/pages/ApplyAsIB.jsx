@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../ib-portal/ui/Button';
+import PageHeader from '../components/PageHeader';
 import Toast from '../../components/Toast';
-import { CheckCircle2, UserCheck, TrendingUp, BarChart3, X, DollarSign, Clock, CheckCircle } from 'lucide-react';
+import { 
+  CheckCircle2, 
+  UserCheck, 
+  TrendingUp, 
+  BarChart3, 
+  X, 
+  DollarSign, 
+  Clock, 
+  CheckCircle,
+  Briefcase,
+  ArrowRight,
+  ShieldCheck,
+  Globe
+} from 'lucide-react';
+import Swal from 'sweetalert2';
 
 function ApplyAsIB() {
   const navigate = useNavigate();
@@ -134,9 +148,11 @@ function ApplyAsIB() {
 
       if (response.ok && data.success) {
         setShowApplicationModal(false);
-        setToast({
-          message: 'Your IB partnership application has been submitted successfully! We will review it and get back to you soon.',
-          type: 'success'
+        Swal.fire({
+          icon: 'success',
+          title: 'Application Submitted',
+          text: 'Your IB partnership application has been submitted successfully! We will review it and get back to you soon.',
+          confirmButtonColor: '#2563eb'
         });
         setFormData({
           ibExperience: '',
@@ -147,16 +163,20 @@ function ApplyAsIB() {
         // Refresh IB status
         setIbStatus('pending');
       } else {
-        setToast({
-          message: data.message || 'Failed to submit application. Please try again.',
-          type: 'error'
+        Swal.fire({
+          icon: 'error',
+          title: 'Submission Failed',
+          text: data.message || 'Failed to submit application. Please try again.',
+          confirmButtonColor: '#2563eb'
         });
       }
     } catch (error) {
       console.error('Error submitting IB application:', error);
-      setToast({
-        message: 'An error occurred. Please try again later.',
-        type: 'error'
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        confirmButtonColor: '#2563eb'
       });
     } finally {
       setIsSubmitting(false);
@@ -164,7 +184,7 @@ function ApplyAsIB() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="min-h-screen bg-slate-50 pb-12">
       {/* Toast Notification */}
       {toast && (
         <Toast
@@ -175,222 +195,214 @@ function ApplyAsIB() {
         />
       )}
 
-      {/* IB Status Banner - Show if application exists */}
-      {!isLoadingStatus && ibStatus && ibStatus !== 'none' && (
-        <div className={`mx-2 sm:mx-4 mt-2 sm:mt-4 rounded-xl shadow-lg ${ibStatus === 'approved'
-            ? 'bg-green-50 border-2 border-green-500'
-            : ibStatus === 'pending'
-              ? 'bg-yellow-50 border-2 border-yellow-500'
-              : 'bg-red-50 border-2 border-red-500'
+      <PageHeader 
+        title="IB Partnership" 
+        subtitle="Join our Introducing Broker program and grow your business"
+        icon={Briefcase}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* IB Status Banner */}
+        {!isLoadingStatus && ibStatus && ibStatus !== 'none' && (
+          <div className={`rounded-2xl p-6 shadow-sm border ${
+            ibStatus === 'approved'
+              ? 'bg-emerald-50 border-emerald-200'
+              : ibStatus === 'pending'
+                ? 'bg-amber-50 border-amber-200'
+                : 'bg-red-50 border-red-200'
           }`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-            <div className="flex items-center gap-3 sm:gap-4">
-              {ibStatus === 'approved' ? (
-                <>
-                  <div className="flex-shrink-0">
-                    <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-base sm:text-lg font-bold text-green-900 mb-1">
-                      IB Application Approved
-                    </h3>
-                    <p className="text-sm sm:text-base text-green-700">
-                      Congratulations! Your IB partnership application has been approved. You can now access the Partner's Cabinet from the menu.
-                    </p>
-                  </div>
-                </>
-              ) : ibStatus === 'pending' ? (
-                <>
-                  <div className="flex-shrink-0">
-                    <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-base sm:text-lg font-bold text-yellow-900 mb-1">
-                      IB Application Under Review
-                    </h3>
-                    <p className="text-sm sm:text-base text-yellow-700">
-                      Your IB partnership application has been submitted and is currently under review. We will notify you once the review is complete.
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex-shrink-0">
-                    <X className="w-6 h-6 sm:w-8 sm:h-8 text-red-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-base sm:text-lg font-bold text-red-900 mb-1">
-                      IB Application Rejected
-                    </h3>
-                    <p className="text-sm sm:text-base text-red-700">
-                      Your IB partnership application was not approved. Please contact support for more information.
-                    </p>
-                  </div>
-                </>
-              )}
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-full ${
+                ibStatus === 'approved' ? 'bg-emerald-100' : ibStatus === 'pending' ? 'bg-amber-100' : 'bg-red-100'
+              }`}>
+                {ibStatus === 'approved' ? (
+                  <CheckCircle className="w-6 h-6 text-emerald-600" />
+                ) : ibStatus === 'pending' ? (
+                  <Clock className="w-6 h-6 text-amber-600" />
+                ) : (
+                  <X className="w-6 h-6 text-red-600" />
+                )}
+              </div>
+              <div className="flex-1">
+                <h3 className={`text-lg font-bold mb-1 ${
+                  ibStatus === 'approved' ? 'text-emerald-900' : ibStatus === 'pending' ? 'text-amber-900' : 'text-red-900'
+                }`}>
+                  {ibStatus === 'approved' 
+                    ? 'IB Application Approved' 
+                    : ibStatus === 'pending' 
+                      ? 'IB Application Under Review' 
+                      : 'IB Application Rejected'}
+                </h3>
+                <p className={`text-sm ${
+                  ibStatus === 'approved' ? 'text-emerald-700' : ibStatus === 'pending' ? 'text-amber-700' : 'text-red-700'
+                }`}>
+                  {ibStatus === 'approved'
+                    ? 'Congratulations! Your IB partnership application has been approved. You can now access the Partner\'s Cabinet.'
+                    : ibStatus === 'pending'
+                      ? 'Your IB partnership application has been submitted and is currently under review. We will notify you once the review is complete.'
+                      : 'Your IB partnership application was not approved. Please contact support for more information.'}
+                </p>
+                
+                {ibStatus === 'approved' && (
+                  <button
+                    onClick={() => navigate('/user/ib/dashboard')}
+                    className="mt-4 px-6 py-2.5 bg-emerald-600 text-white text-sm font-semibold rounded-xl hover:bg-emerald-700 transition-colors shadow-sm inline-flex items-center gap-2"
+                  >
+                    Go to Partner's Cabinet
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Top Banner Section */}
-      <div className="relative bg-gradient-to-r from-purple-900 via-purple-800 to-green-500 overflow-hidden mx-2 sm:mx-4 mt-2 sm:mt-4 rounded-xl">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 items-center">
-            {/* Left Side - Text */}
-            <div className="text-white z-10 order-2 md:order-1">
-              <div className="mb-1">
-                <span className="text-xs sm:text-sm font-medium text-green-300 uppercase tracking-wide">Become a Partner</span>
+        {/* Hero Section */}
+        <div className="relative overflow-hidden rounded-3xl bg-white shadow-sm border border-slate-200">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-50 rounded-full -ml-16 -mb-16 blur-3xl opacity-50"></div>
+          
+          <div className="relative z-10 grid md:grid-cols-2 gap-8 p-8 md:p-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-medium uppercase tracking-wider">
+                <Globe className="w-3 h-3" />
+                Global Partner Program
               </div>
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 sm:mb-2 leading-tight">
-                Become an Introducing Broker & Expand Your Own Business
+              
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-slate-900">
+                Expand Your Business as an Introducing Broker
               </h1>
-              <p className="text-xs sm:text-sm text-green-100 mb-2 sm:mb-3">
-                Opportunity to grow and earn more with us.
+              
+              <p className="text-slate-600 text-lg max-w-lg leading-relaxed">
+                Join our network of successful partners. Earn competitive commissions, access advanced reporting tools, and give your clients the best trading experience.
               </p>
-              {ibStatus === 'none' || ibStatus === 'rejected' ? (
-                <Button
-                  onClick={() => setShowApplicationModal(true)}
-                  size="sm"
-                  className="bg-green-500 hover:bg-green-600 text-black px-4 py-2 text-xs sm:text-sm font-semibold"
-                >
-                  Become a Partner
-                </Button>
-              ) : ibStatus === 'approved' ? (
-                <Button
-                  onClick={() => navigate('/user/ib/dashboard')}
-                  size="sm"
-                  className="bg-green-500 hover:bg-green-600 text-black px-4 py-2 text-xs sm:text-sm font-semibold"
-                >
-                  Go to Partner's Cabinet
-                </Button>
-              ) : (
-                <div className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg text-xs sm:text-sm font-semibold border border-yellow-300">
-                  Application Under Review
-                </div>
-              )}
+              
+              <div className="flex flex-wrap gap-4 pt-2">
+                {ibStatus === 'none' || ibStatus === 'rejected' ? (
+                  <button
+                    onClick={() => setShowApplicationModal(true)}
+                    className="px-8 py-3.5 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200 transform hover:-translate-y-0.5"
+                  >
+                    Become a Partner
+                  </button>
+                ) : ibStatus === 'approved' ? (
+                  <button
+                    onClick={() => navigate('/user/ib/dashboard')}
+                    className="px-8 py-3.5 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200 transform hover:-translate-y-0.5"
+                  >
+                    Partner Dashboard
+                  </button>
+                ) : (
+                  <div className="px-8 py-3.5 bg-slate-100 border border-slate-200 text-slate-400 font-bold rounded-2xl cursor-not-allowed">
+                    Application Pending
+                  </div>
+                )}
+              </div>
             </div>
-
-            {/* Right Side - Illustration */}
-            <div className="relative z-10 flex justify-center items-center order-1 md:order-2">
-              <div className="relative w-full max-w-[180px] sm:max-w-[220px] md:max-w-[280px]">
-                <img
-                  src="/partner-banner.png"
-                  alt="IB Partner"
-                  className="w-full h-auto object-contain max-h-28 sm:max-h-36 md:max-h-44"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'block';
-                  }}
-                />
-                <div className="hidden w-full h-28 sm:h-36 md:h-44 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <UserCheck className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400" />
+            
+            <div className="hidden md:flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 bg-blue-100 rounded-full blur-2xl transform scale-90"></div>
+                <div className="relative bg-white/80 backdrop-blur-xl border border-white/50 p-8 rounded-2xl shadow-xl max-w-sm ring-1 ring-slate-100">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                      <TrendingUp className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-slate-500">Total Commissions</div>
+                      <div className="text-2xl font-bold text-slate-900">$12,450.00</div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full w-3/4 bg-blue-500 rounded-full"></div>
+                    </div>
+                    <div className="flex justify-between text-sm text-slate-500">
+                      <span>Referrals</span>
+                      <span className="font-semibold text-slate-900">24 Active</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="bg-slate-50 rounded-2xl p-3 text-center border border-slate-100">
+                        <div className="text-xs text-slate-500 mb-1">Conversion</div>
+                        <div className="font-bold text-emerald-500">+18%</div>
+                      </div>
+                      <div className="bg-slate-50 rounded-2xl p-3 text-center border border-slate-100">
+                        <div className="text-xs text-slate-500 mb-1">Volume</div>
+                        <div className="font-bold text-blue-600">2.4M</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-green-400 opacity-20 rounded-full blur-2xl -mr-12 sm:-mr-16 -mt-12 sm:-mt-16"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 bg-purple-400 opacity-20 rounded-full blur-2xl -ml-12 sm:-ml-16 -mb-12 sm:-mb-16"></div>
-      </div>
-
-      {/* Why Partner Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
-            Why Partner with Us?
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-700 font-medium mb-4">
-            Become an IB to earn additional income by referring clients to fxbrokersuite Partners.
-          </p>
-          <p className="text-gray-500 leading-relaxed text-base sm:text-lg">
-            We offer our partners the ultimate transparency and seamless experience! Join us to access the most advanced trading tools and benefit from the highest levels of security and customer service.
-          </p>
+        {/* Why Partner Section */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: CheckCircle2,
+              title: "Simple Setup",
+              description: "Zero sign-up fees and a streamlined setup process to get you started immediately.",
+              color: "text-emerald-500",
+              bg: "bg-emerald-50"
+            },
+            {
+              icon: DollarSign,
+              title: "Competitive Payouts",
+              description: "Earn lucrative commissions with our competitive and transparent payout structure.",
+              color: "text-blue-500",
+              bg: "bg-blue-50"
+            },
+            {
+              icon: BarChart3,
+              title: "Advanced Tools",
+              description: "Access a comprehensive dashboard for real-time monitoring and reporting.",
+              color: "text-purple-500",
+              bg: "bg-purple-50"
+            }
+          ].map((item, index) => (
+            <div key={index} className="bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all group">
+              <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <item.icon className={`w-7 h-7 ${item.color}`} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{item.description}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Advantages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col items-center text-center group">
-            <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-green-100 transition-colors">
-              <CheckCircle2 className="w-7 h-7 text-green-600" />
-            </div>
-            <p className="text-gray-900 font-semibold text-lg">Zero sign-up fees and super simple set-up process</p>
+        {/* Steps Section */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Get Started in 4 Easy Steps
+            </h2>
+            <p className="text-gray-600">
+              Start your journey as an Introducing Broker today. It's fast, easy, and free to join.
+            </p>
           </div>
 
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col items-center text-center group">
-            <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-green-100 transition-colors">
-              <DollarSign className="w-7 h-7 text-green-600" />
-            </div>
-            <p className="text-gray-900 font-semibold text-lg">Lucrative and competitive commission payouts</p>
-          </div>
-
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col items-center text-center group">
-            <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-green-100 transition-colors">
-              <BarChart3 className="w-7 h-7 text-green-600" />
-            </div>
-            <p className="text-gray-900 font-semibold text-lg">Advanced dashboard and tools for close monitoring</p>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          {ibStatus === 'none' || ibStatus === 'rejected' ? (
-            <Button
-              onClick={() => setShowApplicationModal(true)}
-              size="lg"
-              className="bg-green-500 hover:bg-green-600 text-black px-8 py-3 text-base font-bold shadow-lg shadow-green-200 hover:shadow-green-300 transform hover:-translate-y-0.5 transition-all"
-            >
-              Become a Partner
-            </Button>
-          ) : ibStatus === 'approved' ? (
-            <Button
-              onClick={() => navigate('/user/ib/dashboard')}
-              size="lg"
-              className="bg-green-500 hover:bg-green-600 text-black px-8 py-3 text-base font-bold shadow-lg shadow-green-200 hover:shadow-green-300 transform hover:-translate-y-0.5 transition-all"
-            >
-              Go to Partner's Cabinet
-            </Button>
-          ) : (
-            <div className="inline-flex items-center px-6 py-3 bg-yellow-100 text-yellow-800 rounded-xl text-base font-semibold border border-yellow-300">
-              Application Under Review
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Get Started Section */}
-      <div className="bg-white py-3 sm:py-4 md:py-5 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 text-center">
-            Get Started Now in Few Steps
-          </h2>
-          <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-4 sm:mb-6 text-center max-w-3xl mx-auto">
-            Being an Introducing Broker with us can be a lucrative opportunity for individuals or companies who have an existing network of potential clients in the financial industry.
-          </p>
-
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: 1, title: 'Promote fxbrokersuite Partners and attract traders.', icon: TrendingUp },
-              { number: 2, title: 'Introduce your clients to fxbrokersuite Partners.', icon: UserCheck },
-              { number: 3, title: 'Gain profit when your referral joins us.', icon: BarChart3 },
-              { number: 4, title: 'Use the partner portal for monitoring.', icon: TrendingUp },
+              { number: "01", title: "Sign Up", desc: "Complete the simple application form.", icon: UserCheck },
+              { number: "02", title: "Get Approved", desc: "We review your application quickly.", icon: ShieldCheck },
+              { number: "03", title: "Refer Clients", desc: "Introduce traders to our platform.", icon: Globe },
+              { number: "04", title: "Earn Commission", desc: "Receive payouts for client activity.", icon: DollarSign },
             ].map((step, index) => (
-              <div
-                key={index}
-                className="bg-white border-t-4 border-green-500 rounded-lg shadow-md p-3 sm:p-4 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-black text-white rounded-full flex items-center justify-center font-bold text-sm sm:text-base flex-shrink-0">
+              <div key={index} className="relative group">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-4xl font-black text-gray-100 group-hover:text-blue-50 transition-colors">
                     {step.number}
-                  </div>
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                  </span>
+                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                    <step.icon className="w-5 h-5 text-blue-600" />
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">{step.title}</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -399,121 +411,147 @@ function ApplyAsIB() {
 
       {/* Application Modal */}
       {showApplicationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="bg-black text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between sticky top-0 z-10">
-              <h3 className="text-lg sm:text-xl font-semibold">IB Partnership Application</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in duration-200">
+            <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-xl border-b border-gray-100 rounded-t-3xl">
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Partner Application</h3>
+                <p className="text-sm text-gray-500">Tell us about your experience</p>
+              </div>
               <button
                 onClick={() => setShowApplicationModal(false)}
-                className="text-white hover:text-gray-300 transition-colors"
+                className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Modal Body */}
-            <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-5">
+            <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6">
               {/* IB Experience */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  IB Experience
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  IB Experience <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   name="ibExperience"
                   value={formData.ibExperience}
                   onChange={handleInputChange}
-                  placeholder="Describe your IB experience"
+                  placeholder="Please describe your experience as an Introducing Broker..."
                   rows={4}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all text-sm sm:text-base ${errors.ibExperience ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none ${
+                    errors.ibExperience ? 'border-red-500 bg-red-50/50' : 'border-gray-200 hover:border-gray-300'
+                  }`}
                 />
                 {errors.ibExperience && (
-                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.ibExperience}</p>
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <X className="w-3 h-3" /> {errors.ibExperience}
+                  </p>
                 )}
               </div>
 
               {/* Previous Clients Count */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  How many IB clients you have with your previous partner?
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Previous Client Base <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="number"
-                  name="previousClientsCount"
-                  value={formData.previousClientsCount}
-                  onChange={handleInputChange}
-                  placeholder="Approximate number of clients"
-                  min="0"
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all text-sm sm:text-base ${errors.previousClientsCount ? 'border-red-500' : 'border-gray-300'
+                <div className="relative">
+                  <input
+                    type="number"
+                    name="previousClientsCount"
+                    value={formData.previousClientsCount}
+                    onChange={handleInputChange}
+                    placeholder="Approximate number of active clients"
+                    min="0"
+                    className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all ${
+                      errors.previousClientsCount ? 'border-red-500 bg-red-50/50' : 'border-gray-200 hover:border-gray-300'
                     }`}
-                />
+                  />
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                    <UserCheck className="w-5 h-5" />
+                  </div>
+                </div>
                 {errors.previousClientsCount && (
-                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.previousClientsCount}</p>
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <X className="w-3 h-3" /> {errors.previousClientsCount}
+                  </p>
                 )}
               </div>
 
               {/* Willing to become IB */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Are you willing to become an IB with fxbrokersuite Partners?
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Are you willing to become an IB with fxbrokersuite Partners? <span className="text-red-500">*</span>
                 </label>
                 <select
                   name="willingToBecomeIB"
                   value={formData.willingToBecomeIB}
                   onChange={handleInputChange}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all text-sm sm:text-base ${errors.willingToBecomeIB ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none ${
+                    errors.willingToBecomeIB ? 'border-red-500 bg-red-50/50' : 'border-gray-200 hover:border-gray-300'
+                  }`}
                 >
-                  <option value="">Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
+                  <option value="">Select an option</option>
+                  <option value="yes">Yes, I am interested</option>
+                  <option value="no">No, maybe later</option>
                 </select>
                 {errors.willingToBecomeIB && (
-                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.willingToBecomeIB}</p>
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <X className="w-3 h-3" /> {errors.willingToBecomeIB}
+                  </p>
                 )}
               </div>
 
               {/* Willing to sign agreement */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Are you willing to sign IB Agreement with fxbrokersuite Partners?
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Are you willing to sign the IB Agreement? <span className="text-red-500">*</span>
                 </label>
                 <select
                   name="willingToSignAgreement"
                   value={formData.willingToSignAgreement}
                   onChange={handleInputChange}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all text-sm sm:text-base ${errors.willingToSignAgreement ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all appearance-none ${
+                    errors.willingToSignAgreement ? 'border-red-500 bg-red-50/50' : 'border-gray-200 hover:border-gray-300'
+                  }`}
                 >
-                  <option value="">Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
+                  <option value="">Select an option</option>
+                  <option value="yes">Yes, I agree to sign</option>
+                  <option value="no">No, I do not agree</option>
                 </select>
                 {errors.willingToSignAgreement && (
-                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.willingToSignAgreement}</p>
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <X className="w-3 h-3" /> {errors.willingToSignAgreement}
+                  </p>
                 )}
               </div>
 
               {/* Modal Footer */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t">
-                <Button
+              <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-6 border-t border-gray-100">
+                <button
                   type="button"
-                  variant="secondary"
                   onClick={() => setShowApplicationModal(false)}
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-gray-700 font-medium hover:bg-gray-100 transition-colors"
                 >
                   Cancel
-                </Button>
-                <Button
+                </button>
+                <button
                   type="submit"
-                  variant="dark"
                   disabled={isSubmitting}
-                  className="bg-black hover:bg-gray-900 text-white w-full sm:w-auto"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit Request'}
-                </Button>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Submit Application
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
               </div>
             </form>
           </div>

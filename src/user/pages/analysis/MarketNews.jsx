@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
 import { Scatter } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -7,14 +7,27 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { 
+  Newspaper, 
+  TrendingUp, 
+  TrendingDown, 
+  ArrowRight, 
+  ArrowLeft,
+  ChevronRight,
+  Clock,
+  Tag,
+  BarChart2,
+  ExternalLink
+} from 'lucide-react';
+import PageHeader from '../../components/PageHeader';
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
 
 function MarketNews() {
-  const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
-  const [currentAnalysisIndex, setCurrentAnalysisIndex] = useState(0)
-  const hotNewsRef = useRef(null)
-  const analysisRef = useRef(null)
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [currentAnalysisIndex, setCurrentAnalysisIndex] = useState(0);
+  const hotNewsRef = useRef(null);
+  const analysisRef = useRef(null);
 
   const marketNews = [
     {
@@ -56,7 +69,7 @@ function MarketNews() {
       movement: 'MOVING UP',
       change: '+0.66%',
       changeColor: 'green',
-      logo: 'a AMZN',
+      logo: 'AMZN',
       image: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=800&q=60',
       description: 'Amazon rises amid mixed economic signals and strong services demand. CEO Jassy plans to sell shares as layoffs impact engineering roles.',
       type: 'trade',
@@ -90,85 +103,7 @@ function MarketNews() {
       description: 'Energy Markets React to Breakthrough Peace Deal Between U.S., Russia, and Ukraine',
       tag: 'EURUSD'
     }
-  ]
-
-  const analysisCards = [
-    {
-      id: 1,
-      ticker: 'ETH',
-      name: 'Ethereum',
-      movement: 'MOVING DOWN',
-      change: '-3.7%',
-      changeColor: 'red',
-      logo: 'ETH',
-      description: 'Ethereum drops below $3,000 amid market volatility. Retail selling of Bitcoin and ETH ETFs fuels correction, while BlackRock\'s ETH transfer',
-      type: 'trade',
-      status: 'Sell Limit',
-      statusColor: 'red',
-      target: '2560.00'
-    },
-    {
-      id: 2,
-      ticker: 'NVDA',
-      name: 'NVIDIA',
-      movement: 'MOVING DOWN',
-      change: '-1.05%',
-      changeColor: 'red',
-      logo: 'NVDA',
-      description: 'NVIDIA shares drop amid sector-wide decline. Concerns grow over revenue sustainability and inventory levels after strong jobs report.',
-      type: 'performance',
-      vsSector: 'BOTTOM 33%',
-      vsSectorColor: 'red',
-      vsSP500: 'BOTTOM 12%',
-      vsSP500Color: 'red'
-    },
-    {
-      id: 3,
-      ticker: 'ROST',
-      name: 'Ross Stores',
-      movement: 'MOVING UP',
-      change: '+7.44%',
-      changeColor: 'green',
-      logo: 'ROST',
-      description: 'Ross Stores beats earnings expectations with $511.94M net income. Full-year EPS forecast raised, driving strong market activity today.',
-      type: 'trade',
-      status: 'Live Trade',
-      statusColor: 'green',
-      target: '175.02',
-      readMore: true
-    },
-    {
-      id: 4,
-      ticker: 'META',
-      name: 'Meta Platforms',
-      movement: 'MOVING DOWN',
-      change: '-0.25%',
-      changeColor: 'red',
-      logo: 'META',
-      description: 'Meta is venturing into electricity trading for AI growth. A Spanish court ruling requires Meta to pay EUR 479 million for unfair competition.',
-      type: 'performance',
-      vsSector: 'BOTTOM 4%',
-      vsSectorColor: 'red',
-      vsSP500: 'BOTTOM 20%',
-      vsSP500Color: 'red'
-    },
-    {
-      id: 5,
-      ticker: 'AMD',
-      name: 'Advanced Micro Devices',
-      movement: 'MOVING DOWN',
-      change: '-2.8%',
-      changeColor: 'red',
-      logo: 'AMD',
-      description: 'AMD stock declines amid negative AI CPU benchmark. U.S. Department of Energy partnership fails to boost sentiment.',
-      type: 'performance',
-      vsSector: 'BOTTOM 15%',
-      vsSectorColor: 'red',
-      vsSP500: 'BOTTOM 8%',
-      vsSP500Color: 'red',
-      readMore: true
-    }
-  ]
+  ];
 
   const newsInsights = [
     {
@@ -225,47 +160,19 @@ function MarketNews() {
       tags: ['Gold', 'Geopolitical Risk', 'Safe Haven'],
       partialText: 'Spot gold prices have risen approximately 2.5%...'
     }
-  ]
-
-  const nextNews = () => {
-    setCurrentNewsIndex((prev) => (prev + 1) % marketNews.length)
-  }
-
-  const prevNews = () => {
-    setCurrentNewsIndex((prev) => (prev - 1 + marketNews.length) % marketNews.length)
-  }
-
-  const nextAnalysis = () => {
-    setCurrentAnalysisIndex((prev) => (prev + 1) % analysisCards.length)
-  }
-
-  const prevAnalysis = () => {
-    setCurrentAnalysisIndex((prev) => (prev - 1 + analysisCards.length) % analysisCards.length)
-  }
+  ];
 
   const scrollHotNewsLeft = () => {
     if (hotNewsRef.current) {
-      hotNewsRef.current.scrollBy({ left: -300, behavior: 'smooth' })
+      hotNewsRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     }
-  }
+  };
 
   const scrollHotNewsRight = () => {
     if (hotNewsRef.current) {
-      hotNewsRef.current.scrollBy({ left: 300, behavior: 'smooth' })
+      hotNewsRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
-  }
-
-  const scrollAnalysisLeft = () => {
-    if (analysisRef.current) {
-      analysisRef.current.scrollBy({ left: -300, behavior: 'smooth' })
-    }
-  }
-
-  const scrollAnalysisRight = () => {
-    if (analysisRef.current) {
-      analysisRef.current.scrollBy({ left: 300, behavior: 'smooth' })
-    }
-  }
+  };
 
   // Scatter plot data for trending instruments
   const scatterData = {
@@ -315,7 +222,7 @@ function MarketNews() {
         pointHoverRadius: 10,
       },
     ],
-  }
+  };
 
   const scatterOptions = {
     responsive: true,
@@ -326,12 +233,32 @@ function MarketNews() {
         labels: {
           usePointStyle: true,
           padding: 20,
+          font: {
+            family: "'Inter', sans-serif",
+            size: 12
+          }
         },
       },
       tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#475569',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 12,
+        cornerRadius: 8,
+        titleFont: {
+          family: "'Inter', sans-serif",
+          size: 13,
+          weight: 'bold'
+        },
+        bodyFont: {
+          family: "'Inter', sans-serif",
+          size: 12
+        },
         callbacks: {
           label: function(context) {
-            return `${context.raw.name}: (${context.parsed.x.toFixed(1)}, ${context.parsed.y.toFixed(1)})`
+            return `${context.raw.name}: (${context.parsed.x.toFixed(1)}, ${context.parsed.y.toFixed(1)})`;
           }
         }
       },
@@ -343,349 +270,246 @@ function MarketNews() {
         title: {
           display: true,
           text: 'Market Sentiment',
+          font: {
+            family: "'Inter', sans-serif",
+            size: 12,
+            weight: 500
+          },
+          color: '#64748b'
         },
         min: 0,
         max: 10,
         grid: {
-          color: 'rgba(0,0,0,0.1)',
+          color: '#f1f5f9',
         },
+        ticks: {
+          color: '#94a3b8'
+        }
       },
       y: {
         title: {
           display: true,
           text: 'News Volume',
+          font: {
+            family: "'Inter', sans-serif",
+            size: 12,
+            weight: 500
+          },
+          color: '#64748b'
         },
         min: 0,
         max: 10,
         grid: {
-          color: 'rgba(0,0,0,0.1)',
+          color: '#f1f5f9',
         },
+        ticks: {
+          color: '#94a3b8'
+        }
       },
     },
-  }
+  };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 overflow-x-hidden">
-      <div className="w-full max-w-[95%] mx-auto">
-        <h1 className="mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '400' }}>
-          Market News
-        </h1>
+    <div className="space-y-6">
+      <PageHeader 
+        title="Market News" 
+        subtitle="Stay updated with the latest market trends and breaking news"
+        icon={Newspaper}
+      />
 
-        {/* Market News Carousel */}
-        <div className="mb-8">
-          {/* <h2 className="mb-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '18px', color: '#000000', fontWeight: '400' }}>
-            Market News
-          </h2> */}
-          <div className="mt-8 mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-xl font-bold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '700' }}>
+      {/* Hot News Section */}
+      <div className="mb-10">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-blue-600" />
               Hot News
             </h2>
-            <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
+            <div className="flex gap-2">
+              <button 
+                onClick={scrollHotNewsLeft} 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={scrollHotNewsRight} 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          <div className="relative">
-            <div ref={hotNewsRef} className="flex gap-4 overflow-x-auto scrollbar-hide pb-4">
-              {[
-                {
-                  id: 1,
-                  date: '21/11/2025 20:59',
-                  type: 'TECHNICAL ANALYSIS',
-                  image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=60',
-                  headline: 'EUR/USD Technical Analysis: Bullish Momentum Building',
-                  pair: 'EURUSD'
-                },
-                {
-                  id: 2,
-                  date: '21/11/2025 20:58',
-                  type: 'FUNDAMENTAL ANALYSIS',
-                  image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Oil Markets Fundamental Outlook: Supply Chain Disruptions',
-                  pair: 'WTI'
-                },
-                {
-                  id: 3,
-                  date: '21/11/2025 19:22',
-                  type: 'SENTIMENT ANALYSIS',
-                  image: 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Market Sentiment Analysis: Risk Appetite Rising',
-                  pair: 'SP500'
-                },
-                {
-                  id: 4,
-                  date: '21/11/2025 19:22',
-                  type: 'QUANTITATIVE ANALYSIS',
-                  image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Quantitative Analysis: Algorithmic Trading Trends',
-                  pair: 'NASDAQ'
-                },
-                {
-                  id: 5,
-                  date: '21/11/2025 19:07',
-                  type: 'MACRO ANALYSIS',
-                  image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Macro Analysis: Global Economic Indicators Review',
-                  pair: 'GDP'
-                }
-              ].map((news) => (
-                <div
-                  key={news.id}
-                  className="min-w-[240px] rounded-lg p-3 pb-8 border border-gray-200 shadow-md relative overflow-hidden"
-                  style={{
-                    backgroundImage: `url('${news.image}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-white bg-opacity-60"></div>
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="text-gray-600">{news.date}</span>
-                      <span className="text-[#00A896] font-semibold">{news.type}</span>
+          <div 
+            ref={hotNewsRef} 
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {[
+              {
+                id: 1,
+                date: '21/11/2025 20:59',
+                type: 'TECHNICAL ANALYSIS',
+                image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=60',
+                headline: 'EUR/USD Technical Analysis: Bullish Momentum Building',
+                pair: 'EURUSD'
+              },
+              {
+                id: 2,
+                date: '21/11/2025 20:58',
+                type: 'FUNDAMENTAL ANALYSIS',
+                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=60',
+                headline: 'Oil Markets Fundamental Outlook: Supply Chain Disruptions',
+                pair: 'WTI'
+              },
+              {
+                id: 3,
+                date: '21/11/2025 19:22',
+                type: 'SENTIMENT ANALYSIS',
+                image: 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=60',
+                headline: 'Market Sentiment Analysis: Risk Appetite Rising',
+                pair: 'SP500'
+              },
+              {
+                id: 4,
+                date: '21/11/2025 19:22',
+                type: 'QUANTITATIVE ANALYSIS',
+                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=60',
+                headline: 'Quantitative Analysis: Algorithmic Trading Trends',
+                pair: 'NASDAQ'
+              },
+              {
+                id: 5,
+                date: '21/11/2025 19:07',
+                type: 'MACRO ANALYSIS',
+                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60',
+                headline: 'Macro Analysis: Global Economic Indicators Review',
+                pair: 'GDP'
+              }
+            ].map((news) => (
+              <div
+                key={news.id}
+                className="min-w-[300px] md:min-w-[340px] snap-center rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 relative group cursor-pointer"
+                style={{ height: '240px' }}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url('${news.image}')` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent" />
+                
+                <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                  <div className="flex justify-between items-start">
+                    <span className="bg-blue-600/90 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">
+                      New
+                    </span>
+                    <span className="bg-slate-900/60 backdrop-blur-sm text-slate-200 text-xs px-2.5 py-1 rounded-lg border border-white/10">
+                      {news.pair}
+                    </span>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-2 text-xs font-medium text-blue-300">
+                      <Clock className="w-3.5 h-3.5" />
+                      {news.date.split(' ')[1]} UTC
                     </div>
-
-                    {/* New badge with line */}
-                    <div className="w-full flex items-center justify-center mb-5 relative">
-                      <div className="absolute w-full h-[1px] bg-gray-300"></div>
-                      <span className="relative bg-[#00A896] text-white text-xs px-3 py-1 rounded-full z-10 shadow">
-                        New
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <p className="text-base font-semibold text-black leading-snug pt-14  text-center">
-                      {news.headline.split(' ').slice(0, 4).join(' ')} <br />
-                      {news.headline.split(' ').slice(4, 8).join(' ')} <br />
-                      {news.headline.split(' ').slice(8).join(' ')}
-                    </p>
-
-                    {/* Pair Badge */}
-                    <div className="text-center">
-                      <div className="inline-block bg-white px-3 py-1 rounded-full border border-gray-300 text-xs font-medium text-gray-700 shadow-sm mt-2">
-                        {news.pair}
-                      </div>
+                    <h3 className="text-white font-bold text-lg leading-snug line-clamp-2 mb-2">
+                      {news.headline}
+                    </h3>
+                    <div className="flex items-center gap-2 text-slate-300 text-xs font-medium uppercase tracking-wider">
+                      <Tag className="w-3.5 h-3.5" />
+                      {news.type}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex justify-center gap-2 mt-4">
-              <button onClick={scrollHotNewsLeft} className="w-8 h-8 bg-gray-800 text-white rounded flex items-center justify-center hover:bg-gray-900 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button onClick={scrollHotNewsRight} className="w-8 h-8 bg-gray-800 text-white rounded flex items-center justify-center hover:bg-gray-900 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        </div>
-
-        {/* Trending Instruments Section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-xl font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '20px', color: '#000000', fontWeight: '600' }}>
-              Trending Instruments
-            </h2>
-            <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            {/* Most Newsworthy Instruments - Scatter Plot */}
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="mb-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: '#000000', fontWeight: '600' }}>
-                Most Newsworthy Instruments
-              </h3>
-              <div className="h-80">
-                <Scatter data={scatterData} options={scatterOptions} />
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
 
-            {/* News & Insights */}
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md max-h-[400px] overflow-y-auto">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: '#000000', fontWeight: '600' }}>
-                  News & Insights
+        {/* Trending Instruments Grid */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          
+          {/* Scatter Plot Card */}
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <BarChart2 className="w-5 h-5 text-blue-600" />
+                  Most Newsworthy Instruments
                 </h3>
-                <span className="px-2 py-1 bg-gray-200 rounded-full text-xs" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                  EURJPY
-                </span>
+                <p className="text-slate-500 text-sm mt-1">Correlation between market sentiment and news volume</p>
               </div>
-
-              <div className="space-y-4">
-                {newsInsights.map((item) => (
-                  <div key={item.id} className="border-b border-gray-200 pb-4 last:border-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>
-                        {item.date}
-                      </span>
-                      <span className="px-2 py-0.5 bg-gray-100 rounded text-xs font-semibold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '600' }}>
-                        {item.category}
-                      </span>
-                    </div>
-                    <div className="flex flex-col md:flex-row gap-4">
-                      <div className="w-full md:w-[30%]">
-                        <img src={item.imageUrl} alt={item.image} className="w-full h-24 md:h-36 object-cover rounded" />
-                      </div>
-                      <div className="w-full md:w-[70%]">
-                        <h4 className="font-semibold mb-2" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#000000', fontWeight: '600' }}>
-                          {item.title}
-                        </h4>
-                        <p className="text-sm text-gray-600 mb-2" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '13px', fontWeight: '400', lineHeight: '1.5' }}>
-                          {item.description}
-                        </p>
-                        {item.tags && (
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {item.tags.map((tag, idx) => (
-                              <span key={idx} className="px-2 py-1 bg-gray-100 rounded-full text-xs" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '10px', fontWeight: '400' }}>
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                        {item.partialText && (
-                          <p className="text-xs text-gray-500 italic" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '11px', fontWeight: '400' }}>
-                            {item.partialText}...
-                          </p>
-                        )}
-                        <button className="mt-2 px-4 py-2 bg-gray-800 text-white text-xs font-semibold rounded hover:bg-gray-900 transition-colors" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', fontWeight: '600' }}>
-                          FIND OUT MORE
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <button className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors">
+                View Full Report <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <div className="h-[400px] w-full">
+              <Scatter data={scatterData} options={scatterOptions} />
             </div>
           </div>
-        </div>
 
-        {/* Analysis Section */}
-        <div className="mt-8 mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-xl font-bold" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '700' }}>
-              Analysis
-            </h2>
-            <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
-          </div>
+          {/* News Feed */}
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-bold text-slate-900">Latest Insights</h3>
+              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-semibold">
+                Live Feed
+              </span>
+            </div>
 
-          <div className="relative">
-            <div ref={analysisRef} className="flex gap-4 overflow-x-auto scrollbar-hide pb-4">
-              {[
-                {
-                  id: 1,
-                  date: '21/11/2025 20:59',
-                  type: 'SUMMARY',
-                  image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Energy Markets React to Breakthrough Peace Deal Between U.S., Russia, and Ukraine',
-                  pair: 'EURUSD'
-                },
-                {
-                  id: 2,
-                  date: '21/11/2025 20:58',
-                  type: 'SNAPSHOTS',
-                  image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Currency pairs: Latest news',
-                  pair: 'EURUSD'
-                },
-                {
-                  id: 3,
-                  date: '21/11/2025 19:22',
-                  type: 'SUMMARY',
-                  image: 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Charting the Future: Vice Chair Jefferson Speaks on AI and Financial Stability',
-                  pair: 'EURUSD'
-                },
-                {
-                  id: 4,
-                  date: '21/11/2025 19:22',
-                  type: 'SNAPSHOTS',
-                  image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Currency pairs: Latest news',
-                  pair: 'USDCAD'
-                },
-                {
-                  id: 5,
-                  date: '21/11/2025 19:07',
-                  type: 'SUMMARY',
-                  image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=60',
-                  headline: 'Federal Reserve Welcomes Young M at the 2025 National College Fed Challenge Finals',
-                  pair: 'EURUSD'
-                }
-              ].map((news) => (
-                <div
-                  key={news.id}
-                  className="min-w-[240px] rounded-lg p-3 pb-8 border border-gray-200 shadow-md relative overflow-hidden"
-                  style={{
-                    backgroundImage: `url('${news.image}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-white bg-opacity-60"></div>
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="text-gray-600">{news.date}</span>
-                      <span className="text-[#00A896] font-semibold">{news.type}</span>
-                    </div>
-
-                    {/* New badge with line */}
-                    <div className="w-full flex items-center justify-center mb-5 relative">
-                      <div className="absolute w-full h-[1px] bg-gray-300"></div>
-                      <span className="relative bg-[#00A896] text-white text-xs px-3 py-1 rounded-full z-10 shadow">
-                        New
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <p className="text-base font-semibold text-black leading-snug pt-14  text-center">
-                      {news.headline.split(' ').slice(0, 4).join(' ')} <br />
-                      {news.headline.split(' ').slice(4, 8).join(' ')} <br />
-                      {news.headline.split(' ').slice(8).join(' ')}
-                    </p>
-
-                    {/* Pair Badge */}
-                    <div className="text-center">
-                      <div className="inline-block bg-white px-3 py-1 rounded-full border border-gray-300 text-xs font-medium text-gray-700 shadow-sm mt-2">
-                        {news.pair}
+            <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              {newsInsights.map((item) => (
+                <div key={item.id} className="group cursor-pointer">
+                  <div className="flex gap-4">
+                    <div className="relative shrink-0">
+                      {item.imageUrl && !item.imageUrl.includes('.svg') ? (
+                        <img 
+                          src={item.imageUrl} 
+                          alt={item.title} 
+                          className="w-16 h-16 rounded-xl object-cover shadow-sm group-hover:shadow transition-all"
+                        />
+                      ) : (
+                        <div className="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400">
+                          <Newspaper className="w-8 h-8" />
+                        </div>
+                      )}
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center">
+                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       </div>
                     </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+                          {item.category}
+                        </span>
+                        <span className="text-xs text-slate-400">
+                          {item.date.split(' ')[1]}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-bold text-slate-900 leading-snug mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
+                  <div className="mt-4 border-b border-slate-50 group-last:border-0" />
                 </div>
               ))}
             </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex justify-center gap-2 mt-4">
-              <button onClick={scrollAnalysisLeft} className="w-8 h-8 bg-gray-800 text-white rounded flex items-center justify-center hover:bg-gray-900 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button onClick={scrollAnalysisRight} className="w-8 h-8 bg-gray-800 text-white rounded flex items-center justify-center hover:bg-gray-900 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
+            
+            <button className="w-full mt-4 py-3 bg-slate-50 text-slate-600 font-semibold rounded-xl hover:bg-slate-100 transition-colors flex items-center justify-center gap-2 text-sm">
+              Load More News <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
-      </div>
+
     </div>
-  )
+  );
 }
 
-export default MarketNews
-
+export default MarketNews;

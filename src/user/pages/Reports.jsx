@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FileText } from 'lucide-react'
+import { FileText, Download } from 'lucide-react'
 import authService from '../../services/auth.js'
 import ProTable from '../../admin/components/ProTable.jsx'
 import PageHeader from '../components/PageHeader.jsx'
@@ -408,283 +408,330 @@ function Reports() {
   }))
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 overflow-x-hidden" style={{ background: 'linear-gradient(to right, #E5E7EB 0%, #FFFFFF 20%, #FFFFFF 80%, #E5E7EB 100%)' }}>
-      <div className="w-full max-w-[95%] mx-auto bg-gray-100 rounded-lg">
-        <div className="w-full mx-auto p-4 md:p-6">
-          <PageHeader
-            icon={FileText}
-            title="Reports"
-            subtitle="View and download your transaction history and MT5 account statements."
-          />
+    <div className="space-y-6">
+      <PageHeader
+        icon={FileText}
+        title="Reports"
+        subtitle="View and download your transaction history and MT5 account statements."
+      />
 
-          {/* Main Content Card */}
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              {/* Report Selection Dropdown */}
+      {/* Main Content Card */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-6 mb-8">
+            {/* Report Selection Dropdown */}
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Select Report Type</label>
+              <div className="relative">
+                <select
+                  value={selectedReport}
+                  onChange={(e) => setSelectedReport(e.target.value)}
+                  className="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all appearance-none text-gray-900"
+                >
+                  {reportOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Account Selection for MT5 Statement */}
+            {selectedReport === 'account-statement-mt5' && (
               <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Select Account</label>
                 <div className="relative">
                   <select
-                    value={selectedReport}
-                    onChange={(e) => setSelectedReport(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white appearance-none focus:ring-2 focus:ring-[#00A896] focus:border-transparent outline-none"
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: selectedReport ? '#000000' : '#6B7280' }}
+                    value={selectedAccount}
+                    onChange={(e) => setSelectedAccount(e.target.value)}
+                    className="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all appearance-none text-gray-900"
                   >
-                    {reportOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
+                    <option value="">All MT5 Accounts</option>
+                    {mt5Accounts.map((acc) => (
+                      <option key={acc.id} value={acc.account_number}>
+                        {acc.account_number} - {acc.account_type || 'Standard'}
                       </option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
                 </div>
               </div>
+            )}
 
-              {/* Account Selection for MT5 Statement */}
-              {selectedReport === 'account-statement-mt5' && (
-                <div className="flex-1">
-                  <div className="relative">
-                    <select
-                      value={selectedAccount}
-                      onChange={(e) => setSelectedAccount(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white appearance-none focus:ring-2 focus:ring-[#00A896] focus:border-transparent outline-none"
-                      style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px' }}
-                    >
-                      <option value="">All MT5 Accounts</option>
-                      {mt5Accounts.map((acc) => (
-                        <option key={acc.id} value={acc.account_number}>
-                          {acc.account_number} - {acc.account_type || 'Standard'}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
+            {/* Open in New Tab Checkbox */}
+            <div className="flex items-end pb-2">
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <div className="relative flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    checked={openInNewTab}
+                    onChange={(e) => setOpenInNewTab(e.target.checked)}
+                    className="peer appearance-none w-5 h-5 border-2 border-gray-300 rounded-md checked:bg-blue-600 checked:border-blue-600 transition-all"
+                  />
+                  <svg className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-              )}
-
-              {/* Open in New Tab Checkbox */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="openInNewTab"
-                  checked={openInNewTab}
-                  onChange={(e) => setOpenInNewTab(e.target.checked)}
-                  className="w-5 h-5 rounded border-gray-300 text-[#00A896] focus:ring-[#00A896] cursor-pointer"
-                />
-                <label
-                  htmlFor="openInNewTab"
-                  className="cursor-pointer"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px', color: '#000000', fontWeight: '400' }}
+                <span className="text-gray-700 font-medium group-hover:text-gray-900 transition-colors">Open in a new tab</span>
+              </label>
+              
+              {openInNewTab && selectedReport && (
+                <button
+                  onClick={handleOpenInNewTab}
+                  className="ml-4 px-4 py-2 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 transition-colors text-sm font-semibold flex items-center gap-2"
                 >
-                  Open in a new tab
-                </label>
-                {openInNewTab && selectedReport && (
-                  <button
-                    onClick={handleOpenInNewTab}
-                    className="ml-2 px-3 py-1.5 bg-[#00A896] text-white rounded-lg hover:bg-[#008B7A] transition text-sm font-medium"
-                  >
-                    Open Now
-                  </button>
-                )}
-              </div>
+                  Open Now
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </button>
+              )}
             </div>
-
-            {/* MT5 Account Statement Datatable */}
-            {selectedReport === 'account-statement-mt5' && (
-              <div className="mt-6">
-                <ProTable
-                  title="MT5 Account Statement"
-                  rows={mt5TableData}
-                  columns={[
-                    {
-                      key: 'dateTime',
-                      label: 'Date & Time',
-                      sortable: true,
-                      render: (value) => (
-                        <div className="flex flex-col">
-                          <span className="font-medium">{new Date(value).toLocaleDateString()}</span>
-                          <span className="text-xs text-gray-500">{new Date(value).toLocaleTimeString()}</span>
-                        </div>
-                      )
-                    },
-                    {
-                      key: 'type',
-                      label: 'Type',
-                      sortable: true,
-                      render: (value) => (
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium capitalize ${value === 'deposit'
-                            ? 'bg-green-100 text-green-800'
-                            : value === 'withdrawal'
-                              ? 'bg-red-100 text-red-800'
-                              : 'bg-blue-100 text-blue-800'
-                          }`}>
-                          {value}
-                        </span>
-                      )
-                    },
-                    {
-                      key: 'description',
-                      label: 'Description',
-                      sortable: false,
-                      render: (value) => (
-                        <span className="truncate max-w-xs block" title={value}>
-                          {value}
-                        </span>
-                      )
-                    },
-                    {
-                      key: 'amount',
-                      label: 'Amount',
-                      sortable: true,
-                      render: (value, row) => (
-                        <div className="text-right font-medium">
-                          {value ? `${row.currency} ${Number(value).toFixed(2)}` : '-'}
-                        </div>
-                      )
-                    },
-                    {
-                      key: 'status',
-                      label: 'Status',
-                      sortable: true,
-                      render: (value) => (
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${value === 'completed' || value === 'approved'
-                            ? 'bg-green-100 text-green-800'
-                            : value === 'pending'
-                              ? 'bg-yellow-100 text-yellow-800'
-                              : value === 'cancelled'
-                                ? 'bg-gray-100 text-gray-800'
-                                : 'bg-red-100 text-red-800'
-                          }`}>
-                          {value || 'Completed'}
-                        </span>
-                      )
-                    },
-                    {
-                      key: 'account',
-                      label: 'Account',
-                      sortable: false,
-                      render: (value) => (
-                        value ? (
-                          <span className="font-mono text-xs bg-brand-100 text-brand-900 px-2 py-1 rounded">
-                            {value}
-                          </span>
-                        ) : (
-                          <span className="text-gray-400">-</span>
-                        )
-                      )
-                    }
-                  ]}
-                  filters={{
-                    searchKeys: ['type', 'description', 'account', 'status'],
-                    selects: [
-                      { key: 'type', label: 'All Types', options: ['deposit', 'withdrawal'] },
-                      { key: 'status', label: 'All Status', options: ['completed', 'approved', 'pending', 'rejected', 'cancelled'] }
-                    ],
-                    dateKey: 'dateTime'
-                  }}
-                  pageSize={10}
-                  searchPlaceholder="Search transactions..."
-                />
-              </div>
-            )}
-
-            {/* Transaction History Datatable */}
-            {selectedReport === 'transaction-history' && (
-              <div className="mt-6">
-                <ProTable
-                  title="Transaction History"
-                  rows={transactionTableData}
-                  columns={[
-                    {
-                      key: 'date',
-                      label: 'Date',
-                      sortable: true,
-                      render: (value) => formatDate(value)
-                    },
-                    {
-                      key: 'type',
-                      label: 'Type',
-                      sortable: true,
-                      render: (value) => (
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${value === 'deposit'
-                            ? 'bg-blue-100 text-blue-800'
-                            : value === 'withdrawal'
-                              ? 'bg-red-100 text-red-800'
-                              : 'bg-green-100 text-green-800'
-                          }`}>
-                          {value === 'deposit' ? 'Deposit' : value === 'withdrawal' ? 'Withdrawal' : 'Account Created'}
-                        </span>
-                      )
-                    },
-                    {
-                      key: 'description',
-                      label: 'Description',
-                      sortable: false,
-                      render: (value) => value
-                    },
-                    {
-                      key: 'amount',
-                      label: 'Amount',
-                      sortable: true,
-                      render: (value, row) => value ? formatAmount(value, row.currency) : '-'
-                    },
-                    {
-                      key: 'status',
-                      label: 'Status',
-                      sortable: true,
-                      render: (value) => (
-                        value ? (
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${value === 'approved'
-                              ? 'bg-green-100 text-green-800'
-                              : value === 'pending'
-                                ? 'bg-yellow-100 text-yellow-800'
-                                : 'bg-red-100 text-red-800'
-                            }`}>
-                            {value}
-                          </span>
-                        ) : (
-                          <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                            Completed
-                          </span>
-                        )
-                      )
-                    },
-                    {
-                      key: 'account',
-                      label: 'Account',
-                      sortable: false,
-                      render: (value) => {
-                        if (!value || value === '-') return '-'
-                        if (value.startsWith('W-')) {
-                          return <span className="text-blue-600">Wallet: {value}</span>
-                        }
-                        return <span className="text-blue-700">MT5: {value}</span>
-                      }
-                    }
-                  ]}
-                  filters={{
-                    searchKeys: ['type', 'description', 'account', 'status'],
-                    selects: [
-                      { key: 'type', label: 'All Types', options: ['deposit', 'withdrawal', 'account_creation'] },
-                      { key: 'status', label: 'All Status', options: ['approved', 'pending', 'rejected', 'completed', 'cancelled'] }
-                    ],
-                    dateKey: 'date'
-                  }}
-                  pageSize={10}
-                  searchPlaceholder="Search transactions..."
-                />
-              </div>
-            )}
           </div>
+
+          {/* MT5 Account Statement Datatable */}
+          {selectedReport === 'account-statement-mt5' && (
+            <div className="space-y-4">
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={handleDownloadPDF}
+                  disabled={downloadingPDF}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors text-sm font-semibold disabled:opacity-50"
+                >
+                  <Download className="w-4 h-4" />
+                  {downloadingPDF ? 'Downloading...' : 'Download PDF'}
+                </button>
+                <button
+                  onClick={handleDownloadExcel}
+                  disabled={downloadingExcel}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-xl hover:bg-green-100 transition-colors text-sm font-semibold disabled:opacity-50"
+                >
+                  <Download className="w-4 h-4" />
+                  {downloadingExcel ? 'Downloading...' : 'Download Excel'}
+                </button>
+              </div>
+              <ProTable
+                loading={loadingMt5}
+                title="MT5 Account Statement"
+                rows={mt5TableData}
+                columns={[
+                  {
+                    key: 'dateTime',
+                    label: 'Date & Time',
+                    sortable: true,
+                    render: (value) => (
+                      <div className="flex flex-col">
+                        <span className="font-medium text-gray-900">{new Date(value).toLocaleDateString()}</span>
+                        <span className="text-xs text-gray-500">{new Date(value).toLocaleTimeString()}</span>
+                      </div>
+                    )
+                  },
+                  {
+                    key: 'type',
+                    label: 'Type',
+                    sortable: true,
+                    render: (value) => (
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold capitalize ${value === 'deposit'
+                          ? 'bg-green-50 text-green-700 border border-green-100'
+                          : value === 'withdrawal'
+                            ? 'bg-red-50 text-red-700 border border-red-100'
+                            : 'bg-blue-50 text-blue-700 border border-blue-100'
+                        }`}>
+                        {value}
+                      </span>
+                    )
+                  },
+                  {
+                    key: 'description',
+                    label: 'Description',
+                    sortable: false,
+                    render: (value) => (
+                      <span className="truncate max-w-xs block text-gray-600" title={value}>
+                        {value}
+                      </span>
+                    )
+                  },
+                  {
+                    key: 'amount',
+                    label: 'Amount',
+                    sortable: true,
+                    render: (value, row) => (
+                      <div className={`text-right font-semibold ${
+                        row.type === 'deposit' ? 'text-green-600' : 
+                        row.type === 'withdrawal' ? 'text-red-600' : 'text-gray-900'
+                      }`}>
+                        {value ? `${row.currency} ${Number(value).toFixed(2)}` : '-'}
+                      </div>
+                    )
+                  },
+                  {
+                    key: 'status',
+                    label: 'Status',
+                    sortable: true,
+                    render: (value) => (
+                      <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold ${value === 'completed' || value === 'approved'
+                          ? 'bg-green-50 text-green-700 border border-green-100'
+                          : value === 'pending'
+                            ? 'bg-yellow-50 text-yellow-700 border border-yellow-100'
+                            : value === 'cancelled'
+                              ? 'bg-gray-100 text-gray-700 border border-gray-200'
+                              : 'bg-red-50 text-red-700 border border-red-100'
+                        }`}>
+                        {value || 'Completed'}
+                      </span>
+                    )
+                  },
+                  {
+                    key: 'account',
+                    label: 'Account',
+                    sortable: false,
+                    render: (value) => (
+                      value ? (
+                        <span className="font-mono text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-lg border border-gray-200">
+                          {value}
+                        </span>
+                      ) : (
+                        <span className="text-gray-400">-</span>
+                      )
+                    )
+                  }
+                ]}
+                filters={{
+                  searchKeys: ['type', 'description', 'account', 'status'],
+                  selects: [
+                    { key: 'type', label: 'All Types', options: ['deposit', 'withdrawal'] },
+                    { key: 'status', label: 'All Status', options: ['completed', 'approved', 'pending', 'rejected', 'cancelled'] }
+                  ],
+                  dateKey: 'dateTime'
+                }}
+                pageSize={10}
+                searchPlaceholder="Search transactions..."
+              />
+            </div>
+          )}
+
+          {/* Transaction History Datatable */}
+          {selectedReport === 'transaction-history' && (
+            <div className="space-y-4">
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={handleDownloadTransactionHistoryPDF}
+                  disabled={downloadingTransactionPDF}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors text-sm font-semibold disabled:opacity-50"
+                >
+                  <Download className="w-4 h-4" />
+                  {downloadingTransactionPDF ? 'Downloading...' : 'Download PDF'}
+                </button>
+                <button
+                  onClick={handleDownloadTransactionHistoryExcel}
+                  disabled={downloadingTransactionExcel}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-xl hover:bg-green-100 transition-colors text-sm font-semibold disabled:opacity-50"
+                >
+                  <Download className="w-4 h-4" />
+                  {downloadingTransactionExcel ? 'Downloading...' : 'Download Excel'}
+                </button>
+              </div>
+              <ProTable
+                title="Transaction History"
+                rows={transactionTableData}
+                columns={[
+                  {
+                    key: 'date',
+                    label: 'Date',
+                    sortable: true,
+                    render: (value) => <span className="text-gray-900 font-medium">{formatDate(value)}</span>
+                  },
+                  {
+                    key: 'type',
+                    label: 'Type',
+                    sortable: true,
+                    render: (value) => (
+                      <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold capitalize ${value === 'deposit'
+                          ? 'bg-blue-50 text-blue-700 border border-blue-100'
+                          : value === 'withdrawal'
+                            ? 'bg-red-50 text-red-700 border border-red-100'
+                            : 'bg-green-50 text-green-700 border border-green-100'
+                        }`}>
+                        {value === 'deposit' ? 'Deposit' : value === 'withdrawal' ? 'Withdrawal' : 'Account Created'}
+                      </span>
+                    )
+                  },
+                  {
+                    key: 'description',
+                    label: 'Description',
+                    sortable: false,
+                    render: (value) => <span className="text-gray-600">{value}</span>
+                  },
+                  {
+                    key: 'amount',
+                    label: 'Amount',
+                    sortable: true,
+                    render: (value, row) => (
+                      <div className={`font-semibold ${
+                        row.type === 'deposit' ? 'text-blue-600' : 
+                        row.type === 'withdrawal' ? 'text-red-600' : 'text-gray-900'
+                      }`}>
+                        {value ? formatAmount(value, row.currency) : '-'}
+                      </div>
+                    )
+                  },
+                  {
+                    key: 'status',
+                    label: 'Status',
+                    sortable: true,
+                    render: (value) => (
+                      value ? (
+                        <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold ${value === 'approved'
+                            ? 'bg-green-50 text-green-700 border border-green-100'
+                            : value === 'pending'
+                              ? 'bg-yellow-50 text-yellow-700 border border-yellow-100'
+                              : 'bg-red-50 text-red-700 border border-red-100'
+                          }`}>
+                          {value}
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                          Completed
+                        </span>
+                      )
+                    )
+                  },
+                  {
+                    key: 'account',
+                    label: 'Account',
+                    sortable: false,
+                    render: (value) => {
+                      if (!value || value === '-') return <span className="text-gray-400">-</span>
+                      if (value.startsWith('W-')) {
+                        return <span className="font-mono text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-lg border border-blue-100">Wallet: {value}</span>
+                      }
+                      return <span className="font-mono text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-lg border border-gray-200">MT5: {value}</span>
+                    }
+                  }
+                ]}
+                filters={{
+                  searchKeys: ['type', 'description', 'account', 'status'],
+                  selects: [
+                    { key: 'type', label: 'All Types', options: ['deposit', 'withdrawal', 'account_creation'] },
+                    { key: 'status', label: 'All Status', options: ['approved', 'pending', 'rejected', 'completed', 'cancelled'] }
+                  ],
+                  dateKey: 'date'
+                }}
+                pageSize={10}
+                searchPlaceholder="Search transactions..."
+              />
+            </div>
+          )}
         </div>
-      </div>
     </div>
   )
 }

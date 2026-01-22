@@ -186,7 +186,11 @@ function UserLayout() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 overflow-x-hidden">
+    <div className="flex min-h-screen bg-slate-50 overflow-x-hidden relative">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-50/50 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-50/50 blur-[120px]" />
+      </div>
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
@@ -245,41 +249,47 @@ function UserLayout() {
 
           {/* Success Ticker - Show when KYC is approved AND not dismissed */}
           {kycStatus === 'approved' && showSuccessTicker && (
-            <div className="w-full bg-green-50 border-t border-green-200 px-4 md:px-6 py-3 transition-all duration-300">
-              <div className="flex items-center justify-center relative">
-                <div className="flex items-center gap-2 text-green-800 text-sm md:text-base font-medium text-center pr-8">
-                  <AiOutlineCheckCircle className="w-5 h-5 flex-shrink-0" />
-                  <span>Your KYC has been approved now you can start your trading activities</span>
-                </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+              <div className="bg-green-50/80 backdrop-blur border border-green-200 rounded-2xl p-4 shadow-sm transition-all duration-300">
+                <div className="flex items-center justify-between relative">
+                  <div className="flex items-center gap-3 text-green-800 text-sm md:text-base font-medium">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <AiOutlineCheckCircle className="w-5 h-5" />
+                    </div>
+                    <span>Your KYC has been approved! You can now start your trading activities.</span>
+                  </div>
 
-                <button
-                  onClick={handleDismissSuccess}
-                  className="absolute right-0 text-green-800 hover:text-green-900 p-1 rounded-full hover:bg-green-100 transition-colors"
-                  aria-label="Dismiss"
-                >
-                  <AiOutlineClose className="w-5 h-5" />
-                </button>
+                  <button
+                    onClick={handleDismissSuccess}
+                    className="text-green-800 hover:text-green-900 p-2 rounded-xl hover:bg-green-100 transition-colors"
+                    aria-label="Dismiss"
+                  >
+                    <AiOutlineClose className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
           )}
 
           {/* Deposit Banner - Hide when KYC is approved or loading */}
           {kycStatus !== 'approved' && kycStatus !== null && (
-            <div className="w-full bg-[#FFF9E6] border-t border-[#f3e7b5] px-4 md:px-6 py-4">
-              {/* MOBILE LAYOUT */}
-              <div className="flex items-center justify-center gap-3 md:hidden">
-                <AiOutlineInfoCircle className="w-5 h-5 text-black" />
-                <Link to="/user/verification" className="text-black underline text-sm hover:text-gray-700 transition">
-                  Complete verification
-                </Link>
-              </div>
-
-              {/* DESKTOP LAYOUT */}
-              <div className="hidden md:flex items-center justify-center gap-3">
-                <AiOutlineInfoCircle className="w-6 h-6 text-black" />
-                <Link to="/user/verification" className="text-black underline text-sm md:text-base hover:text-gray-700 transition">
-                  Complete verification
-                </Link>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+              <div className="bg-amber-50/80 backdrop-blur border border-amber-200 rounded-2xl p-4 shadow-sm transition-all duration-300">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 text-amber-600">
+                      <AiOutlineInfoCircle className="w-5 h-5" />
+                    </div>
+                    <span className="text-amber-900 font-medium">Complete your verification to unlock all features</span>
+                  </div>
+                  
+                  <Link 
+                    to="/user/verification" 
+                    className="w-full md:w-auto text-center bg-amber-100 hover:bg-amber-200 text-amber-800 px-6 py-2 rounded-xl font-medium transition-colors text-sm"
+                  >
+                    Complete Verification
+                  </Link>
+                </div>
               </div>
             </div>
           )}

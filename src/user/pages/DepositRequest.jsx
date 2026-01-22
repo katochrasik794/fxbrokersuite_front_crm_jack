@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { CheckCircle, ArrowRight, Copy, Check, Upload, ArrowLeft } from 'lucide-react';
+import { CheckCircle, ArrowRight, Copy, Check, Upload, ArrowLeft, Wallet, AlertTriangle, ChevronRight, Download, CreditCard } from 'lucide-react';
 import authService from '../../services/auth.js';
 import Swal from 'sweetalert2';
+import PageHeader from '../components/PageHeader';
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_API_URL?.replace('/api', '') || import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
@@ -382,8 +383,8 @@ function DepositRequest() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600"></div>
+      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
@@ -393,184 +394,115 @@ function DepositRequest() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
+    <div className="min-h-screen bg-slate-50 pb-12">
+      <PageHeader 
+        title={`Deposit via ${gateway.name}`}
+        subtitle="Complete your deposit request safely and securely"
+        icon={Wallet}
+      />
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
         <button
           onClick={() => navigate('/user/deposits')}
-          className="mb-6 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+          className="mb-6 flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Back to Deposits</span>
+          <span>Back to Payment Methods</span>
         </button>
 
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            {gateway.icon_url && (
-              <img src={gateway.icon_url} alt={gateway.name} className="w-12 h-12 rounded-lg" />
-            )}
-            <h1 className="text-2xl font-semibold">{gateway.name}</h1>
-          </div>
+        {/* Header Card */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              {gateway.icon_url ? (
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 p-2 border border-gray-100 flex items-center justify-center">
+                  <img src={gateway.icon_url} alt={gateway.name} className="w-full h-full object-contain" />
+                </div>
+              ) : (
+                <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+                  <Wallet className="w-8 h-8" />
+                </div>
+              )}
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">{gateway.name}</h1>
+                <p className="text-sm text-gray-500">Processing time: Instant - 48 hours</p>
+              </div>
+            </div>
 
-          {/* Step Indicators */}
-          <div className="flex items-center justify-center gap-2">
-            <div className={`flex items-center ${step >= 1 ? 'text-blue-700' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
-                {step > 1 ? <CheckCircle className="w-6 h-6" /> : '1'}
+            {/* Step Indicators */}
+            <div className="flex items-center bg-gray-50 rounded-xl p-2">
+              <div className={`flex items-center px-4 py-2 rounded-lg transition-all ${step >= 1 ? 'bg-white shadow-sm text-blue-600 font-semibold' : 'text-gray-400'}`}>
+                <span className="w-6 h-6 rounded-full bg-current text-white flex items-center justify-center text-xs mr-2 opacity-20">1</span>
+                <span>Details</span>
               </div>
-              <span className="ml-2 text-sm font-medium">Details</span>
-            </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 2 ? 'text-blue-700' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
-                {step > 2 ? <CheckCircle className="w-6 h-6" /> : '2'}
+              <ChevronRight className="w-4 h-4 text-gray-300 mx-1" />
+              <div className={`flex items-center px-4 py-2 rounded-lg transition-all ${step >= 2 ? 'bg-white shadow-sm text-blue-600 font-semibold' : 'text-gray-400'}`}>
+                <span className="w-6 h-6 rounded-full bg-current text-white flex items-center justify-center text-xs mr-2 opacity-20">2</span>
+                <span>Confirm</span>
               </div>
-              <span className="ml-2 text-sm font-medium">Confirmation</span>
-            </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 3 ? 'text-blue-700' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
-                {step >= 3 ? <CheckCircle className="w-6 h-6" /> : '3'}
+              <ChevronRight className="w-4 h-4 text-gray-300 mx-1" />
+              <div className={`flex items-center px-4 py-2 rounded-lg transition-all ${step >= 3 ? 'bg-white shadow-sm text-blue-600 font-semibold' : 'text-gray-400'}`}>
+                <span className="w-6 h-6 rounded-full bg-current text-white flex items-center justify-center text-xs mr-2 opacity-20">3</span>
+                <span>Done</span>
               </div>
-              <span className="ml-2 text-sm font-medium">Confirmed</span>
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
           {step === 1 && (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {/* Bank Details / Crypto Address */}
               {(gateway.type === 'wire' || gateway.type === 'crypto') && (
-                <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Payment Details</h3>
-                  <div className="space-y-2">
+                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
+                      <CreditCard className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="text-base font-bold text-gray-900">Payment Details</h3>
+                  </div>
+                  
+                  <div className="space-y-3">
                     {gateway.type === 'wire' && (
-                      <>
-                        {gateway.bank_name && (
-                          <div className="flex items-center justify-between py-2 border-b border-gray-200">
-                            <span className="text-sm text-gray-600 font-medium">Bank Name:</span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-900">{gateway.bank_name}</span>
+                      <div className="grid gap-3">
+                        {[
+                          { label: 'Bank Name', value: gateway.bank_name, key: 'bank_name' },
+                          { label: 'Account Name', value: gateway.account_name, key: 'account_name' },
+                          { label: 'Account Number', value: gateway.account_number, key: 'account_number' },
+                          { label: 'IFSC Code', value: gateway.ifsc_code, key: 'ifsc_code' },
+                          { label: 'SWIFT Code', value: gateway.swift_code, key: 'swift_code' },
+                        ].map((item) => item.value && (
+                          <div key={item.key} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-white rounded-xl border border-gray-200 hover:border-blue-300 transition-colors group">
+                            <span className="text-sm text-gray-500 font-medium mb-1 sm:mb-0">{item.label}</span>
+                            <div className="flex items-center gap-3">
+                              <span className="text-sm font-semibold text-gray-900 font-mono">{item.value}</span>
                               <button
                                 type="button"
                                 onClick={() => {
-                                  navigator.clipboard.writeText(gateway.bank_name);
-                                  setCopiedField('bank_name');
+                                  navigator.clipboard.writeText(item.value);
+                                  setCopiedField(item.key);
                                   setTimeout(() => setCopiedField(null), 2000);
                                 }}
-                                className="p-1 hover:bg-gray-200 rounded transition-colors"
+                                className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-blue-600"
                               >
-                                {copiedField === 'bank_name' ? (
-                                  <Check className="w-4 h-4 text-green-600" />
+                                {copiedField === item.key ? (
+                                  <Check className="w-4 h-4 text-green-500" />
                                 ) : (
-                                  <Copy className="w-4 h-4 text-gray-600" />
+                                  <Copy className="w-4 h-4" />
                                 )}
                               </button>
                             </div>
                           </div>
-                        )}
-                        {gateway.account_name && (
-                          <div className="flex items-center justify-between py-2 border-b border-gray-200">
-                            <span className="text-sm text-gray-600 font-medium">Account Name:</span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-900">{gateway.account_name}</span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(gateway.account_name);
-                                  setCopiedField('account_name');
-                                  setTimeout(() => setCopiedField(null), 2000);
-                                }}
-                                className="p-1 hover:bg-gray-200 rounded transition-colors"
-                              >
-                                {copiedField === 'account_name' ? (
-                                  <Check className="w-4 h-4 text-green-600" />
-                                ) : (
-                                  <Copy className="w-4 h-4 text-gray-600" />
-                                )}
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                        {gateway.account_number && (
-                          <div className="flex items-center justify-between py-2 border-b border-gray-200">
-                            <span className="text-sm text-gray-600 font-medium">Account Number:</span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-900 font-mono">{gateway.account_number}</span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(gateway.account_number);
-                                  setCopiedField('account_number');
-                                  setTimeout(() => setCopiedField(null), 2000);
-                                }}
-                                className="p-1 hover:bg-gray-200 rounded transition-colors"
-                              >
-                                {copiedField === 'account_number' ? (
-                                  <Check className="w-4 h-4 text-green-600" />
-                                ) : (
-                                  <Copy className="w-4 h-4 text-gray-600" />
-                                )}
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                        {gateway.ifsc_code && (
-                          <div className="flex items-center justify-between py-2 border-b border-gray-200">
-                            <span className="text-sm text-gray-600 font-medium">IFSC Code:</span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-900 font-mono">{gateway.ifsc_code}</span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(gateway.ifsc_code);
-                                  setCopiedField('ifsc_code');
-                                  setTimeout(() => setCopiedField(null), 2000);
-                                }}
-                                className="p-1 hover:bg-gray-200 rounded transition-colors"
-                              >
-                                {copiedField === 'ifsc_code' ? (
-                                  <Check className="w-4 h-4 text-green-600" />
-                                ) : (
-                                  <Copy className="w-4 h-4 text-gray-600" />
-                                )}
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                        {gateway.swift_code && (
-                          <div className="flex items-center justify-between py-2">
-                            <span className="text-sm text-gray-600 font-medium">SWIFT Code:</span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-900 font-mono">{gateway.swift_code}</span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(gateway.swift_code);
-                                  setCopiedField('swift_code');
-                                  setTimeout(() => setCopiedField(null), 2000);
-                                }}
-                                className="p-1 hover:bg-gray-200 rounded transition-colors"
-                              >
-                                {copiedField === 'swift_code' ? (
-                                  <Check className="w-4 h-4 text-green-600" />
-                                ) : (
-                                  <Copy className="w-4 h-4 text-gray-600" />
-                                )}
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </>
+                        ))}
+                      </div>
                     )}
+                    
                     {gateway.type === 'crypto' && gateway.crypto_address && (
-                      <div className="flex items-center justify-between py-2">
-                        <span className="text-sm text-gray-600 font-medium">Wallet Address:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm text-gray-900 font-mono break-all max-w-xs">{gateway.crypto_address}</span>
+                      <div className="flex flex-col p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 transition-colors group">
+                        <span className="text-sm text-gray-500 font-medium mb-2">Wallet Address</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-gray-900 font-mono break-all">{gateway.crypto_address}</span>
                           <button
                             type="button"
                             onClick={() => {
@@ -578,12 +510,12 @@ function DepositRequest() {
                               setCopiedField('crypto_address');
                               setTimeout(() => setCopiedField(null), 2000);
                             }}
-                            className="p-1 hover:bg-gray-200 rounded transition-colors flex-shrink-0"
+                            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors text-gray-400 hover:text-blue-600 flex-shrink-0"
                           >
                             {copiedField === 'crypto_address' ? (
-                              <Check className="w-4 h-4 text-green-600" />
+                              <Check className="w-4 h-4 text-green-500" />
                             ) : (
-                              <Copy className="w-4 h-4 text-gray-600" />
+                              <Copy className="w-4 h-4" />
                             )}
                           </button>
                         </div>
@@ -593,317 +525,355 @@ function DepositRequest() {
                 </div>
               )}
 
-              {/* QR Code with Border and Copy */}
+              {/* QR Code */}
               {gateway.qr_code_url && (
-                <div className="flex justify-center">
-                  <div className="flex-shrink-0">
-                    <label className="block text-sm font-medium text-gray-700 mb-2 text-center">QR Code</label>
-                    <div className="relative">
-                      <div className="w-48 h-48 rounded-xl overflow-hidden border-4 border-gray-100 shadow-sm flex items-center justify-center bg-gray-50 p-2">
+                <div className="flex justify-center py-4">
+                  <div className="relative group">
+                    <div className="p-4 bg-white rounded-2xl border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow">
+                      <div className="w-48 h-48 rounded-xl overflow-hidden bg-gray-50">
                         <img src={gateway.qr_code_url} alt="QR Code" className="w-full h-full object-contain" />
                       </div>
-                      {gateway.crypto_address && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            navigator.clipboard.writeText(gateway.crypto_address);
-                            setCopiedField('qr_address');
-                            setTimeout(() => setCopiedField(null), 2000);
-                            Swal.fire({
-                              icon: 'success',
-                              title: 'Copied!',
-                              text: 'Wallet address copied to clipboard',
-                              timer: 2000,
-                              showConfirmButton: false
-                            });
-                          }}
-                          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-dark-base px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors flex items-center gap-1 shadow-lg"
-                        >
-                          {copiedField === 'qr_address' ? (
-                            <>
-                              <Check className="w-3 h-3" />
-                              <span>Copied</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3" />
-                              <span>Copy Address</span>
-                            </>
-                          )}
-                        </button>
-                      )}
+                      <p className="text-center text-xs text-gray-500 mt-2 font-medium">Scan to Pay</p>
                     </div>
+                    {gateway.crypto_address && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(gateway.crypto_address);
+                          setCopiedField('qr_address');
+                          setTimeout(() => setCopiedField(null), 2000);
+                          Swal.fire({
+                            icon: 'success',
+                            title: 'Copied!',
+                            text: 'Wallet address copied to clipboard',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                          });
+                        }}
+                        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 px-4 py-2 rounded-full text-xs font-bold hover:bg-gray-50 transition-colors flex items-center gap-2 shadow-lg border border-gray-100 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-200"
+                      >
+                        {copiedField === 'qr_address' ? (
+                          <>
+                            <Check className="w-3 h-3 text-green-500" />
+                            <span>Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3 text-blue-500" />
+                            <span>Copy Address</span>
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* Deposit To */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Deposit To *
-                </label>
-                <div className="space-y-3">
-                  <div
-                    width={200}
-                    onClick={() => setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' })}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.deposit_to === 'wallet'
-                        ? 'border-blue-600 bg-brand-50'
-                        : 'border-gray-200 hover:border-gray-300'
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Deposit To */}
+                <div className="space-y-4">
+                  <label className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    Deposit Destination <span className="text-red-500">*</span>
+                  </label>
+                  
+                  <div className="space-y-3">
+                    <div
+                      onClick={() => setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' })}
+                      className={`p-4 rounded-2xl border-2 cursor-pointer transition-all relative overflow-hidden ${
+                        formData.deposit_to === 'wallet'
+                          ? 'border-blue-600 bg-blue-50/50'
+                          : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                       }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.deposit_to === 'wallet'
-                            ? 'border-blue-600 bg-blue-600'
-                            : 'border-gray-300'
-                          }`}>
-                          {formData.deposit_to === 'wallet' && (
-                            <div className="w-2 h-2 rounded-full bg-white"></div>
-                          )}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                          formData.deposit_to === 'wallet' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
+                        }`}>
+                          <Wallet className="w-5 h-5" />
                         </div>
-                        <div>
-                          <div className="font-medium text-gray-900">
-                            Wallet {wallet && `(${wallet.wallet_number})`}
+                        <div className="flex-1">
+                          <div className="font-bold text-gray-900">
+                            My Wallet
                           </div>
-                          {wallet && (
-                            <div className="text-sm text-gray-600">
-                              Balance: {wallet.currency} {parseFloat(wallet.balance || 0).toFixed(2)}
-                            </div>
-                          )}
+                          <div className="text-xs text-gray-500">
+                            {wallet ? `Balance: ${wallet.currency} ${parseFloat(wallet.balance || 0).toFixed(2)}` : 'Loading...'}
+                          </div>
                         </div>
+                        {formData.deposit_to === 'wallet' && (
+                          <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                            <Check className="w-3 h-3 text-white" />
+                          </div>
+                        )}
                       </div>
                     </div>
+
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gray-50 rounded-2xl border border-gray-200 -z-10"></div>
+                      <div className="p-4">
+                        <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">
+                          Or Deposit to Trading Account
+                        </label>
+                        <select
+                          value={formData.deposit_to === 'mt5' ? formData.mt5_account_id : ''}
+                          onChange={(e) => {
+                            if (e.target.value) {
+                              setFormData({ ...formData, deposit_to: 'mt5', mt5_account_id: e.target.value });
+                            } else {
+                              setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' });
+                            }
+                          }}
+                          className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-all bg-white appearance-none cursor-pointer ${
+                            formData.deposit_to === 'mt5' ? 'border-blue-600 ring-4 ring-blue-500/10' : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <option value="">Select MT5 Account</option>
+                          {mt5Accounts.map((account) => (
+                            <option key={account.id} value={account.account_number}>
+                              {account.account_number} | {account.account_type || 'Standard'}
+                            </option>
+                          ))}
+                        </select>
+                        
+                        {formData.deposit_to === 'mt5' && formData.mt5_account_id && (() => {
+                          const selectedAccount = mt5Accounts.find(acc => acc.account_number === formData.mt5_account_id);
+                          if (selectedAccount) {
+                            const limits = getSelectedAccountLimits();
+                            return (
+                              <div className="mt-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                                <div className="flex justify-between text-xs mb-1">
+                                  <span className="text-gray-500">Current Balance:</span>
+                                  <span className="font-bold text-gray-900">${parseFloat(selectedAccount.balance || 0).toFixed(2)}</span>
+                                </div>
+                                {(limits.min !== null || limits.max !== null) && (
+                                  <div className="flex justify-between text-xs">
+                                    <span className="text-gray-500">Deposit Limit:</span>
+                                    <span className="font-bold text-blue-700">
+                                      {limits.min !== null ? `$${limits.min.toFixed(2)}` : '$0'} - {limits.max !== null ? `$${limits.max.toFixed(2)}` : 'No limit'}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          }
+                          return null;
+                        })()}
+                        
+                        {mt5Accounts.length === 0 && (
+                          <p className="mt-2 text-xs text-gray-500 italic flex items-center gap-1">
+                            <AlertTriangle className="w-3 h-3" /> No MT5 accounts available
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Amount & Proof */}
+                <div className="space-y-6">
+                  <div>
+                    <label className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-2">
+                      Amount (USDT) <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.amount}
+                        onChange={handleAmountChange}
+                        className={`w-full px-4 py-3 pl-10 rounded-xl border-2 outline-none transition-all font-mono text-lg ${
+                          amountError 
+                            ? 'border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-500/10' 
+                            : 'border-gray-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-500/10'
+                        }`}
+                        placeholder="0.00"
+                        required
+                      />
+                      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</div>
+                    </div>
+                    
+                    {amountError ? (
+                      <p className="text-red-600 text-xs mt-2 flex items-center gap-1 font-medium">
+                        <AlertTriangle className="w-3 h-3" /> {amountError}
+                      </p>
+                    ) : (
+                      convertedAmount && (
+                        <p className="mt-2 text-xs text-gray-500 flex items-center gap-1 bg-gray-50 w-fit px-2 py-1 rounded-lg">
+                          ≈ {convertedAmount.amount} {convertedAmount.currency}
+                        </p>
+                      )
+                    )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      MT5 Account
+                    <label className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-2">
+                      Transaction Hash/ID <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      value={formData.deposit_to === 'mt5' ? formData.mt5_account_id : ''}
-                      onChange={(e) => {
-                        if (e.target.value) {
-                          setFormData({ ...formData, deposit_to: 'mt5', mt5_account_id: e.target.value });
-                        } else {
-                          setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' });
-                        }
-                      }}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white"
-                    >
-                    <option value="">Select MT5 Account</option>
-                    {mt5Accounts.map((account) => (
-                      <option key={account.id} value={account.account_number}>
-                        {account.account_number} | {account.account_type || 'Standard'} | Balance: {account.currency || 'USD'} {parseFloat(account.balance || 0).toFixed(2)}
-                      </option>
-                    ))}
-                  </select>
-                  {/* Show limits when MT5 account is selected */}
-                  {formData.deposit_to === 'mt5' && formData.mt5_account_id && (() => {
-                    const selectedAccount = mt5Accounts.find(acc => acc.account_number === formData.mt5_account_id);
-                    if (selectedAccount && (selectedAccount.minimum_deposit !== null || selectedAccount.maximum_deposit !== null)) {
-                      const limits = getSelectedAccountLimits();
-                      return (
-                        <p className="mt-2 text-xs text-gray-500">
-                          Deposit limits: {limits.min !== null ? `$${limits.min.toFixed(2)}` : '$0.00'} - {limits.max !== null ? `$${limits.max.toFixed(2)}` : 'No maximum'}
-                          {limits.maxLimit !== null && limits.currentBalance > 0 && (
-                            <span className="block mt-1 text-xs text-gray-400">
-                              (Max balance: ${limits.maxLimit.toFixed(2)}, Current: ${limits.currentBalance.toFixed(2)})
-                            </span>
-                          )}
-                        </p>
-                      );
-                    }
-                    return null;
-                  })()}
-                  {mt5Accounts.length === 0 && (
-                    <p className="mt-2 text-sm text-gray-500 italic">No MT5 accounts available</p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-              {/* Deposit Amount */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Deposit Amount (USDT) *
-            </label>
-            {formData.deposit_to === 'mt5' && formData.mt5_account_id ? (
-              <p className="text-gray-500 text-sm mb-2">
-                Transaction limit: {formatLimits()}
-              </p>
-            ) : (
-              <p className="text-gray-500 text-sm mb-2">
-                Transaction limit: No limits set
-              </p>
-            )}
-            <input
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.amount}
-              onChange={handleAmountChange}
-              className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-all ${
-                amountError 
-                  ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-200' 
-                  : 'border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200'
-              }`}
-              placeholder="0.00"
-              required
-            />
-            {amountError && (
-              <p className="text-red-600 text-sm mt-2">{amountError}</p>
-            )}
-            {convertedAmount && !amountError && (
-              <p className="mt-2 text-xs text-gray-500">
-                ≈ {convertedAmount.amount} {convertedAmount.currency}
-              </p>
-            )}
-          </div>
-
-          {/* Transaction Hash */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Transaction Hash/ID
-            </label>
-            <input
-              type="text"
-              value={formData.transaction_hash}
-              onChange={(e) => setFormData({ ...formData, transaction_hash: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200 outline-none transition-all required"
-              placeholder="Enter transaction hash/ID"
-            />
-          </div>
-
-          {/* Upload Proof */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Upload Proof (Optional)
-            </label>
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-gray-300 rounded-xl hover:border-brand-400 transition-colors">
-              <div className="space-y-1 text-center">
-                <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                <div className="flex text-sm text-gray-600">
-                  <label htmlFor="proof-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-blue-700 hover:text-blue-600 focus-within:outline-none">
-                    <span>Upload a file</span>
                     <input
-                      id="proof-upload"
-                      name="proof-upload"
-                      type="file"
-                      accept="image/*,application/pdf"
-                      onChange={handleFileChange}
-                      className="sr-only"
+                      type="text"
+                      value={formData.transaction_hash}
+                      onChange={(e) => setFormData({ ...formData, transaction_hash: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                      placeholder="Enter transaction hash/ID"
+                      required
                     />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-bold text-gray-900 flex items-center gap-2 mb-2">
+                      Upload Proof <span className="text-gray-400 font-normal">(Optional)</span>
+                    </label>
+                    <div className="relative group">
+                      <input
+                        id="proof-upload"
+                        name="proof-upload"
+                        type="file"
+                        accept="image/*,application/pdf"
+                        onChange={handleFileChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                      />
+                      <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-all ${
+                        formData.proof ? 'border-green-500 bg-green-50/30' : 'border-gray-300 group-hover:border-blue-400 group-hover:bg-blue-50/30'
+                      }`}>
+                        {formData.proof ? (
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                              <Check className="w-5 h-5" />
+                            </div>
+                            <span className="text-sm font-medium text-green-700 truncate max-w-full px-4">
+                              {formData.proof.name}
+                            </span>
+                            <span className="text-xs text-green-600">Click to change</span>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
+                              <Upload className="w-5 h-5" />
+                            </div>
+                            <span className="text-sm font-medium text-gray-600">Click to upload proof</span>
+                            <span className="text-xs text-gray-400">PNG, JPG, PDF up to 5MB</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs text-gray-500">PNG, JPG, PDF up to 5MB</p>
-                {formData.proof && (
-                  <p className="text-sm text-green-600 mt-2">{formData.proof.name}</p>
-                )}
               </div>
-            </div>
-          </div>
 
-          {/* Terms and Conditions */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-            <h4 className="text-sm font-semibold text-yellow-800 mb-2">⚠️ Important Terms & Conditions</h4>
-            <ul className="text-xs text-yellow-700 space-y-1 list-disc list-inside">
-              <li>Only deposit to the mentioned payment details above. Funds sent to other addresses will be lost.</li>
-              <li>Ensure you enter the correct transaction hash/ID for verification.</li>
-              <li>Deposits may take 24-48 hours to be processed and reflected in your account.</li>
-              <li>We reserve the right to request additional verification documents if needed.</li>
-              <li>Double-check all payment details before confirming your deposit.</li>
-            </ul>
-          </div>
+              {/* Terms and Conditions */}
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 items-start">
+                <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-sm font-bold text-amber-800 mb-1">Important Terms & Conditions</h4>
+                  <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside opacity-80">
+                    <li>Only deposit to the mentioned payment details above. Funds sent to other addresses will be lost.</li>
+                    <li>Ensure you enter the correct transaction hash/ID for verification.</li>
+                    <li>Deposits may take 24-48 hours to be processed.</li>
+                  </ul>
+                </div>
+              </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-          >
-            Continue
-          </button>
-        </form>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 active:scale-[0.99] flex items-center justify-center gap-2"
+              >
+                Continue to Confirmation
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </form>
           )}
 
-        {step === 2 && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Confirm Deposit</h3>
-              <p className="text-gray-600">Please review your deposit details</p>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-6 space-y-4">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Gateway:</span>
-                <span className="font-medium">{gateway.name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Deposit To:</span>
-                <span className="font-medium">
-                  {formData.deposit_to === 'wallet'
-                    ? `Wallet ${wallet ? `(${wallet.wallet_number})` : ''}`
-                    : `MT5 Account ${formData.mt5_account_id}`
-                  }
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Amount:</span>
-                <span className="font-medium">{formData.amount} USDT</span>
-              </div>
-              {formData.transaction_hash && (
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Transaction Hash / Transaction ID:</span>
-                  <span className="font-medium font-mono text-sm">{formData.transaction_hash}</span>
+          {step === 2 && (
+            <div className="space-y-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-100">
+                  <CheckCircle className="w-8 h-8 text-blue-600" />
                 </div>
-              )}
-              {formData.proof && (
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Proof:</span>
-                  <span className="font-medium">{formData.proof.name}</span>
-                </div>
-              )}
-            </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Confirm Deposit</h3>
+                <p className="text-gray-500">Please review your deposit details carefully before submitting</p>
+              </div>
 
-            <div className="flex gap-4">
-              <button
-                onClick={() => navigate(`/user/deposits/${gatewayId}?step=1`)}
-                className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-300 transition-colors"
-              >
-                Back
-              </button>
-              <button
-                onClick={handleConfirm}
-                disabled={submitting}
-                className="flex-1 bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {submitting ? 'Submitting...' : 'Confirm & Submit'}
-              </button>
-            </div>
-          </div>
-        )}
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
+                {[
+                  { label: 'Payment Gateway', value: gateway.name },
+                  { label: 'Deposit Destination', value: formData.deposit_to === 'wallet' ? `Wallet ${wallet ? `(${wallet.wallet_number})` : ''}` : `MT5 Account ${formData.mt5_account_id}` },
+                  { label: 'Amount', value: `${formData.amount} USDT`, highlight: true },
+                  { label: 'Transaction Hash', value: formData.transaction_hash, mono: true },
+                  formData.proof && { label: 'Proof File', value: formData.proof.name }
+                ].filter(Boolean).map((item, i) => (
+                  <div key={i} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-0 last:pb-0 first:pt-0">
+                    <span className="text-sm text-gray-500">{item.label}</span>
+                    <span className={`text-sm font-medium ${
+                      item.highlight ? 'text-blue-600 font-bold text-lg' : 
+                      item.mono ? 'font-mono text-gray-700' : 'text-gray-900'
+                    }`}>
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
 
-        {step === 3 && (
-          <div className="space-y-6 text-center">
-            <CheckCircle className="w-20 h-20 text-green-500 mx-auto" />
-            <h3 className="text-2xl font-semibold mb-2">Deposit Request Submitted!</h3>
-            <p className="text-gray-600 mb-6">
-              Your deposit request has been submitted successfully. It will be reviewed and processed within 24-48 hours.
-            </p>
-            <button
-              onClick={handleSuccess}
-              className="bg-blue-600 text-dark-base px-8 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-            >
-              Go to Reports
-            </button>
-          </div>
-        )}
+              <div className="flex gap-4">
+                <button
+                  onClick={() => navigate(`/user/deposits/${gatewayId}?step=1`)}
+                  className="flex-1 px-6 py-3.5 rounded-xl border border-gray-200 text-gray-700 font-bold hover:bg-gray-50 transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={handleConfirm}
+                  disabled={submitting}
+                  className="flex-1 bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {submitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      Confirm & Submit
+                      <Check className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="text-center max-w-lg mx-auto py-8">
+              <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-in zoom-in duration-300">
+                <CheckCircle className="w-12 h-12 text-green-500" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">Request Submitted!</h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Your deposit request has been submitted successfully. It will be reviewed and processed by our team within 24-48 hours.
+              </p>
+              
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleSuccess}
+                  className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30"
+                >
+                  View Transaction History
+                </button>
+                <button
+                  onClick={() => navigate('/user/home')}
+                  className="w-full bg-white text-gray-700 py-4 rounded-xl font-bold hover:bg-gray-50 border border-gray-200 transition-colors"
+                >
+                  Return to Dashboard
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-    </div >
   );
 }
 
 export default DepositRequest;
-

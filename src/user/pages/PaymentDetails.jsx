@@ -531,565 +531,405 @@ function PaymentDetails() {
         walletAddress: ''
       });
       setValidationErrors({});
-
+      
       // Refresh list
       fetchPaymentDetails();
+      
     } catch (error) {
-      Swal.fire({ icon: 'error', title: 'Error', text: error.message || 'Failed to submit payment details' });
+      console.error('Error submitting payment details:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: error.message || 'Failed to submit payment details. Please try again.'
+      });
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleDelete = async (id, status) => {
-    if (status === 'approved') {
-      Swal.fire({ icon: 'warning', title: 'Cannot Delete', text: 'Approved payment details cannot be deleted. Please contact support.' });
-      return;
-    }
-
-    const result = await Swal.fire({
-      title: 'Delete Payment Details?',
-      text: 'Are you sure you want to delete this payment detail?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#dc2626',
-      cancelButtonColor: '#6b7280',
-      confirmButtonText: 'Delete',
-      cancelButtonText: 'Cancel'
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const token = authService.getToken();
-        const response = await fetch(`${API_BASE_URL}/payment-details/${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        const data = await response.json();
-        if (data.success) {
-          Swal.fire({ icon: 'success', title: 'Deleted!', text: 'Payment detail deleted successfully', timer: 1500 });
-          fetchPaymentDetails();
-        } else {
-          throw new Error(data.message || 'Failed to delete');
-        }
-      } catch (error) {
-        Swal.fire({ icon: 'error', title: 'Error', text: error.message || 'Failed to delete payment detail' });
-      }
-    }
-  };
-
-  const getStatusBadge = (status) => {
-    switch (status) {
-      case 'approved':
-        return <span className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium flex items-center gap-1"><CheckCircle size={12} /> Approved</span>;
-      case 'rejected':
-        return <span className="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-medium flex items-center gap-1"><XCircle size={12} /> Rejected</span>;
-      default:
-        return <span className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-medium flex items-center gap-1"><Clock size={12} /> Pending</span>;
-    }
-  };
-
-  const getMethodLabel = (method) => {
-    switch (method) {
-      case 'bank_transfer':
-        return 'Bank Transfer';
-      case 'usdt_trc20':
-        return 'USDT TRC20';
-      case 'usdt_erc20':
-        return 'USDT ERC20';
-      case 'usdt_bep20':
-        return 'USDT BEP20';
-      case 'upi':
-        return 'UPI';
-      default:
-        return method.replace(/_/g, ' ').toUpperCase();
-    }
-  };
-
-
-  const pendingCount = paymentDetails.filter(p => p.status === 'pending').length;
-  const approvedCount = paymentDetails.filter(p => p.status === 'approved').length;
-  const canAddMore = (pendingCount + approvedCount) < 3;
-
   return (
-    <div className="bg-gray-50 min-h-screen p-4 sm:p-6">
-      <div className="w-full max-w-full">
-        {/* Header */}
-        <PageHeader
+    <div className="min-h-screen bg-slate-50 p-4 sm:p-6 font-['Inter']">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <PageHeader 
           icon={CreditCard}
           title="Payment Details"
-          subtitle="Manage your payment methods for withdrawals. Maximum 3 payment details allowed."
+          subtitle="Manage your bank accounts and crypto wallets for withdrawals."
         />
 
-        {/* Add Button */}
-        {canAddMore && (
-          <div className="mb-6">
-            <button
-              onClick={() => {
-                setShowForm(true);
-                setStep(1);
-                setSelectedMethod('');
-              }}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium flex items-center gap-2 transition"
-            >
-              <Plus size={20} />
-              Add Payment Method
-            </button>
-          </div>
-        )}
-
-        {!canAddMore && (
-          <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <p className="text-yellow-800 text-sm">You have reached the maximum limit of 3 payment details. Please delete an existing one to add a new method.</p>
-          </div>
-        )}
-
-        {/* Step-by-Step Form */}
-        {showForm && (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-6 border border-gray-200">
-            {/* Step Indicator */}
-            <div className="flex items-center justify-center mb-6">
-              <div className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
-                  }`}>
-                  1
-                </div>
-                <div className={`w-24 h-1 mx-2 transition-all ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200'
-                  }`}></div>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
-                  }`}>
-                  2
+        {showForm ? (
+          <div className="bg-white rounded-2xl shadow-[0_2px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                {step === 2 && (
+                  <button 
+                    onClick={() => setStep(1)}
+                    className="p-2 hover:bg-slate-50 rounded-xl transition-colors text-slate-500 hover:text-slate-700"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                )}
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900">
+                    {step === 1 ? 'Select Payment Method' : 'Enter Details'}
+                  </h2>
+                  <p className="text-sm text-slate-500 mt-1">
+                    {step === 1 ? 'Choose how you want to receive your funds' : getGatewayDescription({ type: selectedMethod === 'usdt_trc20' ? 'crypto' : selectedMethod === 'bank_transfer' ? 'wire' : selectedMethod, name: selectedMethod })}
+                  </p>
                 </div>
               </div>
+              <button 
+                onClick={() => {
+                  setShowForm(false);
+                  setStep(1);
+                  setSelectedMethod('');
+                  setValidationErrors({});
+                }}
+                className="p-2 hover:bg-slate-50 rounded-xl transition-colors text-slate-400 hover:text-slate-600"
+              >
+                <XCircle className="w-6 h-6" />
+              </button>
             </div>
 
-            {/* Step 1: Select Payment Method */}
-            {step === 1 && (
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900 text-center mb-6">Select Payment Method</h3>
-                <div className="flex flex-col items-center gap-4">
-                  {loadingMethod || loadingGateways ? (
-                    <div className="py-12 flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    </div>
-                  ) : withdrawalGateways.length === 0 ? (
-                    <div className="py-8 text-center">
-                      <p className="text-gray-600 mb-4">No withdrawal methods are currently available.</p>
-                      <p className="text-sm text-gray-500">Please contact support if you need to add a payment method.</p>
+            <div className="p-6">
+              {step === 1 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {loadingGateways ? (
+                    <div className="col-span-full flex justify-center py-12">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                     </div>
                   ) : (
                     <>
+                      {/* Standard Methods */}
+                      <button
+                        onClick={() => handleMethodSelect('bank_transfer')}
+                        disabled={loadingMethod}
+                        className="group relative flex flex-col items-center p-6 bg-slate-50 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:bg-blue-50/50 transition-all duration-300"
+                      >
+                        <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <span className="text-3xl">🏦</span>
+                        </div>
+                        <h3 className="font-semibold text-slate-900 mb-1">Bank Transfer</h3>
+                        <p className="text-sm text-slate-500 text-center">Withdraw directly to your bank account</p>
+                      </button>
+
+                      <button
+                        onClick={() => handleMethodSelect('usdt_trc20')}
+                        disabled={loadingMethod}
+                        className="group relative flex flex-col items-center p-6 bg-slate-50 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:bg-blue-50/50 transition-all duration-300"
+                      >
+                        <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <span className="text-3xl">₮</span>
+                        </div>
+                        <h3 className="font-semibold text-slate-900 mb-1">USDT TRC20</h3>
+                        <p className="text-sm text-slate-500 text-center">Crypto withdrawal via TRON network</p>
+                      </button>
+
+                      {/* Dynamic Gateways */}
                       {withdrawalGateways.map((gateway) => {
-                        const paymentMethod = mapGatewayTypeToPaymentMethod(gateway);
-                        return (
+                         const method = mapGatewayTypeToPaymentMethod(gateway);
+                         // Skip if already shown above
+                         if (method === 'bank_transfer' || method === 'usdt_trc20') return null;
+                         
+                         return (
                           <button
                             key={gateway.id}
-                            onClick={() => handleMethodSelect(paymentMethod)}
-                            className="w-full max-w-md px-6 py-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-brand-50 transition-all text-left group"
+                            onClick={() => handleMethodSelect(method)}
+                            disabled={loadingMethod}
+                            className="group relative flex flex-col items-center p-6 bg-slate-50 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:bg-blue-50/50 transition-all duration-300"
                           >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3 flex-1">
-                                {gateway.icon_url && (
-                                  <img
-                                    src={gateway.icon_url}
-                                    alt={gateway.name}
-                                    className="w-10 h-10 object-contain"
-                                    onError={(e) => {
-                                      e.target.style.display = 'none';
-                                    }}
-                                  />
-                                )}
-                                <div>
-                                  <div className="font-semibold text-black mb-1">{getGatewayLabel(gateway)}</div>
-                                  <div className="text-sm text-black">{getGatewayDescription(gateway)}</div>
-                                </div>
-                              </div>
-                              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition flex-shrink-0" />
+                            <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                              {gateway.logo ? (
+                                <img src={gateway.logo} alt={gateway.name} className="w-10 h-10 object-contain" />
+                              ) : (
+                                <span className="text-3xl">💳</span>
+                              )}
                             </div>
+                            <h3 className="font-semibold text-slate-900 mb-1">{getGatewayLabel(gateway)}</h3>
+                            <p className="text-sm text-slate-500 text-center">{getGatewayDescription(gateway)}</p>
                           </button>
-                        );
+                         );
                       })}
                     </>
                   )}
                 </div>
-                <div className="flex flex-col items-center mt-6 gap-2">
-                  <p className="text-xs text-gray-500 text-center italic">
-                    Please select a method to add your payment method to place withdrawals
-                  </p>
-                  <button
-                    onClick={() => {
-                      setShowForm(false);
-                      setStep(1);
-                      setSelectedMethod('');
-                    }}
-                    className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black rounded-lg font-medium transition-colors"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
+              ) : (
+                <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+                  {selectedMethod === 'bank_transfer' && (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700">Account Holder Name</label>
+                          <input
+                            type="text"
+                            name="accountName"
+                            value={formData.accountName}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 rounded-xl bg-slate-50 border ${validationErrors.accountName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:ring-blue-500/20'} focus:border-blue-500 focus:outline-none transition-all`}
+                            placeholder="Enter account holder name"
+                          />
+                          {validationErrors.accountName && (
+                            <p className="text-xs text-red-500 flex items-center gap-1">
+                              <XCircle className="w-3 h-3" /> {validationErrors.accountName}
+                            </p>
+                          )}
+                        </div>
 
-            {/* Step 2: Fill Form */}
-            {step === 2 && (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-black">
-                    {selectedMethod === 'bank_transfer' ? 'Bank Transfer Details' :
-                      selectedMethod.startsWith('usdt_') ? `${selectedMethod.toUpperCase().replace('_', ' ')} Details` :
-                        selectedMethod === 'upi' ? 'UPI Details' :
-                          'Payment Details'}
-                  </h3>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setStep(1);
-                      setSelectedMethod('');
-                    }}
-                    className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
-                  >
-                    <ChevronLeft size={16} />
-                    Back
-                  </button>
-                </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700">Bank Name</label>
+                          <input
+                            type="text"
+                            name="bankName"
+                            value={formData.bankName}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 rounded-xl bg-slate-50 border ${validationErrors.bankName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:ring-blue-500/20'} focus:border-blue-500 focus:outline-none transition-all`}
+                            placeholder="Enter bank name"
+                          />
+                          {validationErrors.bankName && (
+                            <p className="text-xs text-red-500 flex items-center gap-1">
+                              <XCircle className="w-3 h-3" /> {validationErrors.bankName}
+                            </p>
+                          )}
+                        </div>
 
-                {selectedMethod === 'bank_transfer' && (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">Name</label>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700">Account Number</label>
+                          <input
+                            type="text"
+                            name="accountNumber"
+                            value={formData.accountNumber}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 rounded-xl bg-slate-50 border ${validationErrors.accountNumber ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:ring-blue-500/20'} focus:border-blue-500 focus:outline-none transition-all`}
+                            placeholder="Enter account number"
+                          />
+                          {validationErrors.accountNumber && (
+                            <p className="text-xs text-red-500 flex items-center gap-1">
+                              <XCircle className="w-3 h-3" /> {validationErrors.accountNumber}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700">IFSC / SWIFT Code</label>
+                          <input
+                            type="text"
+                            name="ifscSwiftCode"
+                            value={formData.ifscSwiftCode}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 rounded-xl bg-slate-50 border ${validationErrors.ifscSwiftCode ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:ring-blue-500/20'} focus:border-blue-500 focus:outline-none transition-all`}
+                            placeholder="Enter IFSC or SWIFT code"
+                          />
+                          {validationErrors.ifscSwiftCode && (
+                            <p className="text-xs text-red-500 flex items-center gap-1">
+                              <XCircle className="w-3 h-3" /> {validationErrors.ifscSwiftCode}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700">Account Type</label>
+                          <select
+                            name="accountType"
+                            value={formData.accountType}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 focus:outline-none transition-all appearance-none"
+                          >
+                            <option value="savings">Savings</option>
+                            <option value="current">Current</option>
+                            <option value="checking">Checking</option>
+                          </select>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {selectedMethod === 'usdt_trc20' && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-slate-700">Wallet Address (TRC20)</label>
                       <input
                         type="text"
-                        name="name"
-                        value={formData.name}
+                        name="walletAddress"
+                        value={formData.walletAddress}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                          }`}
-                        placeholder="Optional name for this payment method"
+                        className={`w-full px-4 py-3 rounded-xl bg-slate-50 border ${validationErrors.walletAddress ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:ring-blue-500/20'} focus:border-blue-500 focus:outline-none transition-all font-mono`}
+                        placeholder="T..."
                       />
-                      {validationErrors.name && (
-                        <p className="text-xs text-red-600 mt-1">{validationErrors.name}</p>
+                      {validationErrors.walletAddress && (
+                        <p className="text-xs text-red-500 flex items-center gap-1">
+                          <XCircle className="w-3 h-3" /> {validationErrors.walletAddress}
+                        </p>
                       )}
+                      <p className="text-xs text-slate-500">
+                        Please ensure you enter a valid TRC20 address starting with 'T'.
+                      </p>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">Bank Name <span className="text-red-500">*</span></label>
-                      <input
-                        type="text"
-                        name="bankName"
-                        value={formData.bankName}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.bankName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                          }`}
-                        placeholder="Enter bank name"
-                      />
-                      {validationErrors.bankName && (
-                        <p className="text-xs text-red-600 mt-1">{validationErrors.bankName}</p>
+                  )}
+
+                  <div className="pt-4 flex items-center justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setShowForm(false)}
+                      className="px-6 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors font-medium"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="px-6 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all font-medium flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {submitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span>Saving...</span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Save Details</span>
+                        </>
                       )}
-                      {!validationErrors.bankName && formData.bankName && formData.bankName.trim().length >= 2 && (
-                        <p className="text-xs text-black mt-1">Valid</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">Account Name <span className="text-red-500">*</span></label>
-                      <input
-                        type="text"
-                        name="accountName"
-                        value={formData.accountName}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                          }`}
-                        placeholder="Enter account holder name"
-                      />
-                      {validationErrors.accountName && (
-                        <p className="text-xs text-red-600 mt-1">{validationErrors.accountName}</p>
-                      )}
-                      {!validationErrors.accountName && formData.accountName && formData.accountName.trim().length >= 2 && (
-                        <p className="text-xs text-black mt-1">Valid</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">Account Number <span className="text-red-500">*</span></label>
-                      <input
-                        type="text"
-                        name="accountNumber"
-                        value={formData.accountNumber}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountNumber ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                          }`}
-                        placeholder="Enter account number"
-                      />
-                      {validationErrors.accountNumber && (
-                        <p className="text-xs text-red-600 mt-1">{validationErrors.accountNumber}</p>
-                      )}
-                      {!validationErrors.accountNumber && formData.accountNumber && /^\d+$/.test(formData.accountNumber.trim()) && formData.accountNumber.trim().length >= 8 && (
-                        <p className="text-xs text-black mt-1">Valid</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">IFSC / SWIFT Code <span className="text-red-500">*</span></label>
-                      <input
-                        type="text"
-                        name="ifscSwiftCode"
-                        value={formData.ifscSwiftCode}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.ifscSwiftCode ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                          }`}
-                        placeholder="Enter IFSC or SWIFT code"
-                      />
-                      {validationErrors.ifscSwiftCode && (
-                        <p className="text-xs text-red-600 mt-1">{validationErrors.ifscSwiftCode}</p>
-                      )}
-                      {!validationErrors.ifscSwiftCode && formData.ifscSwiftCode && formData.ifscSwiftCode.trim().length >= 8 && (
-                        <p className="text-xs text-black mt-1">Valid</p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-black mb-1">Account Type</label>
-                      <select
-                        name="accountType"
-                        value={formData.accountType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                      >
-                        <option value="savings">Savings</option>
-                        <option value="current">Current</option>
-                        <option value="checking">Checking</option>
-                      </select>
-                    </div>
+                    </button>
                   </div>
-                )}
-
-                {selectedMethod === 'usdt_trc20' && (
-                  <div>
-                    <label className="block text-sm font-medium text-black mb-1">Wallet Address <span className="text-red-500">*</span></label>
-                    <input
-                      type="text"
-                      name="walletAddress"
-                      value={formData.walletAddress}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.walletAddress ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
-                        }`}
-                      placeholder="Enter USDT TRC20 wallet address"
-                    />
-                    {validationErrors.walletAddress && (
-                      <p className="text-xs text-red-600 mt-1">{validationErrors.walletAddress}</p>
-                    )}
-                    {!validationErrors.walletAddress && formData.walletAddress && /^T[A-Za-z1-9]{33}$/.test(formData.walletAddress.trim()) && (
-                      <p className="text-xs text-black mt-1">Valid</p>
-                    )}
-                    {!validationErrors.walletAddress && !formData.walletAddress && (
-                      <p className="text-xs text-gray-500 mt-1">Make sure to enter the correct TRC20 network address</p>
-                    )}
-                  </div>
-                )}
-
-                <div className="flex justify-end gap-3 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowForm(false);
-                      setStep(1);
-                      setSelectedMethod('');
-                      setFormData({
-                        name: '',
-                        bankName: '',
-                        accountName: '',
-                        accountNumber: '',
-                        ifscSwiftCode: '',
-                        accountType: 'savings',
-                        walletAddress: ''
-                      });
-                      setValidationErrors({});
-                    }}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    {submitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-dark-base"></div>
-                        Submitting...
-                      </>
-                    ) : (
-                      'Submit for Review'
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        )}
-
-        {/* Payment Details DataTable */}
-        {loading ? (
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading payment details...</p>
-          </div>
-        ) : paymentDetails.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-            <p className="text-gray-600">No payment details added yet.</p>
-            {canAddMore && (
-              <button
-                onClick={() => {
-                  setShowForm(true);
-                  setStep(1);
-                }}
-                className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium"
-              >
-                Add Payment Method
-              </button>
-            )}
+                </form>
+              )}
+            </div>
           </div>
         ) : (
-          <>
+          <div className="bg-white rounded-2xl shadow-[0_2px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900">Saved Methods</h2>
+                <p className="text-sm text-slate-500 mt-1">Manage your saved payment methods</p>
+              </div>
+              <button
+                onClick={() => setShowForm(true)}
+                className="px-4 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all flex items-center gap-2 font-medium"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add Method</span>
+              </button>
+            </div>
+            
             <ProTable
-              rows={paymentDetails.map(detail => ({
-                id: detail.id,
-                method: getMethodLabel(detail.payment_method),
-                details: detail.payment_method === 'bank_transfer'
-                  ? `${detail.payment_details.bankName || ''} • ${detail.payment_details.accountName || ''} • ${detail.payment_details.accountNumber || ''}`
-                  : detail.payment_details.walletAddress || '',
-                status: detail.status,
-                submittedDate: detail.created_at,
-                reviewedDate: detail.reviewed_at,
-                rejectionReason: detail.rejection_reason,
-                paymentMethod: detail.payment_method,
-                paymentDetails: detail.payment_details,
-                detail: detail
-              }))}
               columns={[
                 {
-                  key: 'method',
-                  label: 'Method',
-                  render: (value) => <span className="font-medium text-gray-900">{value}</span>
-                },
-                {
-                  key: 'details',
-                  label: 'Details',
-                  render: (value, row) => {
-                    if (row.paymentMethod === 'bank_transfer') {
-                      return (
-                        <div className="text-sm text-gray-900 text-left whitespace-normal">
-                          <div className="grid grid-cols-2 gap-x-6 gap-y-1 min-w-max">
-                            {row.paymentDetails.name && (
-                              <>
-                                <div className="font-medium text-gray-600 whitespace-nowrap">Name:</div>
-                                <div className="text-gray-900 whitespace-nowrap">{row.paymentDetails.name}</div>
-                              </>
-                            )}
-                            <div className="font-medium text-gray-600 whitespace-nowrap">Bank:</div>
-                            <div className="text-gray-900 whitespace-nowrap">{row.paymentDetails.bankName}</div>
-                            <div className="font-medium text-gray-600 whitespace-nowrap">Account Name:</div>
-                            <div className="text-gray-900 whitespace-nowrap">{row.paymentDetails.accountName}</div>
-                            <div className="font-medium text-gray-600 whitespace-nowrap">Account Number:</div>
-                            <div className="text-gray-900 font-mono text-xs whitespace-nowrap">{row.paymentDetails.accountNumber}</div>
-                            <div className="font-medium text-gray-600 whitespace-nowrap">IFSC/SWIFT:</div>
-                            <div className="text-gray-900 font-mono text-xs whitespace-nowrap">{row.paymentDetails.ifscSwiftCode}</div>
-                            {row.paymentDetails.accountType && (
-                              <>
-                                <div className="font-medium text-gray-600 whitespace-nowrap">Account Type:</div>
-                                <div className="text-gray-900 capitalize whitespace-nowrap">{row.paymentDetails.accountType}</div>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div className="text-left whitespace-normal">
-                          <div className="grid grid-cols-2 gap-x-6 gap-y-1 min-w-max">
-                            <div className="font-medium text-gray-600 whitespace-nowrap">Wallet Address:</div>
-                            <div className="text-gray-900 font-mono text-xs whitespace-nowrap">{row.paymentDetails.walletAddress}</div>
-                          </div>
-                        </div>
-                      );
-                    }
+                  header: 'Method',
+                  accessorKey: 'payment_method',
+                  cell: (info) => {
+                    const method = info.getValue();
+                    const labels = {
+                      'bank_transfer': 'Bank Transfer',
+                      'usdt_trc20': 'USDT TRC20',
+                      'upi': 'UPI'
+                    };
+                    return (
+                      <div className="flex items-center gap-2">
+                        <span className="p-2 bg-slate-50 rounded-lg text-lg">
+                          {method === 'bank_transfer' ? '🏦' : method.includes('usdt') ? '₮' : '💳'}
+                        </span>
+                        <span className="font-medium text-slate-700">{labels[method] || method}</span>
+                      </div>
+                    );
                   }
                 },
                 {
-                  key: 'status',
-                  label: 'Status',
-                  render: (value, row) => (
-                    <div className="flex flex-col items-start gap-1">
-                      {getStatusBadge(value)}
-                      {row.rejectionReason && (
-                        <div className="mt-1 text-xs text-red-600 max-w-xs bg-red-50 px-2 py-1 rounded">
-                          {row.rejectionReason}
+                  header: 'Details',
+                  accessorKey: 'payment_details',
+                  cell: (info) => {
+                    const details = typeof info.getValue() === 'string' 
+                      ? JSON.parse(info.getValue()) 
+                      : info.getValue();
+                    const method = info.row.original.payment_method;
+                    
+                    if (method === 'bank_transfer') {
+                      return (
+                        <div className="text-sm">
+                          <div className="font-medium text-slate-900">{details.bankName}</div>
+                          <div className="text-slate-500 font-mono">{details.accountNumber}</div>
                         </div>
-                      )}
+                      );
+                    } else if (method === 'usdt_trc20') {
+                      return (
+                        <div className="font-mono text-sm text-slate-600">
+                          {details.walletAddress?.substring(0, 6)}...{details.walletAddress?.substring(details.walletAddress.length - 4)}
+                        </div>
+                      );
+                    }
+                    return <span className="text-slate-500">-</span>;
+                  }
+                },
+                {
+                  header: 'Status',
+                  accessorKey: 'status',
+                  cell: (info) => {
+                    const status = info.getValue();
+                    const styles = {
+                      approved: 'bg-green-50 text-green-700 border-green-200',
+                      pending: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+                      rejected: 'bg-red-50 text-red-700 border-red-200'
+                    };
+                    return (
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${styles[status] || 'bg-slate-50 text-slate-600 border-slate-200'}`}>
+                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                      </span>
+                    );
+                  }
+                },
+                {
+                  header: 'Date Added',
+                  accessorKey: 'created_at',
+                  cell: (info) => (
+                    <div className="flex items-center gap-2 text-slate-500 text-sm">
+                      <Clock className="w-3 h-3" />
+                      {new Date(info.getValue()).toLocaleDateString()}
                     </div>
                   )
                 },
                 {
-                  key: 'submittedDate',
-                  label: 'Date',
-                  render: (value, row) => (
-                    <div className="text-sm text-gray-500 text-left space-y-2">
-                      <div>
-                        <div className="font-medium text-gray-700">Submitted:</div>
-                        <div className="text-xs">{new Date(value).toLocaleDateString()}</div>
-                        <div className="text-xs">{new Date(value).toLocaleTimeString()}</div>
-                      </div>
-                      {row.reviewedDate && (
-                        <div>
-                          <div className="font-medium text-gray-700">
-                            {row.status === 'approved' ? 'Approved:' : 'Rejected:'}
-                          </div>
-                          <div className="text-xs">{new Date(row.reviewedDate).toLocaleDateString()}</div>
-                          <div className="text-xs">{new Date(row.reviewedDate).toLocaleTimeString()}</div>
-                        </div>
-                      )}
-                    </div>
+                  header: 'Actions',
+                  id: 'actions',
+                  cell: (info) => (
+                    <button
+                      onClick={() => {
+                        Swal.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#d33',
+                          cancelButtonColor: '#3085d6',
+                          confirmButtonText: 'Yes, delete it!'
+                        }).then(async (result) => {
+                          if (result.isConfirmed) {
+                            try {
+                              const token = authService.getToken();
+                              const response = await fetch(`${API_BASE_URL}/payment-details/${info.row.original.id}`, {
+                                method: 'DELETE',
+                                headers: { 'Authorization': `Bearer ${token}` }
+                              });
+                              if (response.ok) {
+                                Swal.fire('Deleted!', 'Payment method has been deleted.', 'success');
+                                fetchPaymentDetails();
+                              }
+                            } catch (error) {
+                              console.error('Error deleting:', error);
+                            }
+                          }
+                        });
+                      }}
+                      className="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-lg transition-colors"
+                      title="Delete"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   )
-                },
-                {
-                  key: 'actions',
-                  label: 'Actions',
-                  render: (value, row) => (
-                    <div className="text-center">
-                      {row.status !== 'approved' && (
-                        <button
-                          onClick={() => handleDelete(row.id, row.status)}
-                          className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors"
-                          title="Delete"
-                        >
-                          <Trash2 size={16} className="mr-1" />
-                          <span className="hidden sm:inline">Delete</span>
-                        </button>
-                      )}
-                      {row.status === 'approved' && (
-                        <span className="text-xs text-gray-400 italic">Locked</span>
-                      )}
-                    </div>
-                  ),
-                  sortable: false
                 }
               ]}
-              filters={{
-                dateKey: 'submittedAt'
-              }}
-              pageSize={10}
+              data={paymentDetails}
+              loading={loading}
               searchPlaceholder="Search payment methods..."
             />
-            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-xs text-blue-700 text-center italic">
-                Funds will be only credited to approved payment methods
-              </p>
-            </div>
-          </>
+          </div>
         )}
       </div>
     </div>
@@ -1097,4 +937,3 @@ function PaymentDetails() {
 }
 
 export default PaymentDetails;
-

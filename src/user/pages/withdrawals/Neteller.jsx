@@ -1,25 +1,42 @@
+import React from 'react';
+import PageHeader from '../../components/PageHeader';
+import { Wallet, Info } from 'lucide-react';
+
 function Neteller() {
   return (
-    <div className="min-h-screen p-4 sm:p-6 overflow-x-hidden" style={{ background: 'linear-gradient(to right, #E5E7EB 0%, #FFFFFF 20%, #FFFFFF 80%, #E5E7EB 100%)' }}>
-      <div className="w-full max-w-full sm:max-w-[90%] mx-auto">
-        <h1 className="mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '24px', color: '#000000', fontWeight: '400' }}>
-          Withdraw Through Neteller
-        </h1>
+    <div className="space-y-6">
+      <PageHeader 
+        title="Withdraw via Neteller" 
+        subtitle="Fast and secure withdrawals to your Neteller account"
+        icon={Wallet}
+      />
 
-        {/* Neteller Information Panel */}
-        <div className="bg-white rounded-lg p-8 border border-gray-200 text-center">
-          {/* Neteller Logo with gray background */}
-          <div className="bg-gray-200 rounded-lg p-4 mb-6 flex items-center justify-center">
-            <img src="/netellerw.png" alt="Neteller" className="h-20 w-auto mr-10" />
+      {/* Neteller Information Panel */}
+      <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
+          
+          {/* Neteller Logo Container */}
+          <div className="bg-gray-50 rounded-xl p-8 mb-8 flex items-center justify-center border border-gray-100 max-w-sm mx-auto">
+            <img 
+              src="/netellerw.png" 
+              alt="Neteller" 
+              className="h-16 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <span className="hidden text-2xl font-bold text-gray-700">Neteller</span>
           </div>
           
-          <p className="text-center max-w-lg mx-auto" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#4B5156', fontWeight: '400', lineHeight: '1.6' }}>
-            You did not deposit funds using Neteller. Neteller withdrawals are only available to accounts that were previously used for deposits.
-          </p>
+          <div className="flex gap-4 p-4 bg-amber-50 text-amber-800 rounded-xl border border-amber-100 text-left">
+            <Info className="w-5 h-5 shrink-0 mt-0.5" />
+            <p className="text-sm leading-relaxed">
+              You did not deposit funds using Neteller. Neteller withdrawals are only available to accounts that were previously used for deposits.
+            </p>
           </div>
-        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Neteller
+export default Neteller;

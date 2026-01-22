@@ -14,12 +14,12 @@ import {
   Legend,
   Title
 } from "chart.js";
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
-  Activity, 
-  BarChart3, 
+import {
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  Activity,
+  BarChart3,
   Info,
   Wallet,
   ArrowUpCircle,
@@ -33,15 +33,14 @@ import {
   Award,
   Calendar,
   Clock,
-  TrendingUp as TrendingUpIcon,
   AlertCircle,
   CheckCircle2,
   XCircle,
   PieChart,
   Gauge,
-  Users,
-  DollarSign as DollarIcon
+  Users
 } from "lucide-react";
+import PageHeader from "../components/PageHeader";
 
 ChartJS.register(
   CategoryScale,
@@ -101,7 +100,7 @@ function TradePerformance() {
         setLoading(false);
         return;
       }
-      
+
       const response = await fetch(`${API_BASE_URL}/accounts`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -120,7 +119,7 @@ function TradePerformance() {
       const data = await response.json();
       if (data.success && data.data) {
         const all = Array.isArray(data.data) ? data.data : [];
-        
+
         // Filter exactly like Dashboard: Only active, real MT5 accounts
         const realAccounts = all.filter((acc) => {
           const platform = (acc.platform || '').toUpperCase();
@@ -128,10 +127,10 @@ function TradePerformance() {
           const isMT5 = platform === 'MT5';
           const isActive = status === '' || status === 'active' || !status;
           const isReal = !acc.is_demo;
-          
+
           return isMT5 && isActive && isReal;
         });
-        
+
         setAccounts(realAccounts);
       }
     } catch (error) {
@@ -149,12 +148,12 @@ function TradePerformance() {
         setLoading(false);
         return;
       }
-      
+
       const params = new URLSearchParams({
         accountNumber: selectedAccount,
         timeframe: timeframe
       });
-      
+
       const response = await fetch(`${API_BASE_URL}/reports/trading-performance?${params.toString()}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -171,7 +170,7 @@ function TradePerformance() {
       }
 
       const data = await response.json();
-      
+
       if (data.success && data.data) {
         setSummary(data.data.summary);
         setChartData(data.data.chartData);
@@ -208,7 +207,7 @@ function TradePerformance() {
   const calculateMetrics = () => {
     const totalTrades = summary.profitable + summary.unprofitable;
     const winRate = totalTrades > 0 ? (summary.profitable / totalTrades) : 0;
-    
+
     // Only calculate profit factor if we have both profit and loss data
     let profitFactor = null;
     if (summary.loss > 0) {
@@ -218,10 +217,10 @@ function TradePerformance() {
     } else {
       profitFactor = 0;
     }
-    
+
     const avgWin = summary.profitable > 0 ? (summary.profit / summary.profitable) : 0;
     const avgLoss = summary.unprofitable > 0 ? (summary.loss / summary.unprofitable) : 0;
-    
+
     // Only calculate risk/reward if we have both avg win and loss
     let riskRewardRatio = null;
     if (avgLoss > 0) {
@@ -231,16 +230,16 @@ function TradePerformance() {
     } else {
       riskRewardRatio = 0;
     }
-    
+
     const totalDeposits = summary.totalDeposits || 0;
     const roi = totalDeposits > 0 ? ((summary.netProfit / totalDeposits) * 100) : 0;
-    
+
     // These require actual trade history data from MT5 - set to null if not available
     const sharpeRatio = null; // Requires volatility data from actual trades
     const maxDrawdown = null; // Requires historical equity data from actual trades
-    
+
     const expectancy = totalTrades > 0 ? ((winRate * avgWin) - ((1 - winRate) * avgLoss)) : 0;
-    
+
     return {
       winRate,
       profitFactor,
@@ -267,14 +266,16 @@ function TradePerformance() {
         data: chartData.netProfit.profit,
         backgroundColor: 'rgba(34, 197, 94, 0.8)',
         borderColor: 'rgba(34, 197, 94, 1)',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 4
       },
       {
         label: 'Loss',
         data: chartData.netProfit.loss,
         backgroundColor: 'rgba(239, 68, 68, 0.8)',
         borderColor: 'rgba(239, 68, 68, 1)',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 4
       }
     ]
   };
@@ -287,14 +288,16 @@ function TradePerformance() {
         data: chartData.closedOrders.profitable,
         backgroundColor: 'rgba(34, 197, 94, 0.8)',
         borderColor: 'rgba(34, 197, 94, 1)',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 4
       },
       {
         label: 'Unprofitable',
         data: chartData.closedOrders.unprofitable,
         backgroundColor: 'rgba(239, 68, 68, 0.8)',
         borderColor: 'rgba(239, 68, 68, 1)',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 4
       }
     ]
   };
@@ -307,7 +310,8 @@ function TradePerformance() {
         data: chartData.tradingVolume.volumes,
         backgroundColor: 'rgba(59, 130, 246, 0.8)',
         borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 4
       }
     ]
   };
@@ -318,10 +322,10 @@ function TradePerformance() {
       {
         label: 'Equity',
         data: chartData.equity.values,
-        borderColor: 'rgba(0, 0, 0, 1)',
+        borderColor: 'rgba(59, 130, 246, 1)',
         borderWidth: 2,
         fill: true,
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.4,
         pointRadius: 3,
         pointHoverRadius: 5
@@ -371,15 +375,24 @@ function TradePerformance() {
           usePointStyle: true,
           padding: 15,
           font: {
-            size: 12
+            size: 12,
+            family: "'Inter', sans-serif"
           }
         }
       },
       tooltip: {
         mode: 'index',
         intersect: false,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#475569',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 10,
+        boxPadding: 6,
+        usePointStyle: true,
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             let label = context.dataset.label || '';
             if (label) {
               label += ': ';
@@ -396,19 +409,43 @@ function TradePerformance() {
       y: {
         beginAtZero: true,
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)'
+          color: 'rgba(226, 232, 240, 0.5)',
+          drawBorder: false
         },
         ticks: {
-          callback: function(value) {
+          font: {
+            size: 11,
+            family: "'Inter', sans-serif"
+          },
+          color: '#64748b',
+          callback: function (value) {
             return formatCurrency(value);
           }
+        },
+        border: {
+          display: false
         }
       },
       x: {
         grid: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          font: {
+            size: 11,
+            family: "'Inter', sans-serif"
+          },
+          color: '#64748b'
+        },
+        border: {
           display: false
         }
       }
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false,
     }
   };
 
@@ -420,7 +457,8 @@ function TradePerformance() {
         ...chartOptions.scales.y,
         beginAtZero: false,
         ticks: {
-          callback: function(value) {
+          ...chartOptions.scales.y.ticks,
+          callback: function (value) {
             return formatCurrency(value);
           }
         }
@@ -435,7 +473,8 @@ function TradePerformance() {
       y: {
         ...chartOptions.scales.y,
         ticks: {
-          callback: function(value) {
+          ...chartOptions.scales.y.ticks,
+          callback: function (value) {
             if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
             if (value >= 1000) return (value / 1000).toFixed(1) + 'K';
             return formatCurrency(value);
@@ -455,13 +494,22 @@ function TradePerformance() {
           usePointStyle: true,
           padding: 15,
           font: {
-            size: 12
+            size: 12,
+            family: "'Inter', sans-serif"
           }
         }
       },
       tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#475569',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 10,
+        boxPadding: 6,
+        usePointStyle: true,
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             const label = context.label || '';
             const value = context.parsed || 0;
             const total = context.dataset.data.reduce((a, b) => a + b, 0);
@@ -476,7 +524,7 @@ function TradePerformance() {
   const renderOverview = () => (
     <div className="space-y-6">
       {/* Key Performance Indicators */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <MetricCard
           title="Net Profit"
           value={formatCurrency(summary.netProfit)}
@@ -509,15 +557,15 @@ function TradePerformance() {
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Net Profit Trend</h3>
-          <div className="h-64">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Net Profit Trend</h3>
+          <div className="h-72">
             <Bar data={netProfitChartData} options={chartOptions} />
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Equity Curve</h3>
-          <div className="h-64">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Equity Curve</h3>
+          <div className="h-72">
             <Line data={equityChartData} options={equityChartOptions} />
           </div>
         </div>
@@ -526,15 +574,15 @@ function TradePerformance() {
       {/* Pie Charts - Only show if we have trade data */}
       {(summary.profitable > 0 || summary.unprofitable > 0) && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4">Win/Loss Distribution</h3>
-            <div className="h-64">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <h3 className="text-lg font-bold text-slate-800 mb-6">Win/Loss Distribution</h3>
+            <div className="h-72">
               <Doughnut data={winRatePieData} options={pieChartOptions} />
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4">Profit/Loss Breakdown</h3>
-            <div className="h-64">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <h3 className="text-lg font-bold text-slate-800 mb-6">Profit/Loss Breakdown</h3>
+            <div className="h-72">
               <Pie data={profitLossPieData} options={pieChartOptions} />
             </div>
           </div>
@@ -546,7 +594,7 @@ function TradePerformance() {
   const renderPerformance = () => (
     <div className="space-y-6">
       {/* Performance Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <DetailCard
           title="Total Profit"
           value={formatCurrency(summary.profit)}
@@ -609,14 +657,14 @@ function TradePerformance() {
 
       {/* Performance Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Monthly Performance</h3>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Monthly Performance</h3>
           <div className="h-80">
             <Bar data={netProfitChartData} options={chartOptions} />
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Trading Volume Trend</h3>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Trading Volume Trend</h3>
           <div className="h-80">
             <Bar data={tradingVolumeChartData} options={tradingVolumeChartOptions} />
           </div>
@@ -628,7 +676,7 @@ function TradePerformance() {
   const renderRiskAnalysis = () => (
     <div className="space-y-6">
       {/* Risk Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <RiskCard
           title="Max Drawdown"
           value={metrics.maxDrawdown !== null ? formatPercent(metrics.maxDrawdown / 100) : 'N/A'}
@@ -656,35 +704,35 @@ function TradePerformance() {
       </div>
 
       {/* Risk Assessment */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-lg font-semibold mb-4">Risk Assessment</h3>
-        <div className="space-y-4">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <h3 className="text-lg font-bold text-slate-800 mb-6">Risk Assessment</h3>
+        <div className="space-y-6">
           <RiskIndicator
             label="Overall Risk Level"
             value={calculateRiskLevel()}
             description="Based on drawdown, profit factor, and win rate"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600 mb-2">Recommended Position Size</p>
-              <p className="text-2xl font-bold text-gray-900">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <p className="text-sm font-medium text-slate-500 mb-2">Recommended Position Size</p>
+              <p className="text-2xl font-bold text-slate-800">
                 {formatCurrency(summary.equity * 0.02)}
               </p>
-              <p className="text-xs text-gray-500 mt-1">2% of equity per trade</p>
+              <p className="text-xs text-slate-400 mt-1">2% of equity per trade</p>
             </div>
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600 mb-2">Max Risk Per Trade</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <p className="text-sm font-medium text-slate-500 mb-2">Max Risk Per Trade</p>
+              <p className="text-2xl font-bold text-slate-800">
                 {formatCurrency(summary.equity * 0.01)}
               </p>
-              <p className="text-xs text-gray-500 mt-1">1% of equity</p>
+              <p className="text-xs text-slate-400 mt-1">1% of equity</p>
             </div>
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600 mb-2">Daily Risk Limit</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <p className="text-sm font-medium text-slate-500 mb-2">Daily Risk Limit</p>
+              <p className="text-2xl font-bold text-slate-800">
                 {formatCurrency(summary.equity * 0.05)}
               </p>
-              <p className="text-xs text-gray-500 mt-1">5% of equity</p>
+              <p className="text-xs text-slate-400 mt-1">5% of equity</p>
             </div>
           </div>
         </div>
@@ -695,7 +743,7 @@ function TradePerformance() {
   const renderStatistics = () => (
     <div className="space-y-6">
       {/* Trade Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Trades"
           value={metrics.totalTrades}
@@ -711,7 +759,7 @@ function TradePerformance() {
         <StatCard
           title="Average Win"
           value={formatCurrency(metrics.avgWin)}
-          icon={TrendingUpIcon}
+          icon={TrendingUp}
           subtitle="Per winning trade"
         />
         <StatCard
@@ -724,33 +772,35 @@ function TradePerformance() {
 
       {/* Detailed Statistics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Trade Distribution</h3>
-          <div className="h-64">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Trade Distribution</h3>
+          <div className="h-72">
             <Doughnut data={winRatePieData} options={pieChartOptions} />
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4">Closed Orders Trend</h3>
-          <div className="h-64">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Closed Orders Trend</h3>
+          <div className="h-72">
             <Bar data={closedOrdersChartData} options={chartOptions} />
           </div>
         </div>
       </div>
 
       {/* Performance Table */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-lg font-semibold mb-4">Performance Summary</h3>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="p-6 border-b border-slate-100">
+          <h3 className="text-lg font-bold text-slate-800">Performance Summary</h3>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-slate-50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Metric</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Value</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Metric</th>
+                <th className="px-6 py-4 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Value</th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-slate-100">
               <TableRow label="Net Profit" value={formatCurrency(summary.netProfit)} status={summary.netProfit >= 0} />
               <TableRow label="Total Profit" value={formatCurrency(summary.profit)} status={true} />
               <TableRow label="Total Loss" value={formatCurrency(summary.loss)} status={false} />
@@ -766,112 +816,97 @@ function TradePerformance() {
     </div>
   );
 
-  const renderComparison = () => (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-lg font-semibold mb-4">Account Performance Comparison</h3>
-        <p className="text-gray-600 mb-4">
-          Compare performance across different accounts and time periods
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {accounts.map((account) => (
-            <div key={account.id} className="p-4 border rounded-lg hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-gray-900">Account {account.account_number}</span>
-                <span className={`px-2 py-1 rounded text-xs ${
-                  account.equity >= 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                }`}>
-                  {formatCurrency(account.equity || 0)}
-                </span>
-              </div>
-              <div className="text-sm text-gray-600 space-y-1">
-                <p>Balance: {formatCurrency(account.balance || 0)}</p>
-                <p>Equity: {formatCurrency(account.equity || 0)}</p>
-                <p>Credit: {formatCurrency(account.credit || 0)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
   const calculateRiskLevel = () => {
     // Only calculate if we have real data
     if (!metrics.hasRealData) {
       return { level: 'Insufficient Data', color: 'gray' };
     }
-    
+
     let score = 0;
     if (metrics.profitFactor !== null) {
       if (metrics.profitFactor >= 2) score += 1;
       else if (metrics.profitFactor >= 1) score += 0.5;
     }
-    
+
     if (metrics.winRate >= 0.6) score += 1;
     else if (metrics.winRate >= 0.5) score += 0.5;
-    
+
     if (metrics.maxDrawdown !== null) {
       if (metrics.maxDrawdown < 20) score += 1;
       else if (metrics.maxDrawdown < 50) score += 0.5;
     }
-    
+
     if (score >= 2.5) return { level: 'Low', color: 'green' };
     if (score >= 1.5) return { level: 'Medium', color: 'yellow' };
     return { level: 'High', color: 'red' };
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Trade Performance Analytics</h1>
-          <p className="text-gray-600">Comprehensive trading performance analysis with detailed metrics and insights</p>
-        </div>
+    <div className="min-h-screen bg-slate-50 pb-20">
+      <PageHeader
+        title="Trade Performance"
+        subtitle="Comprehensive trading performance analysis with detailed metrics and insights"
+        icon={LineChart}
+      />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         {error && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-            {error}
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-700">
+            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <p>{error}</p>
           </div>
         )}
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+          <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Account</label>
-              <select
-                value={selectedAccount}
-                onChange={(e) => setSelectedAccount(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="all">All Real Accounts</option>
-                {accounts.map((account) => (
-                  <option key={account.id} value={account.account_number}>
-                    {account.account_number} - {account.account_type || 'MT5'}
-                  </option>
-                ))}
-              </select>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Account</label>
+              <div className="relative">
+                <select
+                  value={selectedAccount}
+                  onChange={(e) => setSelectedAccount(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none text-slate-700 font-medium"
+                >
+                  <option value="all">All Real Accounts</option>
+                  {accounts.map((account) => (
+                    <option key={account.id} value={account.account_number}>
+                      {account.account_number} - {account.account_type || 'MT5'}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Timeframe</label>
-              <select
-                value={timeframe}
-                onChange={(e) => setTimeframe(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="7">Last 7 days</option>
-                <option value="30">Last 30 days</option>
-                <option value="90">Last 90 days</option>
-                <option value="365">Last 365 days</option>
-              </select>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Timeframe</label>
+              <div className="relative">
+                <select
+                  value={timeframe}
+                  onChange={(e) => setTimeframe(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none text-slate-700 font-medium"
+                >
+                  <option value="7">Last 7 days</option>
+                  <option value="30">Last 30 days</option>
+                  <option value="90">Last 90 days</option>
+                  <option value="365">Last 365 days</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <SummaryCard
             title="Net Profit"
             value={formatCurrency(summary.netProfit)}
@@ -913,28 +948,30 @@ function TradePerformance() {
         </div>
 
         {/* Main Content - Combined View */}
-        <div className="bg-white rounded-lg shadow-sm mb-6 p-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 mb-8 p-8">
           {loading ? (
-            <div className="flex items-center justify-center h-64">
-              <div className="text-gray-500">Loading analytics data...</div>
+            <div className="flex flex-col items-center justify-center h-64">
+              <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin mb-4"></div>
+              <div className="text-slate-500 font-medium">Loading analytics data...</div>
             </div>
           ) : !metrics.hasRealData ? (
             <div className="flex flex-col items-center justify-center h-64 text-center">
-              <AlertCircle className="w-16 h-16 text-gray-400 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Trading Data Available</h3>
-              <p className="text-gray-600 mb-4">
-                No real MT5 account data found for the selected timeframe.
-              </p>
-              <p className="text-sm text-gray-500">
-                Please ensure you have real MT5 accounts with trading activity.
+              <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                <AlertCircle className="w-8 h-8 text-slate-400" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">No Trading Data Available</h3>
+              <p className="text-slate-500 mb-4 max-w-md">
+                No real MT5 account data found for the selected timeframe. Please ensure you have real MT5 accounts with trading activity.
               </p>
             </div>
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-12">
               {/* Overview Section - Key Metrics */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6" />
+                <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <div className="p-2 bg-blue-50 rounded-lg">
+                    <BarChart3 className="w-5 h-5 text-blue-600" />
+                  </div>
                   Performance Overview
                 </h2>
                 {renderOverview()}
@@ -942,8 +979,10 @@ function TradePerformance() {
 
               {/* Performance Metrics Section */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <TrendingUp className="w-6 h-6" />
+                <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <div className="p-2 bg-purple-50 rounded-lg">
+                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                  </div>
                   Performance Metrics
                 </h2>
                 {renderPerformance()}
@@ -951,20 +990,33 @@ function TradePerformance() {
 
               {/* Statistics Section */}
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Target className="w-6 h-6" />
+                <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <div className="p-2 bg-green-50 rounded-lg">
+                    <Target className="w-5 h-5 text-green-600" />
+                  </div>
                   Trade Statistics
                 </h2>
                 {renderStatistics()}
+              </div>
+
+              {/* Risk Analysis Section */}
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <div className="p-2 bg-red-50 rounded-lg">
+                    <Shield className="w-5 h-5 text-red-600" />
+                  </div>
+                  Risk Analysis
+                </h2>
+                {renderRiskAnalysis()}
               </div>
             </div>
           )}
         </div>
 
         {/* Footer Note */}
-        <div className="mt-6 text-center text-sm text-gray-500">
-          <p>
-            Data updated: {new Date().toLocaleString('en-US', { 
+        <div className="mt-8 text-center">
+          <p className="text-sm text-slate-500">
+            Data updated: {new Date().toLocaleString('en-US', {
               timeZone: 'UTC',
               year: 'numeric',
               month: '2-digit',
@@ -972,7 +1024,7 @@ function TradePerformance() {
               hour: '2-digit',
               minute: '2-digit'
             })} (UTC). For real-time statistics, check{" "}
-            <a href="/user/web-terminal" className="text-blue-600 hover:underline">Terminal</a>.
+            <a href="/user/web-terminal" className="text-blue-600 hover:text-blue-700 font-medium">Terminal</a>.
           </p>
         </div>
       </div>
@@ -983,57 +1035,53 @@ function TradePerformance() {
 // Helper Components
 function MetricCard({ title, value, icon: Icon, trend, subtitle }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-slate-200 hover:shadow-md transition-all duration-300">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${
-            trend === 'up' ? 'bg-green-100' : trend === 'down' ? 'bg-red-100' : 'bg-gray-100'
-          }`}>
-            <Icon className={`w-5 h-5 ${
-              trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-600'
-            }`} />
+          <div className={`p-2.5 rounded-xl ${trend === 'up' ? 'bg-green-50' : trend === 'down' ? 'bg-red-50' : 'bg-slate-50'
+            }`}>
+            <Icon className={`w-5 h-5 ${trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-slate-600'
+              }`} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
+            <h3 className="text-sm font-semibold text-slate-600">{title}</h3>
           </div>
         </div>
         {trend === 'up' && <TrendingUp className="w-5 h-5 text-green-500" />}
         {trend === 'down' && <TrendingDown className="w-5 h-5 text-red-500" />}
       </div>
-      <p className={`text-2xl font-bold mb-2 ${
-        trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-900'
-      }`}>
+      <p className={`text-2xl font-bold mb-2 ${trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-slate-900'
+        }`}>
         {value}
       </p>
-      {subtitle && <p className="text-xs text-gray-500">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-slate-500 font-medium">{subtitle}</p>}
     </div>
   );
 }
 
 function SummaryCard({ title, value, icon: Icon, trend, details }) {
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-md p-6 border border-blue-100 hover:shadow-lg transition-shadow">
+    <div className="bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-2xl shadow-sm p-6 border border-blue-100 hover:shadow-md transition-all duration-300">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-blue-100">
-            <Icon className="w-6 h-6 text-blue-600" />
+          <div className="p-2.5 rounded-xl bg-white shadow-sm border border-blue-100">
+            <Icon className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
+            <h3 className="text-sm font-semibold text-slate-600">{title}</h3>
           </div>
         </div>
       </div>
-      <p className="text-3xl font-bold text-gray-900 mb-4">{value}</p>
+      <p className="text-3xl font-bold text-slate-900 mb-4">{value}</p>
       {details && details.length > 0 && (
-        <div className="mt-4 space-y-2 text-sm bg-white/60 rounded-lg p-3">
+        <div className="mt-4 space-y-2 text-sm bg-white/60 backdrop-blur-sm rounded-xl p-3 border border-white/50">
           {details.map((detail, idx) => (
             <div key={idx} className="flex justify-between items-center">
-              <span className="text-gray-600">{detail.label}</span>
-              <span className={`font-bold ${
-                detail.color === 'green' ? 'text-green-600' :
-                detail.color === 'red' ? 'text-red-600' :
-                detail.color === 'blue' ? 'text-blue-600' : 'text-gray-700'
-              }`}>
+              <span className="text-slate-500 font-medium">{detail.label}</span>
+              <span className={`font-bold ${detail.color === 'green' ? 'text-green-600' :
+                  detail.color === 'red' ? 'text-red-600' :
+                    detail.color === 'blue' ? 'text-blue-600' : 'text-slate-700'
+                }`}>
                 {detail.value}
               </span>
             </div>
@@ -1046,28 +1094,28 @@ function SummaryCard({ title, value, icon: Icon, trend, details }) {
 
 function DetailCard({ title, value, icon: Icon, color, details }) {
   const colorClasses = {
-    green: 'bg-green-100 text-green-600',
-    red: 'bg-red-100 text-red-600',
-    blue: 'bg-blue-100 text-blue-600',
-    purple: 'bg-purple-100 text-purple-600',
-    indigo: 'bg-indigo-100 text-indigo-600'
+    green: 'bg-green-50 text-green-600',
+    red: 'bg-red-50 text-red-600',
+    blue: 'bg-blue-50 text-blue-600',
+    purple: 'bg-purple-50 text-purple-600',
+    indigo: 'bg-indigo-50 text-indigo-600'
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-slate-200 hover:border-blue-200 transition-colors">
       <div className="flex items-center gap-3 mb-4">
-        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
+        <div className={`p-2.5 rounded-xl ${colorClasses[color]}`}>
           <Icon className="w-5 h-5" />
         </div>
-        <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
+        <h3 className="text-sm font-semibold text-slate-600">{title}</h3>
       </div>
-      <p className="text-2xl font-bold text-gray-900 mb-4">{value}</p>
+      <p className="text-2xl font-bold text-slate-900 mb-4">{value}</p>
       {details && (
         <div className="space-y-2 text-sm">
           {details.map((detail, idx) => (
-            <div key={idx} className="flex justify-between text-gray-600">
-              <span>{detail.label}</span>
-              <span className="font-semibold">{detail.value}</span>
+            <div key={idx} className="flex justify-between text-slate-500">
+              <span className="font-medium">{detail.label}</span>
+              <span className="font-bold text-slate-700">{detail.value}</span>
             </div>
           ))}
         </div>
@@ -1078,16 +1126,16 @@ function DetailCard({ title, value, icon: Icon, color, details }) {
 
 function RiskCard({ title, value, status, description }) {
   const statusColors = {
-    good: 'bg-green-100 text-green-800 border-green-200',
-    warning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-    danger: 'bg-red-100 text-red-800 border-red-200'
+    good: 'bg-green-50/50 text-green-800 border-green-200',
+    warning: 'bg-yellow-50/50 text-yellow-800 border-yellow-200',
+    danger: 'bg-red-50/50 text-red-800 border-red-200'
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm p-6 border-2 ${statusColors[status]}`}>
-      <h3 className="text-sm font-semibold mb-2">{title}</h3>
+    <div className={`rounded-2xl shadow-sm p-6 border ${statusColors[status]}`}>
+      <h3 className="text-sm font-bold mb-2 opacity-80">{title}</h3>
       <p className="text-2xl font-bold mb-2">{value}</p>
-      <p className="text-xs opacity-75">{description}</p>
+      <p className="text-xs font-medium opacity-70">{description}</p>
     </div>
   );
 }
@@ -1101,53 +1149,58 @@ function RiskIndicator({ label, value, description }) {
   };
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-gray-700">{label}</span>
-        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-          color === 'green' ? 'bg-green-100 text-green-800' :
-          color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-          'bg-red-100 text-red-800'
-        }`}>
+    <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-sm font-bold text-slate-700">{label}</span>
+        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${color === 'green' ? 'bg-green-100 text-green-700' :
+            color === 'yellow' ? 'bg-yellow-100 text-yellow-700' :
+              'bg-red-100 text-red-700'
+          }`}>
           {level}
         </span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2.5">
-        <div 
-          className={`h-2.5 rounded-full ${colorClasses[color]}`}
+      <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
+        <div
+          className={`h-3 rounded-full transition-all duration-500 ${colorClasses[color]}`}
           style={{ width: `${color === 'green' ? 80 : color === 'yellow' ? 50 : 30}%` }}
         ></div>
       </div>
-      <p className="text-xs text-gray-500 mt-2">{description}</p>
+      <p className="text-xs text-slate-500 font-medium">{description}</p>
     </div>
   );
 }
 
 function StatCard({ title, value, icon: Icon, subtitle }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-slate-200 hover:border-blue-200 transition-colors">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-gray-100">
-          <Icon className="w-5 h-5 text-gray-600" />
+        <div className="p-2.5 rounded-xl bg-slate-100">
+          <Icon className="w-5 h-5 text-slate-600" />
         </div>
-        <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
+        <h3 className="text-sm font-semibold text-slate-600">{title}</h3>
       </div>
-      <p className="text-2xl font-bold text-gray-900 mb-2">{value}</p>
-      {subtitle && <p className="text-xs text-gray-500">{subtitle}</p>}
+      <p className="text-2xl font-bold text-slate-900 mb-2">{value}</p>
+      {subtitle && <p className="text-xs text-slate-500 font-medium">{subtitle}</p>}
     </div>
   );
 }
 
 function TableRow({ label, value, status }) {
   return (
-    <tr className="hover:bg-gray-50">
-      <td className="px-4 py-3 text-sm text-gray-900">{label}</td>
-      <td className="px-4 py-3 text-sm text-right font-semibold">{value}</td>
-      <td className="px-4 py-3 text-sm">
+    <tr className="hover:bg-slate-50 transition-colors">
+      <td className="px-6 py-4 text-sm font-medium text-slate-700">{label}</td>
+      <td className="px-6 py-4 text-sm text-right font-bold text-slate-900">{value}</td>
+      <td className="px-6 py-4 text-sm">
         {status ? (
-          <CheckCircle2 className="w-5 h-5 text-green-500 inline" />
+          <div className="flex items-center gap-1.5 text-green-600 font-medium">
+            <CheckCircle2 className="w-5 h-5" />
+            <span className="hidden sm:inline">Good</span>
+          </div>
         ) : (
-          <XCircle className="w-5 h-5 text-red-500 inline" />
+          <div className="flex items-center gap-1.5 text-red-500 font-medium">
+            <XCircle className="w-5 h-5" />
+            <span className="hidden sm:inline">Attention</span>
+          </div>
         )}
       </td>
     </tr>

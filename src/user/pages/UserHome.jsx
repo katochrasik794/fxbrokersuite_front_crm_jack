@@ -1,37 +1,49 @@
+import { LayoutDashboard, User, Wallet } from 'lucide-react'
+import PageHeader from '../components/PageHeader.jsx'
+import { Link } from 'react-router-dom'
+
 function UserHome() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-50 to-neutral-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-blue-700 mb-2">
-              User Dashboard
-            </h1>
-            <p className="text-gray-600">
-              Welcome to the User Side
-            </p>
-          </header>
+    <div className="space-y-6">
+      <PageHeader
+        icon={LayoutDashboard}
+        title="User Home"
+        subtitle="Welcome to your personal trading dashboard."
+      />
 
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              User Features
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <h3 className="font-semibold text-blue-800 mb-2">Profile</h3>
-                <p className="text-sm text-gray-600">Manage your profile settings</p>
-              </div>
-              <div className="p-4 bg-green-50 rounded-lg">
-                <h3 className="font-semibold text-green-800 mb-2">Dashboard</h3>
-                <p className="text-sm text-gray-600">View your dashboard</p>
-              </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Link to="/user/profile" className="group">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+              <User size={24} />
             </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Profile Settings</h3>
+            <p className="text-sm text-gray-500">Manage your personal information, security settings, and preferences.</p>
           </div>
-        </div>
+        </Link>
+
+        <Link to="/user/dashboard" className="group">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+            <div className="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+              <LayoutDashboard size={24} />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">Trading Dashboard</h3>
+            <p className="text-sm text-gray-500">View your accounts, monitor performance, and access trading tools.</p>
+          </div>
+        </Link>
+
+        <Link to="/user/deposits" className="group">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+              <Wallet size={24} />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Funds Management</h3>
+            <p className="text-sm text-gray-500">Deposit funds, request withdrawals, and view transaction history.</p>
+          </div>
+        </Link>
       </div>
     </div>
   )
 }
 
 export default UserHome
-

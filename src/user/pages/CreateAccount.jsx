@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { PlusCircle } from 'lucide-react'
+import { PlusCircle, ArrowLeft, CheckCircle2, Shield, Info, CreditCard } from 'lucide-react'
 import authService from '../../services/auth.js'
 import AuthLoader from '../../components/AuthLoader.jsx'
 import Toast from '../../components/Toast.jsx'
@@ -184,7 +184,7 @@ function CreateAccount() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-slate-50 p-4 sm:p-6 transition-colors duration-300">
       {loading && <AuthLoader message="Creating account..." />}
       {toast && (
         <Toast
@@ -194,7 +194,7 @@ function CreateAccount() {
         />
       )}
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-6">
         <PageHeader
           icon={PlusCircle}
           title="Create Trading Account"
@@ -202,34 +202,31 @@ function CreateAccount() {
         />
         
         {/* Back Button */}
-        <div className="mb-6 flex justify-end">
+        <div className="flex justify-end">
           <button
             onClick={() => navigate('/user/platforms')}
-            className="text-gray-600 hover:text-gray-900 flex items-center gap-2"
-            style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
+            className="group flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-200 transition-all duration-200 shadow-sm"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Back to Platforms
           </button>
         </div>
 
         {/* Step 1: Create Account Form */}
         {currentStep === 1 && (
-          <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Create a new {mode === 'demo' ? 'demo' : 'live'} account
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-slate-200/60 p-6 sm:p-8">
+            <h1 className="text-xl font-semibold text-slate-900 mb-6">
+              Create a new <span className={mode === 'live' ? 'text-blue-600' : 'text-emerald-600'}>{mode === 'demo' ? 'Demo' : 'Live'}</span> account
             </h1>
 
             {/* Account Type Tabs */}
-            <div className="flex p-1 bg-gray-100 rounded-lg mb-6 w-fit">
+            <div className="flex p-1.5 bg-slate-100/80 rounded-xl mb-8 w-fit">
               <button
                 type="button"
                 onClick={() => setMode('live')}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${mode === 'live'
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-900'
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${mode === 'live'
+                  ? 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200'
+                  : 'text-slate-500 hover:text-slate-700'
                   }`}
               >
                 Live Account
@@ -237,41 +234,43 @@ function CreateAccount() {
               <button
                 type="button"
                 onClick={() => setMode('demo')}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${mode === 'demo'
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-900'
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${mode === 'demo'
+                  ? 'bg-white text-emerald-600 shadow-sm ring-1 ring-slate-200'
+                  : 'text-slate-500 hover:text-slate-700'
                   }`}
               >
                 Demo Account
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {/* Trading Group Selection */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Choose Your Trading Group
-                </label>
-                <p className="text-xs text-gray-600 mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Select the trading group that best suits your trading style. Each group offers different spreads, commissions, and trading conditions.
-                </p>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Choose Your Trading Group
+                  </label>
+                  <p className="text-sm text-slate-500">
+                    Select the trading group that best suits your trading style.
+                  </p>
+                </div>
+
                 {loadingGroups ? (
-                  <div className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 flex items-center justify-center">
-                    <svg className="animate-spin h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span className="ml-2 text-sm text-gray-600" style={{ fontFamily: 'Roboto, sans-serif' }}>Loading groups...</span>
+                  <div className="w-full px-4 py-8 border border-slate-200 border-dashed rounded-2xl bg-slate-50/50 flex flex-col items-center justify-center gap-3">
+                    <div className="w-8 h-8 border-2 border-blue-600/20 border-t-blue-600 rounded-full animate-spin"></div>
+                    <span className="text-sm text-slate-500 font-medium">Loading available groups...</span>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {filteredGroups.length === 0 && (
-                      <div className="col-span-full text-center py-4 text-gray-500">
-                        No {mode} groups available currently.
+                      <div className="col-span-full flex flex-col items-center justify-center py-12 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                        <Info className="w-10 h-10 text-slate-300 mb-3" />
+                        <p className="text-slate-900 font-medium">No {mode} groups available</p>
+                        <p className="text-slate-500 text-sm mt-1">Please try switching account types or contact support.</p>
                       </div>
                     )}
                     {filteredGroups.map((group) => (
-                      <label key={group.id} className="cursor-pointer">
+                      <label key={group.id} className="group cursor-pointer relative">
                         <input
                           type="radio"
                           name="mt5GroupId"
@@ -280,29 +279,36 @@ function CreateAccount() {
                           onChange={handleChange}
                           className="sr-only"
                         />
-                        <div className={`border-2 rounded-lg p-4 transition-all ${formData.mt5GroupId === group.id.toString()
-                          ? 'border-blue-600 bg-blue-600 bg-opacity-5'
-                          : 'border-gray-200 hover:border-gray-300'
+                        <div className={`relative h-full border rounded-2xl p-4 transition-all duration-200 ${
+                          formData.mt5GroupId === group.id.toString()
+                            ? 'border-blue-500 bg-blue-50/50 ring-1 ring-blue-500'
+                            : 'border-slate-200 hover:border-blue-300 hover:bg-slate-50'
                           }`}>
-                          <div className="flex items-center gap-4">
-                            {/* MT5 Image on left side */}
-                            <img
-                              src="/mt_5.png"
-                              alt="MetaTrader 5"
-                              className="w-28 h-20 object-contain flex-shrink-0"
-                            />
-                            {/* Group name and details */}
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <div className={`w-4 h-4 rounded-full ${formData.mt5GroupId === group.id.toString() ? 'bg-blue-600' : 'bg-gray-300'
-                                  }`}></div>
-                                <span className="font-semibold text-gray-900" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                          <div className="flex items-start gap-4">
+                            <div className="p-2 bg-white rounded-xl border border-slate-100 shadow-sm shrink-0">
+                              <img
+                                src="/mt_5.png"
+                                alt="MetaTrader 5"
+                                className="w-12 h-12 object-contain"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="font-semibold text-slate-900 truncate">
                                   {group.dedicated_name || 'Unnamed Group'}
                                 </span>
+                                {formData.mt5GroupId === group.id.toString() && (
+                                  <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
+                                )}
                               </div>
-                              <ul className="space-y-1 text-sm text-gray-600 ml-7" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                                <li>• Currency: {group.currency}</li>
-                              </ul>
+                              <div className="flex flex-wrap gap-2 text-xs">
+                                <span className="px-2 py-1 rounded-md bg-slate-100 text-slate-600 font-medium border border-slate-200">
+                                  {group.currency}
+                                </span>
+                                <span className="px-2 py-1 rounded-md bg-slate-100 text-slate-600 font-medium border border-slate-200">
+                                  MT5
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -312,149 +318,138 @@ function CreateAccount() {
                 )}
               </div>
 
-              {/* Leverage Selection */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Select Your Leverage
-                </label>
-                <p className="text-xs text-gray-600 mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Leverage allows you to trade with more capital than you have in your account. Higher leverage increases both potential profits and risks.
-                </p>
-                <select
-                  name="leverage"
-                  value={formData.leverage}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
-                >
-                  <option value="50">1:50</option>
-                  <option value="100">1:100</option>
-                  <option value="200">1:200</option>
-                  <option value="500">1:500</option>
-                </select>
-              </div>
-
-              {/* fxbrokersuite Markets Copy Account */}
-              {/* <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                      fxbrokersuite Markets Copy Account
-                    </label>
-                    <p className="text-xs text-gray-600 mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                      Enable copy trading to automatically replicate trades from successful traders.
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="isCopyAccount"
-                      checked={formData.isCopyAccount}
-                      onChange={handleChange}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-600 peer-focus:ring-opacity-20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Leverage Selection */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Select Leverage
                   </label>
+                  <div className="relative">
+                    <select
+                      name="leverage"
+                      value={formData.leverage}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none text-slate-900 text-sm"
+                    >
+                      <option value="50">1:50</option>
+                      <option value="100">1:100</option>
+                      <option value="200">1:200</option>
+                      <option value="500">1:500</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-500 flex items-center gap-1.5">
+                    <Info className="w-3.5 h-3.5" />
+                    Higher leverage increases both potential profits and risks.
+                  </p>
                 </div>
-              </div> */}
 
-              {/* Reason for opening */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Reason for Opening an Additional Account
-                </label>
-                <p className="text-xs text-gray-600 mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Help us understand your trading needs by selecting the primary reason for opening this account.
-                </p>
-                <select
-                  name="reasonForAccount"
-                  value={formData.reasonForAccount}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
-                >
-                  {reasons.map((reason) => (
-                    <option key={reason} value={reason}>
-                      {reason}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Master Password (for MT5) */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Master Password (MT5 Login Password)
-                </label>
-                <p className="text-xs text-gray-600 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  This will be your main password to login to MT5. Keep it strong and do not share it with anyone.
-                </p>
-                <div className="relative">
-                  <input
-                    type={showMasterPassword ? 'text' : 'password'}
-                    name="masterPassword"
-                    value={formData.masterPassword}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent pr-10"
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
-                    placeholder="Set your MT5 master password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowMasterPassword(!showMasterPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showMasterPassword ? (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                {/* Reason for opening */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-slate-700">
+                    Reason for Opening
+                  </label>
+                  <div className="relative">
+                    <select
+                      name="reasonForAccount"
+                      value={formData.reasonForAccount}
+                      onChange={handleChange}
+                      className="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none text-slate-900 text-sm"
+                    >
+                      {reasons.map((reason) => (
+                        <option key={reason} value={reason}>
+                          {reason}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                       </svg>
-                    ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    )}
-                  </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Portal Password */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Portal Password
-                </label>
-                <p className="text-xs text-gray-600 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  For added security we require you to confirm your Portal password.
-                </p>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="portalPassword"
-                    value={formData.portalPassword}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent pr-10"
-                    style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
-                    placeholder="Enter your portal password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showPassword ? (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    )}
-                  </button>
+              <div className="pt-4 border-t border-slate-100 space-y-6">
+                <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-blue-500" />
+                  Security Settings
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Master Password (for MT5) */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-slate-700">
+                      Set MT5 Master Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showMasterPassword ? 'text' : 'password'}
+                        name="masterPassword"
+                        value={formData.masterPassword}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 text-sm placeholder:text-slate-400"
+                        placeholder="Create a strong password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowMasterPassword(!showMasterPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                      >
+                        {showMasterPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Portal Password */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-slate-700">
+                      Confirm Portal Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        name="portalPassword"
+                        value={formData.portalPassword}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 text-sm placeholder:text-slate-400"
+                        placeholder="Enter your current password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                      >
+                        {showPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -462,19 +457,21 @@ function CreateAccount() {
               <button
                 type="submit"
                 disabled={loading || loadingGroups || !formData.mt5GroupId}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base py-3 rounded-lg transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
               >
                 {loading ? (
                   <>
-                    <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-5 w-5 text-white/90" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Submitting...
+                    <span>Processing...</span>
                   </>
                 ) : (
-                  'Submit'
+                  <>
+                    <PlusCircle className="w-5 h-5" />
+                    <span>Create {mode === 'demo' ? 'Demo' : 'Live'} Account</span>
+                  </>
                 )}
               </button>
             </form>
@@ -483,58 +480,56 @@ function CreateAccount() {
 
         {/* Step 2: Account Created Success */}
         {currentStep === 2 && createdAccount && (
-          <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8 text-center">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-slate-200/60 p-8 text-center max-w-2xl mx-auto">
             {/* Success Icon */}
             <div className="mb-6">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#dff8f4] rounded-full mb-4">
-                <svg className="w-10 h-10 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-50 rounded-full mb-4 ring-1 ring-emerald-100">
+                <CheckCircle2 className="w-10 h-10 text-emerald-500" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Account Created
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Account Created Successfully!
               </h2>
-              <p className="text-gray-600" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Congratulations, you've successfully created an additional trading account and can now start trading. Check below for your account details.
+              <p className="text-slate-600">
+                Your new trading account is ready. You can now fund your account and start trading.
               </p>
             </div>
 
             {/* Account Details */}
-            <div className="bg-gray-50 rounded-lg p-6 mb-4 text-left">
+            <div className="bg-slate-50/80 rounded-2xl border border-slate-200 p-6 mb-8 text-left">
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Trading account:</span>
-                  <span className="text-gray-900 font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                <div className="flex justify-between items-center py-2 border-b border-slate-200/50 last:border-0">
+                  <span className="text-slate-500 font-medium text-sm">Trading Account</span>
+                  <span className="text-slate-900 font-bold font-mono text-lg">
                     {createdAccount.mt5Response || createdAccount.account_number}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Trading server:</span>
-                  <span className="text-gray-900 font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>{createdAccount.trading_server}</span>
+                <div className="flex justify-between items-center py-2 border-b border-slate-200/50 last:border-0">
+                  <span className="text-slate-500 font-medium text-sm">Trading Server</span>
+                  <span className="text-slate-900 font-semibold text-sm">{createdAccount.trading_server}</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Group:</span>
-                  <span className="text-gray-900 font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                <div className="flex justify-between items-center py-2 border-b border-slate-200/50 last:border-0">
+                  <span className="text-slate-500 font-medium text-sm">Account Group</span>
+                  <span className="text-slate-900 font-semibold text-sm">
                     {createdAccount.mt5_group_name || selectedGroup?.dedicated_name || selectedGroup?.group_name || 'N/A'}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Leverage:</span>
-                  <span className="text-gray-900 font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>1:{createdAccount.leverage || 'N/A'}</span>
+                <div className="flex justify-between items-center py-2 border-b border-slate-200/50 last:border-0">
+                  <span className="text-slate-500 font-medium text-sm">Leverage</span>
+                  <span className="text-slate-900 font-semibold text-sm">1:{createdAccount.leverage || 'N/A'}</span>
                 </div>
               </div>
             </div>
 
-            <p className="text-sm text-gray-600 mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              We've also sent you an email with these details.
+            <p className="text-sm text-slate-500 mb-8 flex items-center justify-center gap-2">
+              <Info className="w-4 h-4" />
+              Account credentials have been sent to your email.
             </p>
 
             <button
               onClick={() => navigate('/user/dashboard')}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base py-3 rounded-lg transition-colors font-semibold"
-              style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl transition-all font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
             >
-              To Dashboard
+              Go to Dashboard
             </button>
           </div>
         )}
@@ -544,4 +539,3 @@ function CreateAccount() {
 }
 
 export default CreateAccount
-

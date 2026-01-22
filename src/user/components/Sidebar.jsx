@@ -172,9 +172,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
 
   return (
     <div
-      className={`bg-white h-screen fixed left-0 top-0 shadow-lg flex flex-col z-50 transition-all duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
+      className={`bg-white h-screen fixed left-0 top-0 border-r border-gray-100 flex flex-col z-50 transition-all duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 ${collapsed ? 'lg:!w-[80px]' : 'lg:!w-[240px]'}`}
-      style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', width: '100%', maxWidth: '100%' }}
+      style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '14px', width: '100%', maxWidth: '100%' }}
     >
       {/* Logo with Close Button */}
       <div className={`bg-transparent pt-4 pb-2 flex-shrink-0 flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between pl-8 pr-6'}`}>
@@ -205,9 +205,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Dashboard */}
           {isMenuEnabled('dashboard') && <Link
             to="/user/dashboard"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/dashboard')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/dashboard')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Dashboard' : undefined}
@@ -221,9 +221,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Deposits */}
           {isMenuEnabled('deposits') && <Link
             to="/user/deposits"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/deposits')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/deposits')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Deposits' : undefined}
@@ -238,9 +238,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Withdrawals */}
           {isMenuEnabled('withdrawals') && <Link
             to="/user/withdrawals"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/withdrawals') || isActive('/withdrawals/crypto')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/withdrawals') || isActive('/withdrawals/crypto')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Withdrawals' : undefined}
@@ -255,9 +255,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Transfers */}
           {isMenuEnabled('transfers') && <Link
             to="/user/transfers"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/transfers')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/transfers')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Transfers' : undefined}
@@ -271,9 +271,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Payment Details */}
           {isMenuEnabled('payment-details') && <Link
             to="/user/payment-details"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/payment-details')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/payment-details')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Payment Details' : undefined}
@@ -287,9 +287,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Reports */}
           {isMenuEnabled('reports') && <Link
             to="/user/reports"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/reports')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/reports')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Reports' : undefined}
@@ -305,8 +305,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <Link
               to="/user/trade-performance"
               className={`w-full flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors rounded-lg ${isActive('/trade-performance')
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               title={collapsed ? 'Trade Performance' : undefined}
             >
@@ -321,9 +321,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {hasEnabledChildren('analysis') && <div>
             <button
               onClick={() => toggleSubmenu('analysis')}
-              className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} ${collapsed ? 'px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isSubmenuActive(['/analysis', '/analysis/signal-centre', '/analysis/assets-overview', '/analysis/market-news', '/analysis/market-calendar', '/analysis/research-terminal'])
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+              className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} ${collapsed ? 'px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isSubmenuActive(['/analysis', '/analysis/signal-centre', '/analysis/assets-overview', '/analysis/market-news', '/analysis/market-calendar', '/analysis/research-terminal'])
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               style={{}}
               title={collapsed ? 'Analysis' : undefined}
@@ -350,8 +350,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
               <div className="ml-8 mt-1 space-y-1">
                 {isSubMenuEnabled('analysis/signal-centre') && <Link
                   to="/user/analysis/signal-centre"
-                  className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/signal-centre')
-                    ? 'bg-blue-600 text-white'
+                  className={`block px-4 py-2 mx-3 mb-1 rounded-xl transition-colors ${isActive('/analysis/signal-centre')
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -359,8 +359,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 </Link>}
                 {isSubMenuEnabled('analysis/assets-overview') && <Link
                   to="/user/analysis/assets-overview"
-                  className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/assets-overview')
-                    ? 'bg-blue-600 text-white'
+                  className={`block px-4 py-2 mx-3 mb-1 rounded-xl transition-colors ${isActive('/analysis/assets-overview')
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -368,8 +368,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 </Link>}
                 {isSubMenuEnabled('analysis/market-news') && <Link
                   to="/user/analysis/market-news"
-                  className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/market-news')
-                    ? 'bg-blue-600 text-white'
+                  className={`block px-4 py-2 mx-3 mb-1 rounded-xl transition-colors ${isActive('/analysis/market-news')
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -377,8 +377,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 </Link>}
                 {isSubMenuEnabled('analysis/market-calendar') && <Link
                   to="/user/analysis/market-calendar"
-                  className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/market-calendar')
-                    ? 'bg-blue-600 text-white'
+                  className={`block px-4 py-2 mx-3 mb-1 rounded-xl transition-colors ${isActive('/analysis/market-calendar')
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -386,8 +386,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 </Link>}
                 {isSubMenuEnabled('analysis/research-terminal') && <Link
                   to="/user/analysis/research-terminal"
-                  className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/research-terminal')
-                    ? 'bg-blue-600 text-white'
+                  className={`block px-4 py-2 mx-3 mb-1 rounded-xl transition-colors ${isActive('/analysis/research-terminal')
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -400,9 +400,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* Platforms */}
           {isMenuEnabled('platforms') && <Link
             to="/user/platforms"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/platforms')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/platforms')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Platforms' : undefined}
@@ -416,9 +416,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {/* fxbrokersuite Support */}
           {isMenuEnabled('support') && <Link
             to="/user/support"
-            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/support')
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+            className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/support')
+              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'fxbrokersuite Support' : undefined}
@@ -433,9 +433,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {ibStatus === 'approved' ? (
             <Link
               to="/user/ib/dashboard"
-              className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${location.pathname.startsWith('/user/ib')
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+              className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${location.pathname.startsWith('/user/ib')
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               style={{}}
               title={collapsed ? "Partner's Cabinet" : undefined}
@@ -448,9 +448,9 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           ) : (
             <Link
               to="/user/apply-as-ib"
-              className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/apply-as-ib')
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
+              className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4 mx-3'} py-3 mb-1 transition-colors relative rounded-xl ${isActive('/apply-as-ib')
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               style={{}}
               title={collapsed ? 'Apply as IB' : undefined}
