@@ -94,7 +94,7 @@ function UserLayout() {
   useEffect(() => {
     const pathname = location.pathname;
     const pageTitle = routeTitles[pathname] || 'Dashboard';
-    document.title = `Solitaire : ${pageTitle}`;
+    document.title = `fxbrokersuite : ${pageTitle}`;
   }, [location.pathname]);
 
   // Check KYC status on mount

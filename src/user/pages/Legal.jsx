@@ -8,7 +8,7 @@ function Legal() {
     { title: 'Cookies Policy', content: 'Information about how we use cookies on our website.' },
     { title: 'Privacy Policy', content: 'How we collect, use, and protect your personal information.' },
     { title: 'Terms and Conditions', content: 'General terms and conditions for using our services.' },
-    { title: 'Clients Agreement', content: 'Agreement between the client and Solitaire Brokerage.' },
+    { title: 'Clients Agreement', content: 'Agreement between the client and fxbrokersuite Brokerage.' },
     { title: 'Conflicts of Interest Policy', content: 'Policy regarding potential conflicts of interest.' },
     { title: 'Terms of Use', content: 'Terms governing the use of our website and platform.' },
     { title: 'Website Acceptable Use Policy', content: 'Rules and guidelines for acceptable use of our website.' }
@@ -59,7 +59,7 @@ function Legal() {
             Trading involves a high degree of risk
           </h2>
           <p className="text-gray-700 mb-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', lineHeight: '1.6' }}>
-            Solitaire Brokerage (Seychelles) Limited is a registered trading name in Seychelles (License Number SD064) which is authorized and regulated by the Financial Services Authority with its company address at First Floor, Marina House, Eden Island, Republic of Seychelles.
+            fxbrokersuite Brokerage (Seychelles) Limited is a registered trading name in Seychelles (License Number SD064) which is authorized and regulated by the Financial Services Authority with its company address at First Floor, Marina House, Eden Island, Republic of Seychelles.
           </p>
           <p className="text-gray-700" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', lineHeight: '1.6' }}>
             Trading in financial instruments involves significant risk and may not be suitable for all investors. Before trading, please ensure you understand the risks involved and seek independent advice if necessary.

@@ -43,7 +43,7 @@ function DebitCard() {
           {/* Information Text */}
           <div className="space-y-4">
             <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#4B5156', fontWeight: '400', lineHeight: '1.5' }}>
-              Solitaire follows a strict return to source policy, in all instances where applicable, all monies paid out by Solitaire will be paid back to the source from where they originated from.
+              fxbrokersuite follows a strict return to source policy, in all instances where applicable, all monies paid out by fxbrokersuite will be paid back to the source from where they originated from.
             </p>
             <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#4B5156', fontWeight: '400', lineHeight: '1.5' }}>
               To make a withdrawal to a card, a deposit must first be made from a card and the details must be saved on this platform.

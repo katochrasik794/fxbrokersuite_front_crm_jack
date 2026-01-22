@@ -568,7 +568,7 @@ export default function Topbar({
               {open && (
                 <div className="absolute right-0 mt-2 w-56 overflow-hidden rounded-2xl border border-gray-200 bg-white text-gray-800 shadow-2xl">
                   <div className="px-3 py-2 text-xs text-gray-500">
-                    Signed in as <span className="text-gray-700">{admin?.email || 'admin@solitaire.com'}</span>
+                    Signed in as <span className="text-gray-700">{admin?.email || 'admin@fxbrokersuite.com'}</span>
                   </div>
                   <div className="divide-y divide-gray-100">
                     <a href={profileHref} className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">

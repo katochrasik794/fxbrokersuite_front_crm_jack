@@ -62,7 +62,7 @@ function Login() {
 
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Loading Animation */}
       {loading && <AuthLoader message="Logging in..." />}
       
@@ -74,7 +74,7 @@ function Login() {
           <div className="mb-4">
             <img
               src="/logo.png"
-              alt="Solitaire Markets"
+              alt="fxbrokersuite Markets"
               className="h-14 w-auto mx-auto"
               style={{ filter: 'none' }}
             />
@@ -114,7 +114,7 @@ function Login() {
               </p>
               <a
                 href={activationLink}
-                className="inline-block px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg text-sm font-semibold transition-colors font-sans"
+                className="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-semibold transition-colors font-sans"
               >
                 Click Here to Activate
               </a>
@@ -144,7 +144,7 @@ function Login() {
                 required
                 disabled={loading}
                 placeholder="Enter your email"
-                className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors disabled:bg-gray-100"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors disabled:bg-gray-100"
               />
             </div>
 
@@ -161,7 +161,7 @@ function Login() {
                   required
                   disabled={loading}
                   placeholder="Enter password"
-                  className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
                 />
                 <button
                   type="button"
@@ -189,13 +189,13 @@ function Login() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 text-brand-500 border-gray-300 rounded focus:ring-brand-500"
+                  className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
                 />
                 <span className="ml-2 text-sm text-dark-base/70 font-sans">
                   Remember me
                 </span>
               </label>
-              <Link to="/forgot-password" className="text-sm text-brand-700 hover:text-brand-800 font-sans">
+              <Link to="/forgot-password" className="text-sm text-blue-700 hover:text-blue-800 font-sans">
                 I forgot my password
               </Link>
             </div>
@@ -204,7 +204,7 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
             >
               {loading ? 'Logging in...' : 'Continue'}
             </button>
@@ -217,14 +217,14 @@ function Login() {
             <div className="text-xs text-dark-base/50 space-y-2 font-sans">
               <p className="font-semibold mb-2">Risk Statement:</p>
               <p>
-                A trading amount in derivatives may mean Trader may lose an amount even greater than their original trading amount. Anyone wishing to Trade in any of the products mentioned in www.solitaireprime.com should seek their own financial or professional advice. Trading of securities, forex, stock market, commodities, options and futures may not be suitable for everyone and involves the risk of losing part or all of your money. Trading in the financial markets has large potential rewards, but also large potential risk. You must be aware of the risks and be willing to accept them in order to Trade in the markets. Don't trade with money which you can't afford to lose. Forex Trading are not allowed in some countries, before trading your money, make sure whether your country is allowing this or not. You are strongly advised to obtain independent financial, legal and tax advice before proceeding with any currency or spot metals trade. Nothing in this site should be read or construed as constituting advice on the part of Solitaire Prime Limited. or any of its affiliates, directors, officers or employees.
+                Trading in financial markets involves a high degree of risk and may not be suitable for all investors. You should carefully consider your investment objectives, level of experience, and risk appetite before deciding to trade. There is a possibility that you could sustain a loss of some or all of your initial investment and therefore you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with trading and seek advice from an independent financial advisor if you have any doubts.
               </p>
               <p className="font-semibold mt-3 mb-2">Restricted Regions:</p>
               <p>
-                Solitaire Prime Limited. does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of Solitaire Prime Limited. are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
+                FxBrokerSuite does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of FxBrokerSuite are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
               </p>
               <p className="mt-3">
-                Solitaire Prime Limited. Registration Number: 2025-00567. Registered Address: Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@solitaireprime.com
+                FxBrokerSuite. Registration Number: 12345678. Registered Address: 123 Dummy Street, Dummy City, Country. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@fxbrokersuite.com
               </p>
             </div>
           </div>

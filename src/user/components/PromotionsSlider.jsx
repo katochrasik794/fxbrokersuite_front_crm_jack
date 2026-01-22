@@ -121,13 +121,13 @@ export default function PromotionsSlider() {
                 href={currentPromotion.button_link}
                 target={currentPromotion.button_link.startsWith('http') ? '_blank' : '_self'}
                 rel={currentPromotion.button_link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="bg-brand-500 hover:bg-brand-600 text-dark-base px-6 py-2 rounded-lg whitespace-nowrap text-sm sm:text-base transition-colors font-medium shadow-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-dark-base px-6 py-2 rounded-lg whitespace-nowrap text-sm sm:text-base transition-colors font-medium shadow-lg"
               >
                 {currentPromotion.button_text}
               </a>
             ) : (
               <button
-                className="bg-brand-500 hover:bg-brand-600 text-dark-base px-6 py-2 rounded-lg whitespace-nowrap text-sm sm:text-base transition-colors font-medium shadow-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-dark-base px-6 py-2 rounded-lg whitespace-nowrap text-sm sm:text-base transition-colors font-medium shadow-lg"
               >
                 {currentPromotion.button_text}
               </button>
@@ -164,7 +164,7 @@ export default function PromotionsSlider() {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-brand-500 w-8'
+                    ? 'bg-blue-600 w-8'
                     : 'bg-white/50 hover:bg-white/75'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}

@@ -22,7 +22,7 @@ const AVAILABLE_VARIABLES = [
   { name: 'content', description: 'Email body content' },
   { name: 'subject', description: 'Email subject' },
   { name: 'logoUrl', description: 'Company logo URL' },
-  { name: 'companyName', description: 'Solitaire Markets Limited' },
+  { name: 'companyName', description: 'fxbrokersuite Markets Limited' },
   { name: 'companyEmail', description: 'Company email address' },
   { name: 'companyPhone', description: 'Company phone number' },
   { name: 'imageUrl', description: 'Optional footer image URL' },
@@ -316,7 +316,7 @@ export default function EmailTemplates() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-brand-500 rounded-lg">
+            <div className="p-2 bg-blue-600 rounded-lg">
               <FileCode className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">
@@ -329,7 +329,7 @@ export default function EmailTemplates() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)]">
           {/* Left Panel - Code Editor */}
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col overflow-hidden">
-            <div className="bg-brand-600 p-4 flex items-center justify-between">
+            <div className="bg-blue-700 p-4 flex items-center justify-between">
               <div className="flex items-center gap-2 text-white">
                 <Code2 className="w-5 h-5" />
                 <span className="font-semibold">Template Code</span>
@@ -351,7 +351,7 @@ export default function EmailTemplates() {
                   value={templateName}
                   onChange={(e) => setTemplateName(e.target.value)}
                   placeholder="e.g., Welcome Email Template"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
               </div>
               <div>
@@ -361,7 +361,7 @@ export default function EmailTemplates() {
                   value={templateDescription}
                   onChange={(e) => setTemplateDescription(e.target.value)}
                   placeholder="Brief description of this template"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
               </div>
               <div>
@@ -370,8 +370,8 @@ export default function EmailTemplates() {
                   type="email"
                   value={fromEmail}
                   onChange={(e) => setFromEmail(e.target.value)}
-                  placeholder="e.g., noreply@solitaire.com or leave empty for default"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                  placeholder="e.g., noreply@fxbrokersuite.com or leave empty for default"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">Email address to send from when using this template. Leave empty to use default SMTP settings.</p>
               </div>
@@ -398,7 +398,7 @@ export default function EmailTemplates() {
               <button
                 onClick={handleSave}
                 disabled={saving || !templateName.trim() || !htmlCode.trim()}
-                className="w-full px-4 py-2 bg-brand-600 text-white rounded-lg font-semibold hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
+                className="w-full px-4 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
               >
                 {saving ? (
                   <>
@@ -448,7 +448,7 @@ export default function EmailTemplates() {
 
         {/* Template List */}
         <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-          <div className="bg-brand-600 p-4 flex items-center justify-between">
+          <div className="bg-blue-700 p-4 flex items-center justify-between">
             <div className="flex items-center gap-2 text-white">
               <Sparkles className="w-5 h-5" />
               <span className="font-semibold">Saved Templates</span>
@@ -464,7 +464,7 @@ export default function EmailTemplates() {
 
           {loading ? (
             <div className="p-8 text-center">
-              <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-500" />
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-600" />
             </div>
           ) : filteredTemplates.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
@@ -478,7 +478,7 @@ export default function EmailTemplates() {
                   <div
                     key={template.id}
                     className={`p-4 border rounded-lg cursor-pointer transition-all ${selectedTemplate?.id === template.id
-                      ? 'border-brand-500 bg-brand-50 shadow-md'
+                      ? 'border-blue-600 bg-brand-50 shadow-md'
                       : 'border-gray-200 hover:border-brand-300 hover:shadow-sm'
                       }`}
                     onClick={() => handleSelectTemplate(template)}
@@ -534,7 +534,7 @@ export default function EmailTemplates() {
         {/* Variable Helper */}
         <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-200 p-4">
           <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-brand-500" />
+            <Code2 className="w-5 h-5 text-blue-600" />
             Available Variables
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2">
@@ -545,11 +545,11 @@ export default function EmailTemplates() {
                 className="p-3 border border-gray-200 rounded-lg hover:border-brand-300 hover:bg-brand-50 transition-all text-left group"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <code className="text-sm font-mono text-brand-600">{`{{${variable.name}}}`}</code>
+                  <code className="text-sm font-mono text-blue-700">{`{{${variable.name}}}`}</code>
                   {copiedVariable === variable.name ? (
                     <Check className="w-4 h-4 text-green-500" />
                   ) : (
-                    <Copy className="w-4 h-4 text-gray-400 group-hover:text-brand-500" />
+                    <Copy className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
                   )}
                 </div>
                 <p className="text-xs text-gray-600">{variable.description}</p>

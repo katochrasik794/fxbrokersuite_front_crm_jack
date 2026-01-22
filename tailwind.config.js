@@ -58,47 +58,47 @@ export default {
       },
       colors: {
         brand: {
-          50: '#effe92',
-          100: '#e5fc66',
-          200: '#dbfb3d',
-          300: '#d1f91b',
-          400: '#c8f300',
-          500: '#c8f300', // Base
-          600: '#a3c600',
-          700: '#7e9a00',
-          800: '#5b6f00',
-          900: '#394600',
-          950: '#151b00',
-          DEFAULT: '#C8F300',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#2563eb', // Blue-600 (Primary)
+          600: '#1d4ed8', // Blue-700
+          700: '#1e40af', // Blue-800
+          800: '#1e3a8a',
+          900: '#172554',
+          950: '#0f172a',
+          DEFAULT: '#2563eb',
         },
         neutral: {
-          50: '#F1F6EC', // Brand Off-White
-          100: '#e2e8f0', // Slate-200
-          200: '#cbd5e1', // Slate-300
-          300: '#94a3b8', // Slate-400
-          400: '#64748b', // Slate-500
-          500: '#F1F6EC', // Keep as base for now
-          600: '#475569', // Slate-600
-          700: '#334155', // Slate-700
-          800: '#1e293b', // Slate-800
-          900: '#0f172a', // Slate-900
+          50: '#f9fafb', // Gray-50
+          100: '#f3f4f6', // Gray-100
+          200: '#e5e7eb', // Gray-200
+          300: '#d1d5db', // Gray-300
+          400: '#9ca3af', // Gray-400
+          500: '#6b7280', // Gray-500
+          600: '#4b5563', // Gray-600
+          700: '#374151', // Gray-700
+          800: '#1f2937', // Gray-800
+          900: '#111827', // Gray-900
         },
         dark: {
           base: '#081428',
           DEFAULT: '#081428',
         },
         ib: {
-          50: '#f7fcc8',
-          100: '#eff9a0',
-          200: '#e7f678',
-          300: '#dff350',
-          400: '#d7f028',
-          500: '#c8f300', // IB Theme Color
-          600: '#a3c600',
-          700: '#7e9a00',
-          800: '#5b6f00',
-          900: '#394600',
-          DEFAULT: '#c8f300',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6', // IB Theme Color
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          DEFAULT: '#3b82f6',
         },
         // Preserving existing color just in case, though it might be superseded
         'text-primary': '#4B5156',

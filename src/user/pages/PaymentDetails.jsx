@@ -633,7 +633,7 @@ function PaymentDetails() {
                 setStep(1);
                 setSelectedMethod('');
               }}
-              className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg font-medium flex items-center gap-2 transition"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium flex items-center gap-2 transition"
             >
               <Plus size={20} />
               Add Payment Method
@@ -653,13 +653,13 @@ function PaymentDetails() {
             {/* Step Indicator */}
             <div className="flex items-center justify-center mb-6">
               <div className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 1 ? 'bg-brand-500 text-white' : 'bg-gray-200 text-gray-600'
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                   }`}>
                   1
                 </div>
-                <div className={`w-24 h-1 mx-2 transition-all ${step >= 2 ? 'bg-brand-500' : 'bg-gray-200'
+                <div className={`w-24 h-1 mx-2 transition-all ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200'
                   }`}></div>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 2 ? 'bg-brand-500 text-white' : 'bg-gray-200 text-gray-600'
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                   }`}>
                   2
                 </div>
@@ -673,7 +673,7 @@ function PaymentDetails() {
                 <div className="flex flex-col items-center gap-4">
                   {loadingMethod || loadingGateways ? (
                     <div className="py-12 flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500"></div>
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                     </div>
                   ) : withdrawalGateways.length === 0 ? (
                     <div className="py-8 text-center">
@@ -688,7 +688,7 @@ function PaymentDetails() {
                           <button
                             key={gateway.id}
                             onClick={() => handleMethodSelect(paymentMethod)}
-                            className="w-full max-w-md px-6 py-4 border-2 border-gray-200 rounded-lg hover:border-brand-500 hover:bg-brand-50 transition-all text-left group"
+                            className="w-full max-w-md px-6 py-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-brand-50 transition-all text-left group"
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3 flex-1">
@@ -707,7 +707,7 @@ function PaymentDetails() {
                                   <div className="text-sm text-black">{getGatewayDescription(gateway)}</div>
                                 </div>
                               </div>
-                              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-brand-500 transition flex-shrink-0" />
+                              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition flex-shrink-0" />
                             </div>
                           </button>
                         );
@@ -765,7 +765,7 @@ function PaymentDetails() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                           }`}
                         placeholder="Optional name for this payment method"
                       />
@@ -781,7 +781,7 @@ function PaymentDetails() {
                         value={formData.bankName}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.bankName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.bankName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                           }`}
                         placeholder="Enter bank name"
                       />
@@ -800,7 +800,7 @@ function PaymentDetails() {
                         value={formData.accountName}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                           }`}
                         placeholder="Enter account holder name"
                       />
@@ -819,7 +819,7 @@ function PaymentDetails() {
                         value={formData.accountNumber}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountNumber ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.accountNumber ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                           }`}
                         placeholder="Enter account number"
                       />
@@ -838,7 +838,7 @@ function PaymentDetails() {
                         value={formData.ifscSwiftCode}
                         onChange={handleInputChange}
                         required
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.ifscSwiftCode ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.ifscSwiftCode ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                           }`}
                         placeholder="Enter IFSC or SWIFT code"
                       />
@@ -855,7 +855,7 @@ function PaymentDetails() {
                         name="accountType"
                         value={formData.accountType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                       >
                         <option value="savings">Savings</option>
                         <option value="current">Current</option>
@@ -874,7 +874,7 @@ function PaymentDetails() {
                       value={formData.walletAddress}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.walletAddress ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-brand-500'
+                      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${validationErrors.walletAddress ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-600'
                         }`}
                       placeholder="Enter USDT TRC20 wallet address"
                     />
@@ -915,7 +915,7 @@ function PaymentDetails() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                   >
                     {submitting ? (
                       <>
@@ -935,7 +935,7 @@ function PaymentDetails() {
         {/* Payment Details DataTable */}
         {loading ? (
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading payment details...</p>
           </div>
         ) : paymentDetails.length === 0 ? (
@@ -947,7 +947,7 @@ function PaymentDetails() {
                   setShowForm(true);
                   setStep(1);
                 }}
-                className="mt-4 px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg font-medium"
+                className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg font-medium"
               >
                 Add Payment Method
               </button>

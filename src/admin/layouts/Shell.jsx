@@ -95,8 +95,8 @@ export default function Shell() {
       }
     }
     
-    // Format: "Solitaire : Admin-{active menu}"
-    document.title = `Solitaire : Admin-${activeMenuLabel}`;
+    // Format: "fxbrokersuite : Admin-{active menu}"
+    document.title = `fxbrokersuite : Admin-${activeMenuLabel}`;
   }, [breadcrumbs]);
 
   return (

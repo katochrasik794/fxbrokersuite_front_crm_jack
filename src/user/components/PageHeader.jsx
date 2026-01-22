@@ -10,7 +10,7 @@ export default function PageHeader({ icon: Icon, title, subtitle }) {
     <div className="mb-6">
       <div className="flex items-center gap-3 mb-2">
         {Icon && (
-          <div className="w-10 h-10 rounded-lg bg-brand-500 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
             <Icon size={20} className="text-dark-base" />
           </div>
         )}

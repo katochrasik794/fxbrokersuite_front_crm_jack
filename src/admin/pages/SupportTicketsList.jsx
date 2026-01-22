@@ -297,7 +297,7 @@ export default function SupportTicketsList({ status }) {
         <button
           onClick={fetchData}
           disabled={loading}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
           Refresh
@@ -336,7 +336,7 @@ export default function SupportTicketsList({ status }) {
               <select
                 value={selectedRoleId || ''}
                 onChange={(e) => setSelectedRoleId(e.target.value ? parseInt(e.target.value) : null)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="">Unassigned (All admins can see)</option>
                 {roles.length > 0 ? (
@@ -361,7 +361,7 @@ export default function SupportTicketsList({ status }) {
               <button
                 onClick={handleAssign}
                 disabled={assigning}
-                className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 disabled:opacity-50"
+                className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 disabled:opacity-50"
               >
                 {assigning ? 'Assigning...' : 'Assign'}
               </button>

@@ -328,7 +328,7 @@ export default function MT5Assign() {
         <button
           onClick={handleFetchInfo}
           disabled={fetchLoading || !formData.accountId}
-          className="px-4 h-10 rounded-md bg-brand-500 text-dark-base hover:bg-brand-600 disabled:bg-gray-400 disabled:opacity-60 flex items-center gap-2"
+          className="px-4 h-10 rounded-md bg-blue-600 text-dark-base hover:bg-blue-700 disabled:bg-gray-400 disabled:opacity-60 flex items-center gap-2"
         >
           {fetchLoading ? (
             <>
@@ -345,7 +345,7 @@ export default function MT5Assign() {
         <button
           onClick={handleAssign}
           disabled={assignLoading || !formData.userId || !formData.accountId || !formData.password}
-          className="px-4 h-10 rounded-md bg-brand-500 text-dark-base hover:bg-brand-600 disabled:bg-gray-400 disabled:opacity-60 flex items-center gap-2"
+          className="px-4 h-10 rounded-md bg-blue-600 text-dark-base hover:bg-blue-700 disabled:bg-gray-400 disabled:opacity-60 flex items-center gap-2"
         >
           {assignLoading ? (
             <>
@@ -411,7 +411,7 @@ export default function MT5Assign() {
                 </div>
                 <div>
                   <label className="block text-xs text-gray-600">Equity</label>
-                  <div className="text-sm font-medium text-brand-600">${accountInfo.Equity?.toFixed(2) || "0.00"}</div>
+                  <div className="text-sm font-medium text-blue-700">${accountInfo.Equity?.toFixed(2) || "0.00"}</div>
                 </div>
                 <div>
                   <label className="block text-xs text-gray-600">Profit</label>

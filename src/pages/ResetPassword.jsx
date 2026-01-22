@@ -69,7 +69,7 @@ function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <div className="w-full flex justify-between items-center px-6 py-4">
         <div className="w-32"></div> {/* Spacer for centering */}
@@ -97,7 +97,7 @@ function ResetPassword() {
                   <button
                     key={index}
                     className={`w-full text-left px-4 py-2 hover:bg-gray-50 ${
-                      lang === 'English' ? 'text-[#ffd700]' : 'text-gray-700'
+                      lang === 'English' ? 'text-blue-700' : 'text-gray-700'
                     }`}
                     style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400' }}
                     onClick={() => setLanguageOpen(false)}
@@ -169,7 +169,7 @@ function ResetPassword() {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ffd700] focus:border-transparent pr-10 disabled:bg-gray-100"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent pr-10 disabled:bg-gray-100"
                       style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
                       placeholder="Enter new password"
                     />
@@ -231,7 +231,7 @@ function ResetPassword() {
                 <button
                   type="submit"
                   disabled={loading || !token}
-                  className="w-full bg-[#e6c200] hover:bg-[#d4b000] text-gray-900 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
                 >
                   {loading ? 'Resetting...' : 'Reset Password'}

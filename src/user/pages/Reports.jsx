@@ -665,7 +665,7 @@ function Reports() {
                         if (value.startsWith('W-')) {
                           return <span className="text-blue-600">Wallet: {value}</span>
                         }
-                        return <span className="text-brand-600">MT5: {value}</span>
+                        return <span className="text-blue-700">MT5: {value}</span>
                       }
                     }
                   ]}

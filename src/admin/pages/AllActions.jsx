@@ -276,7 +276,7 @@ export default function AllActions() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-brand-500 rounded-lg">
+              <div className="p-2 bg-blue-600 rounded-lg">
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function AllActions() {
                     <p className="text-sm text-gray-600">Actions (24h)</p>
                     <p className="text-2xl font-bold text-gray-900">{stats.recent_24h || 0}</p>
                   </div>
-                  <Activity className="w-8 h-8 text-brand-500" />
+                  <Activity className="w-8 h-8 text-blue-600" />
                 </div>
               </div>
               {stats.by_system && stats.by_system.map(system => (
@@ -339,7 +339,7 @@ export default function AllActions() {
               <select
                 value={filters.system_type}
                 onChange={(e) => handleFilterChange('system_type', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               >
                 {systemTypes.map(type => (
                   <option key={type} value={type}>
@@ -353,7 +353,7 @@ export default function AllActions() {
               <select
                 value={filters.action_category}
                 onChange={(e) => handleFilterChange('action_category', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               >
                 <option value="">All Categories</option>
                 {actionCategories.map(cat => (
@@ -368,7 +368,7 @@ export default function AllActions() {
                 value={filters.actor_email}
                 onChange={(e) => handleFilterChange('actor_email', e.target.value)}
                 placeholder="Search by email..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
             <div>
@@ -377,7 +377,7 @@ export default function AllActions() {
                 type="date"
                 value={filters.start_date}
                 onChange={(e) => handleFilterChange('start_date', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
             <div>
@@ -386,7 +386,7 @@ export default function AllActions() {
                 type="date"
                 value={filters.end_date}
                 onChange={(e) => handleFilterChange('end_date', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               />
             </div>
             <div className="flex items-end">
@@ -414,7 +414,7 @@ export default function AllActions() {
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-8 text-center">
-              <Loader2 className="w-8 h-8 animate-spin mx-auto text-brand-500 mb-4" />
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-600 mb-4" />
               <p className="text-gray-600">Loading actions...</p>
             </div>
           ) : actions.length === 0 ? (

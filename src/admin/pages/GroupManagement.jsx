@@ -437,7 +437,7 @@ export default function GroupManagement() {
           <button
             onClick={handleSync}
             disabled={syncing}
-            className="flex items-center gap-2 px-4 py-2 rounded-md bg-brand-500 text-dark-base hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-600 text-dark-base hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <RefreshCw size={16} className={syncing ? "animate-spin" : ""} />
             {syncing ? "Syncing..." : "Sync from API"}
@@ -445,7 +445,7 @@ export default function GroupManagement() {
           <select
             value={filterActive}
             onChange={(e) => setFilterActive(e.target.value)}
-            className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
             <option value="">All Groups</option>
             <option value="true">Active Only</option>
@@ -649,7 +649,7 @@ export default function GroupManagement() {
                 onChange={(e) => setEditModal({ ...editModal, dedicated_name: e.target.value })}
                 placeholder="Enter dedicated name"
                 disabled={savingDedicatedName}
-                className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 autoFocus
               />
               <p className="text-xs text-gray-500 mt-1">Leave empty to clear the dedicated name</p>
@@ -665,7 +665,7 @@ export default function GroupManagement() {
               <button
                 onClick={handleSaveDedicatedName}
                 disabled={savingDedicatedName}
-                className="px-4 h-10 rounded-md bg-brand-500 text-dark-base hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-4 h-10 rounded-md bg-blue-600 text-dark-base hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {savingDedicatedName && (
                   <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -699,7 +699,7 @@ export default function GroupManagement() {
                   onChange={(e) => setLimitsModal({ ...limitsModal, minimum_deposit: e.target.value })}
                   placeholder="0.00"
                   disabled={savingLimits}
-                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -712,7 +712,7 @@ export default function GroupManagement() {
                   onChange={(e) => setLimitsModal({ ...limitsModal, maximum_deposit: e.target.value === '' ? null : e.target.value })}
                   placeholder="Leave empty for no max"
                   disabled={savingLimits}
-                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 <p className="text-xs text-gray-500 mt-1">Leave empty for no maximum</p>
               </div>
@@ -726,7 +726,7 @@ export default function GroupManagement() {
                   onChange={(e) => setLimitsModal({ ...limitsModal, minimum_withdrawal: e.target.value })}
                   placeholder="0.00"
                   disabled={savingLimits}
-                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
               <div>
@@ -739,7 +739,7 @@ export default function GroupManagement() {
                   onChange={(e) => setLimitsModal({ ...limitsModal, maximum_withdrawal: e.target.value === '' ? null : e.target.value })}
                   placeholder="Leave empty for no max"
                   disabled={savingLimits}
-                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 <p className="text-xs text-gray-500 mt-1">Leave empty for no maximum</p>
               </div>
@@ -755,7 +755,7 @@ export default function GroupManagement() {
               <button
                 onClick={handleSaveLimits}
                 disabled={savingLimits}
-                className="px-4 h-10 rounded-md bg-brand-500 text-dark-base hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-4 h-10 rounded-md bg-blue-600 text-dark-base hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {savingLimits && (
                   <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

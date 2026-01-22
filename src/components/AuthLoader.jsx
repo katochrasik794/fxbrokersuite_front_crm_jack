@@ -18,20 +18,20 @@ function AuthLoader({ message = 'Processing...' }) {
           </div>
           
           {/* Inner subtle ring */}
-          <div className="absolute inset-4 w-24 h-24 border-2 border-brand-500/20 rounded-full"></div>
+          <div className="absolute inset-4 w-24 h-24 border-2 border-blue-600/20 rounded-full"></div>
           
           {/* Logo in center - stable and centered */}
           <div className="relative z-10 w-20 h-20 flex items-center justify-center bg-white rounded-full shadow-lg">
             <img 
               src="/logo.png" 
-              alt="Solitaire Logo" 
+              alt="fxbrokersuite Logo" 
               className="w-16 h-16 object-contain"
               style={{ filter: 'none' }}
             />
           </div>
           
           {/* Pulsing glow effect */}
-          <div className="absolute inset-0 w-40 h-40 bg-brand-500/10 rounded-full animate-ping opacity-75"></div>
+          <div className="absolute inset-0 w-40 h-40 bg-blue-600/10 rounded-full animate-ping opacity-75"></div>
         </div>
 
         {/* Loading text with better typography */}
@@ -43,7 +43,7 @@ function AuthLoader({ message = 'Processing...' }) {
           {/* Enhanced loading dots */}
           <div className="flex items-center justify-center gap-2">
             <div 
-              className="w-3 h-3 bg-brand-500 rounded-full animate-bounce shadow-sm" 
+              className="w-3 h-3 bg-blue-600 rounded-full animate-bounce shadow-sm" 
               style={{ animationDelay: '0s', animationDuration: '1s' }}
             ></div>
             <div 

@@ -180,7 +180,7 @@ function Ethereum() {
 
         {/* ETHEREUM BUTTON (CENTERED FULL WIDTH) */}
         <div className="flex justify-center"  >
-          <button className="max-w-4xl w-full bg-brand-500 text-dark-base py-4 rounded-lg flex items-center justify-center hover:bg-brand-600 transition-all font-semibold">
+          <button className="max-w-4xl w-full bg-blue-600 text-dark-base py-4 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-all font-semibold">
             <img src="/ethereum.svg" alt="Ethereum" className="w-6 h-6 mr-2" />
             Continue with Ethereum
           </button>

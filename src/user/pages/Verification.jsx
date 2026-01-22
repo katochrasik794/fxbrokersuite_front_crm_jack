@@ -209,7 +209,7 @@ function Verification() {
           // Note: Logo should also be configured in Sumsub Dashboard > Settings > Branding
           uiConf: {
             // Use current logo.png - ensure this matches the logo in public/logo.png
-            logoUrl: `${import.meta.env.VITE_FRONTEND_URL || 'https://portal.solitairemarkets.com'}/logo.png`
+            logoUrl: `${import.meta.env.VITE_FRONTEND_URL || 'https://portal.fxbrokersuite.com'}/logo.png`
           }
         })
         .on('onError', (error) => {
@@ -495,7 +495,7 @@ function Verification() {
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-100 rounded-full mb-4">
-                <svg className="w-10 h-10 text-brand-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-10 h-10 text-blue-700 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
               </div>
@@ -539,8 +539,8 @@ function Verification() {
         {/* Progress Indicator */}
         <div className="mb-8">
           <div className="flex items-center gap-4">
-            <div className={`flex items-center gap-2 ${currentStep >= 1 ? 'text-[#00A896]' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 1 ? 'bg-[#00A896] text-white' : 'bg-gray-200'}`}>
+            <div className={`flex items-center gap-2 ${currentStep >= 1 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
                 {currentStep > 1 ? (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -552,10 +552,10 @@ function Verification() {
               <span className="font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Profile</span>
             </div>
             <div className="flex-1 h-1 bg-gray-200">
-              <div className={`h-full ${currentStep >= 2 ? 'bg-[#00A896]' : 'bg-gray-200'}`} style={{ width: currentStep >= 2 ? '100%' : '0%' }}></div>
+              <div className={`h-full ${currentStep >= 2 ? 'bg-blue-600' : 'bg-gray-200'}`} style={{ width: currentStep >= 2 ? '100%' : '0%' }}></div>
             </div>
-            <div className={`flex items-center gap-2 ${currentStep >= 2 ? 'text-[#00A896]' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-[#00A896] text-white' : 'bg-gray-200'}`}>
+            <div className={`flex items-center gap-2 ${currentStep >= 2 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
                 <span>2</span>
               </div>
               <span className="font-medium" style={{ fontFamily: 'Roboto, sans-serif' }}>Verify Identity</span>
@@ -604,7 +604,7 @@ function Verification() {
                         value="yes"
                         checked={formData.hasTradingExperience === 'yes'}
                         onChange={handleFormChange}
-                        className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                        className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                       />
                       <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>Yes</span>
                     </label>
@@ -615,7 +615,7 @@ function Verification() {
                         value="no"
                         checked={formData.hasTradingExperience === 'no'}
                         onChange={handleFormChange}
-                        className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                        className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                       />
                       <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>No</span>
                     </label>
@@ -644,7 +644,7 @@ function Verification() {
                             value={status.toLowerCase().replace(' ', '_')}
                             checked={formData.employmentStatus === status.toLowerCase().replace(' ', '_')}
                             onChange={handleFormChange}
-                            className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                            className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                           />
                           <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>{status}</span>
                         </label>
@@ -673,7 +673,7 @@ function Verification() {
                             value={income}
                             checked={formData.annualIncome === income}
                             onChange={handleFormChange}
-                            className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                            className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                           />
                           <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>{income}</span>
                         </label>
@@ -703,7 +703,7 @@ function Verification() {
                             value={worth}
                             checked={formData.totalNetWorth === worth}
                             onChange={handleFormChange}
-                            className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                            className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                           />
                           <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>{worth}</span>
                         </label>
@@ -731,7 +731,7 @@ function Verification() {
                             value={source}
                             checked={formData.sourceOfWealth === source}
                             onChange={handleFormChange}
-                            className="w-4 h-4 text-[#00A896] border-gray-300 focus:ring-[#00A896]"
+                            className="w-4 h-4 text-blue-700 border-gray-300 focus:ring-blue-600"
                           />
                           <span className="ml-2 text-gray-700" style={{ fontFamily: 'Roboto, sans-serif' }}>{source}</span>
                         </label>
@@ -744,7 +744,7 @@ function Verification() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}
               >
                 {submitting ? 'SUBMITTING...' : 'CONTINUE'}
@@ -759,8 +759,8 @@ function Verification() {
             {/* Logo at the top */}
             <div className="flex justify-center mb-6">
               <img
-                src={`${import.meta.env.VITE_FRONTEND_URL || 'https://portal.solitairemarkets.com'}/logo.png`}
-                alt="Solitaire Markets"
+                src={`${import.meta.env.VITE_FRONTEND_URL || 'https://portal.fxbrokersuite.com'}/logo.png`}
+                alt="fxbrokersuite Markets"
                 className="h-16 w-auto"
                 style={{ background: 'transparent' }}
                 onError={(e) => {

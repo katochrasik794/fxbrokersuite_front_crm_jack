@@ -168,7 +168,7 @@ function Deposits() {
       {kycLoading && (
         <div className="absolute inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40 flex items-center justify-center">
           <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500 mb-4"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
             <p className="text-gray-600">Checking verification status...</p>
           </div>
         </div>
@@ -200,7 +200,7 @@ function Deposits() {
               {/* Button */}
               <button
                 onClick={() => navigate('/user/verification')}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold text-base"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base border border-blue-600 py-3 rounded-lg transition-colors font-semibold text-base"
               >
                 Go to KYC Verification
               </button>

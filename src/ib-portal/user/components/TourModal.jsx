@@ -21,7 +21,7 @@ const steps = [
     {
         title: "Welcome aboard!",
         description: "Your powerful new Partner's Cabinet is ready. Let's take a quick 1-minute tour.",
-        icon: <Sparkles className="w-8 h-8 text-brand-500" />,
+        icon: <Sparkles className="w-8 h-8 text-blue-600" />,
         color: "bg-brand-50",
         targetPath: null
     },

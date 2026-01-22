@@ -27,7 +27,7 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
   const isTourHighlight = (path) => tourActiveItem === path;
 
   // Pulse animation class for tour highlight
-  const pulseClass = "ring-4 ring-[#c8f300] ring-opacity-50 animate-pulse shadow-[0_0_20px_rgba(200,243,0,0.4)] z-10 scale-105";
+  const pulseClass = "ring-4 ring-blue-600 ring-opacity-50 animate-pulse shadow-[0_0_20px_rgba(59,130,246,0.4)] z-10 scale-105";
 
   return (
     <div
@@ -38,10 +38,10 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
       {/* Logo with Close Button */}
       <div className={`bg-transparent pt-4 pb-2 flex-shrink-0 flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between pl-8 pr-6'}`}>
         {collapsed ? (
-          <img src="/logo.png" alt="Solitaire Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
+          <img src="/logo.png" alt="fxbrokersuite Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
         ) : (
           <>
-            <img src="/logo.png" alt="Solitaire Markets" className="h-10 w-auto " style={{ background: 'transparent' }} />
+            <img src="/logo.png" alt="fxbrokersuite Markets" className="h-10 w-auto " style={{ background: 'transparent' }} />
             {/* Close button for mobile */}
             <button
               onClick={onClose}
@@ -65,8 +65,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/dashboard"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/dashboard')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/dashboard') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'IB Dashboard' : undefined}
@@ -81,8 +81,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/account-overview"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/account-overview')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/account-overview') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'Account Overview' : undefined}
@@ -97,8 +97,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/commission-analytics"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/commission-analytics')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/commission-analytics') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'Commission Analytics' : undefined}
@@ -113,8 +113,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/my-clients"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/my-clients')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/my-clients') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'My Clients' : undefined}
@@ -129,8 +129,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/ib-tree"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/ib-tree')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/ib-tree') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'IB Tree' : undefined}
@@ -145,8 +145,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/referral-report"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/referral-report')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/referral-report') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'Referral Report' : undefined}
@@ -161,8 +161,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/my-commission"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/my-commission')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/my-commission') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'My Commission' : undefined}
@@ -177,8 +177,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/withdrawals"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/withdrawals')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/withdrawals') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'Withdrawals' : undefined}
@@ -194,8 +194,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/pip-calculator"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/pip-calculator')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/pip-calculator') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'Pip Calculator' : undefined}
@@ -210,8 +210,8 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
           <Link
             to="/user/ib/profile-settings"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-all relative rounded-lg ${isActive('/profile-settings')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               } ${isTourHighlight('/profile-settings') ? pulseClass : ''}`}
             style={{}}
             title={collapsed ? 'IB Profile Settings' : undefined}
@@ -242,13 +242,13 @@ function Sidebar({ isOpen, onClose, collapsed = false, tourActiveItem = null }) 
         <button
           onClick={handleLogout}
           className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-start'} ${collapsed ? 'px-2' : 'px-4'} py-3 bg-black hover:bg-gray-900 rounded-lg transition-colors`}
-          style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '500', color: '#c8f300' }}
+          style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '500', color: '#3b82f6' }}
           title={collapsed ? 'Logout' : undefined}
         >
-          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#c8f300', ...(collapsed ? {} : { marginRight: '8px' }) }}>
+          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#3b82f6', ...(collapsed ? {} : { marginRight: '8px' }) }}>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
-          {!collapsed && <span style={{ color: '#c8f300' }}>Logout</span>}
+          {!collapsed && <span style={{ color: '#3b82f6' }}>Logout</span>}
         </button>
       </div>
     </div>

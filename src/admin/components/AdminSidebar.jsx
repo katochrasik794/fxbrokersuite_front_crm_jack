@@ -9,7 +9,7 @@ function AdminSidebar() {
     <div className="w-64 bg-white h-screen fixed left-0 top-0 shadow-lg">
       {/* Logo */}
       <div className="p-6 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-brand-500">Solitaire Admin</h1>
+        <h1 className="text-2xl font-bold text-blue-600">fxbrokersuite Admin</h1>
       </div>
 
       {/* Navigation */}
@@ -19,7 +19,7 @@ function AdminSidebar() {
           <Link
             to="/admin"
             className={`flex items-center px-4 py-3 rounded-lg transition-colors ${isActive('') || isActive('/')
-              ? 'bg-brand-50 text-brand-600 border-l-4 border-brand-500'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-gray-50'
               }`}
           >
@@ -33,7 +33,7 @@ function AdminSidebar() {
           <Link
             to="/admin/users"
             className={`flex items-center px-4 py-3 rounded-lg transition-colors ${isActive('/users')
-              ? 'bg-brand-50 text-brand-600 border-l-4 border-brand-500'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-gray-50'
               }`}
           >

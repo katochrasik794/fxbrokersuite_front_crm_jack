@@ -19,14 +19,14 @@ function BackButton({ onClick, to, className = '' }) {
       onClick={handleClick}
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors font-medium ${className}`}
       style={{
-        backgroundColor: '#c8f300',
-        color: '#081428',
+        backgroundColor: '#3b82f6',
+        color: '#ffffff',
       }}
       onMouseEnter={(e) => {
-        e.target.style.backgroundColor = '#a3c600';
+        e.target.style.backgroundColor = '#2563eb';
       }}
       onMouseLeave={(e) => {
-        e.target.style.backgroundColor = '#c8f300';
+        e.target.style.backgroundColor = '#3b82f6';
       }}
     >
       <svg

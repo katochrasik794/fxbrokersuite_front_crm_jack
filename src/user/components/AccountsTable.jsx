@@ -500,7 +500,7 @@ const AccountsTable = ({
                         </p>
                         <input
                             type="text"
-                            className="w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
                             placeholder="New Password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
@@ -518,7 +518,7 @@ const AccountsTable = ({
                             <button
                                 onClick={handleUpdatePassword}
                                 disabled={updating || !newPassword}
-                                className="px-4 py-2 bg-brand-500 text-black font-medium rounded hover:bg-brand-600 disabled:opacity-50"
+                                className="px-4 py-2 bg-blue-600 text-black font-medium rounded hover:bg-blue-700 disabled:opacity-50"
                             >
                                 {updating ? 'Updating...' : 'Save'}
                             </button>
@@ -536,7 +536,7 @@ const AccountsTable = ({
                             Select new leverage for account {leverageModal.accountId}.
                         </p>
                         <select
-                            className="w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
                             value={newLeverage}
                             onChange={(e) => setNewLeverage(e.target.value)}
                         >
@@ -557,7 +557,7 @@ const AccountsTable = ({
                             <button
                                 onClick={handleUpdateLeverage}
                                 disabled={updating || !newLeverage}
-                                className="px-4 py-2 bg-brand-500 text-black font-medium rounded hover:bg-brand-600 disabled:opacity-50"
+                                className="px-4 py-2 bg-blue-600 text-black font-medium rounded hover:bg-blue-700 disabled:opacity-50"
                             >
                                 {updating ? 'Updating...' : 'Save'}
                             </button>

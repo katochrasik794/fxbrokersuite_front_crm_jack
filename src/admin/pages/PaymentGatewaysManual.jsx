@@ -407,7 +407,7 @@ export default function PaymentGatewaysManual() {
             </div>
             <button
               onClick={() => setShowForm(true)}
-              className="bg-brand-500 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+              className="bg-blue-600 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
             >
               <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
               <span className="hidden sm:inline">Add Manual Gateway</span>
@@ -524,7 +524,7 @@ export default function PaymentGatewaysManual() {
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     required
                   >
                     {GATEWAY_TYPES.map((type) => (
@@ -541,7 +541,7 @@ export default function PaymentGatewaysManual() {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     placeholder="e.g., UPI PAYMENT, USDT TRC20"
                     required
                   />
@@ -559,7 +559,7 @@ export default function PaymentGatewaysManual() {
                       type="text"
                       value={formData.type === 'upi' ? formData.vpa_address : formData.type === 'crypto' ? formData.crypto_address : formData.details}
                       onChange={(e) => setFormData({ ...formData, [formData.type === 'upi' ? 'vpa_address' : formData.type === 'crypto' ? 'crypto_address' : 'details']: e.target.value })}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                       placeholder={formData.type === 'upi' ? 'e.g., username@bank' : formData.type === 'crypto' ? 'e.g., USDT TRC20 address' : 'Local depositor details'}
                       required
                     />
@@ -665,7 +665,7 @@ export default function PaymentGatewaysManual() {
                     id="is_active"
                     checked={formData.is_active}
                     onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_active" className="text-sm text-gray-700">
                     Active Gateway
@@ -678,7 +678,7 @@ export default function PaymentGatewaysManual() {
                     id="is_deposit_enabled"
                     checked={formData.is_deposit_enabled}
                     onChange={(e) => setFormData({ ...formData, is_deposit_enabled: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_deposit_enabled" className="text-sm text-gray-700">
                     Enable for Deposits
@@ -691,7 +691,7 @@ export default function PaymentGatewaysManual() {
                     id="is_withdrawal_enabled"
                     checked={formData.is_withdrawal_enabled}
                     onChange={(e) => setFormData({ ...formData, is_withdrawal_enabled: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_withdrawal_enabled" className="text-sm text-gray-700">
                     Enable for Withdrawals
@@ -731,7 +731,7 @@ export default function PaymentGatewaysManual() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                  className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                 >
                   <Save className="h-4 w-4" />
                   {editingGateway ? 'Update Gateway' : 'Save Gateway'}
@@ -755,7 +755,7 @@ export default function PaymentGatewaysManual() {
               <p className="text-gray-500 mb-4">Get started by adding your first manual payment gateway</p>
               <button
                 onClick={() => setShowForm(true)}
-                className="bg-brand-500 text-dark-base px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center gap-2 mx-auto"
+                className="bg-blue-600 text-dark-base px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 mx-auto"
               >
                 <Plus className="h-4 w-4" />
                 Add Gateway
@@ -903,7 +903,7 @@ export default function PaymentGatewaysManual() {
                             <div className="flex flex-col items-center gap-0.5">
                               <button
                                 onClick={() => setViewingImage({ type: 'qr', url: fileUrl(gateway.qr_code_url) })}
-                                className="p-1.5 w-8 h-8 flex items-center justify-center text-brand-600 hover:text-brand-900 hover:bg-brand-50 border border-brand-200 rounded"
+                                className="p-1.5 w-8 h-8 flex items-center justify-center text-blue-700 hover:text-brand-900 hover:bg-brand-50 border border-brand-200 rounded"
                                 title="View QR Code"
                               >
                                 <Eye className="h-3 w-3" />
@@ -1001,7 +1001,7 @@ export default function PaymentGatewaysManual() {
                     href={viewingImage.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-brand-500 hover:text-brand-600 underline text-sm"
+                    className="text-blue-600 hover:text-blue-700 underline text-sm"
                   >
                     Open in new tab
                   </a>

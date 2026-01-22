@@ -73,7 +73,7 @@ export default function DepositsApproved() {
         if (row.depositTo === 'wallet' && row.walletNumber) {
           return <span className="text-blue-600 font-medium">Deposit in wallet {row.walletNumber}</span>;
         } else if (row.depositTo === 'mt5' && row.mt5AccountId && row.mt5AccountId !== "-") {
-          return <span className="text-brand-600 font-medium">Deposit in MT5 ID {row.mt5AccountId}</span>;
+          return <span className="text-blue-700 font-medium">Deposit in MT5 ID {row.mt5AccountId}</span>;
         }
         return <span className="text-gray-400">-</span>;
       }

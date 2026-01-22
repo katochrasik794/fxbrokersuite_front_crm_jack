@@ -303,7 +303,7 @@ function ApplyAsIB() {
             Why Partner with Us?
           </h2>
           <p className="text-lg sm:text-xl text-gray-700 font-medium mb-4">
-            Become an IB to earn additional income by referring clients to Solitaire Partners.
+            Become an IB to earn additional income by referring clients to fxbrokersuite Partners.
           </p>
           <p className="text-gray-500 leading-relaxed text-base sm:text-lg">
             We offer our partners the ultimate transparency and seamless experience! Join us to access the most advanced trading tools and benefit from the highest levels of security and customer service.
@@ -373,8 +373,8 @@ function ApplyAsIB() {
           {/* Steps Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
             {[
-              { number: 1, title: 'Promote Solitaire Partners and attract traders.', icon: TrendingUp },
-              { number: 2, title: 'Introduce your clients to Solitaire Partners.', icon: UserCheck },
+              { number: 1, title: 'Promote fxbrokersuite Partners and attract traders.', icon: TrendingUp },
+              { number: 2, title: 'Introduce your clients to fxbrokersuite Partners.', icon: UserCheck },
               { number: 3, title: 'Gain profit when your referral joins us.', icon: BarChart3 },
               { number: 4, title: 'Use the partner portal for monitoring.', icon: TrendingUp },
             ].map((step, index) => (
@@ -456,7 +456,7 @@ function ApplyAsIB() {
               {/* Willing to become IB */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Are you willing to become an IB with Solitaire Partners?
+                  Are you willing to become an IB with fxbrokersuite Partners?
                 </label>
                 <select
                   name="willingToBecomeIB"
@@ -477,7 +477,7 @@ function ApplyAsIB() {
               {/* Willing to sign agreement */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Are you willing to sign IB Agreement with Solitaire Partners?
+                  Are you willing to sign IB Agreement with fxbrokersuite Partners?
                 </label>
                 <select
                   name="willingToSignAgreement"

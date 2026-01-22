@@ -593,7 +593,7 @@ function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Loading Animation */}
       {loading && <AuthLoader message="Creating your account..." />}
 
@@ -652,7 +652,7 @@ function Register() {
                       <select
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 appearance-none font-sans text-sm transition-colors"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none font-sans text-sm transition-colors"
                         disabled={countriesLoading}
                       >
                         <option value="">Select Country / Region of Residence</option>
@@ -673,7 +673,7 @@ function Register() {
                   <button
                     type="submit"
                     disabled={countriesLoading || !country}
-                    className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold uppercase mt-6 disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 py-3 rounded-lg transition-colors font-semibold uppercase mt-6 disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
                   >
                     CONTINUE
                   </button>
@@ -719,7 +719,7 @@ function Register() {
                     onChange={handleChange}
                     onBlur={() => validateField('firstName', formData.firstName)}
                     placeholder="As per your Passport / Government ID"
-                    className={`w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors ${fieldErrors.firstName ? 'bg-red-50 border-red-300' : ''
+                    className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors ${fieldErrors.firstName ? 'bg-red-50 border-red-300' : ''
                       }`}
                   />
                   <div className="flex justify-between items-center mt-1">
@@ -754,7 +754,7 @@ function Register() {
                     onChange={handleChange}
                     onBlur={() => validateField('lastName', formData.lastName)}
                     placeholder="As per your Passport / Government ID"
-                    className={`w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors ${fieldErrors.lastName ? 'bg-red-50 border-red-300' : ''
+                    className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors ${fieldErrors.lastName ? 'bg-red-50 border-red-300' : ''
                       }`}
                   />
                   <div className="flex justify-between items-center mt-1">
@@ -789,7 +789,7 @@ function Register() {
                     onChange={handleChange}
                     onBlur={() => validateField('email', formData.email)}
                     placeholder="Enter your email"
-                    className={`w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors ${fieldErrors.email ? 'bg-red-50 border-red-300' : (() => {
+                    className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors ${fieldErrors.email ? 'bg-red-50 border-red-300' : (() => {
                       const status = getFieldStatus('email', formData.email)
                       return status.status === 'great' ? 'bg-green-50 border-green-300' : status.status === 'good' ? 'bg-blue-50 border-blue-300' : ''
                     })()
@@ -832,7 +832,7 @@ function Register() {
                             phoneCode: e.target.value
                           })
                         }}
-                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 appearance-none font-sans text-sm transition-colors"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none font-sans text-sm transition-colors"
                       >
                         {countries.map((countryOption) => (
                           <option key={countryOption.id} value={countryOption.phone_code}>
@@ -855,7 +855,7 @@ function Register() {
                         onChange={handleChange}
                         onBlur={() => validateField('phoneNumber', formData.phoneNumber)}
                         placeholder="Phone number"
-                        className={`flex-1 px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors ${fieldErrors.phoneNumber ? 'bg-red-50 border-red-300' : (() => {
+                        className={`flex-1 px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors ${fieldErrors.phoneNumber ? 'bg-red-50 border-red-300' : (() => {
                           const status = getFieldStatus('phoneNumber', formData.phoneNumber)
                           return status.status === 'great' ? 'bg-green-50 border-green-300' : ''
                         })()
@@ -896,7 +896,7 @@ function Register() {
                       placeholder="Enter password"
                       required
                       disabled={loading}
-                      className={`w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors ${fieldErrors.password ? 'bg-red-50 border-red-300' : allPasswordRequirementsMet ? 'bg-green-50 border-green-300' : ''
+                      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors ${fieldErrors.password ? 'bg-red-50 border-red-300' : allPasswordRequirementsMet ? 'bg-green-50 border-green-300' : ''
                         }`}
                     />
                     <button
@@ -919,7 +919,7 @@ function Register() {
 
                   {/* Password Requirements Box */}
                   {formData.password && (
-                    <div className="mt-2 p-3 bg-neutral-50 border border-gray-200 rounded-lg">
+                    <div className="mt-2 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                       <p className="text-sm font-medium text-dark-base mb-2 font-sans">Enter a password</p>
                       <div className="space-y-1">
                         <div className="flex items-center">
@@ -1006,7 +1006,7 @@ function Register() {
                   </div>
 
                   <p className="text-xs text-dark-base/50 mt-1 font-sans">
-                    This password will be used to login to your MetaTrader trading account and the MySolitaire Markets Client Portal.
+                    This password will be used to login to your MetaTrader trading account and the Myfxbrokersuite Markets Client Portal.
                   </p>
                 </div>
 
@@ -1025,7 +1025,7 @@ function Register() {
                       placeholder="Confirm password"
                       required
                       disabled={loading}
-                      className={`w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-brand-500 focus:border-brand-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors ${fieldErrors.confirmPassword ? 'bg-red-50 border-red-300' : formData.confirmPassword === formData.password && formData.password ? 'bg-green-50 border-green-300' : ''
+                      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors ${fieldErrors.confirmPassword ? 'bg-red-50 border-red-300' : formData.confirmPassword === formData.password && formData.password ? 'bg-green-50 border-green-300' : ''
                         }`}
                     />
                     <button
@@ -1075,7 +1075,7 @@ function Register() {
                     value={formData.referralCode}
                     onChange={handleChange}
                     placeholder="Enter referral code"
-                    className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-sans text-sm transition-colors"
                   />
                   {/* Unified Referred By / IB Alert Box */}
                   {formData.referralCode && (referrerName || formData.commissionRates) && (
@@ -1083,7 +1083,7 @@ function Register() {
                       {/* Referrer Header */}
                       <div className="px-4 py-3 bg-white border-b border-blue-50 flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-dark-base font-bold text-sm shadow-sm">
+                          <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-dark-base font-bold text-sm shadow-sm">
                             {referrerName ? referrerName.charAt(0).toUpperCase() : '?'}
                           </div>
                           <div>
@@ -1123,13 +1123,13 @@ function Register() {
                                 ? formData.commissionRates.map((item, idx) => (
                                   <li key={item.id || idx} className="flex items-center justify-between text-[11px]">
                                     <span className="text-white/60 font-medium">{item.name}</span>
-                                    <span className="text-brand-500 font-bold px-2 py-0.5 bg-brand-500/10 rounded border border-brand-500/20">{item.rate} pip/lot</span>
+                                    <span className="text-blue-500 font-bold px-2 py-0.5 bg-blue-500/10 rounded border border-blue-500/20">{item.rate} pip/lot</span>
                                   </li>
                                 ))
                                 : Object.entries(formData.commissionRates).map(([id, data]) => (
                                   <li key={id} className="flex items-center justify-between text-[11px]">
                                     <span className="text-white/60 font-medium">{data.name}</span>
-                                    <span className="text-brand-500 font-bold px-2 py-0.5 bg-brand-500/10 rounded border border-brand-500/20">{data.rates?.[0] || 0} pip/lot</span>
+                                    <span className="text-blue-500 font-bold px-2 py-0.5 bg-blue-500/10 rounded border border-blue-500/20">{data.rates?.[0] || 0} pip/lot</span>
                                   </li>
                                 ))
                               }
@@ -1148,7 +1148,7 @@ function Register() {
                       type="checkbox"
                       checked={usTaxChecked}
                       onChange={(e) => setUsTaxChecked(e.target.checked)}
-                      className="w-4 h-4 text-brand-500 border-gray-300 rounded focus:ring-brand-500 mt-1"
+                      className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500 mt-1"
                     />
                     <span className="ml-2 text-sm text-dark-base/70 font-sans">
                       I declare and confirm that I am not a citizen or resident of the US for tax purposes.
@@ -1164,7 +1164,7 @@ function Register() {
                         type="checkbox"
                         checked={agreementChecked}
                         onChange={(e) => setAgreementChecked(e.target.checked)}
-                        className="peer h-5 w-5 cursor-pointer appearance-none rounded border border-gray-400 checked:bg-brand-500 checked:border-brand-500 transition-all"
+                        className="peer h-5 w-5 cursor-pointer appearance-none rounded border border-gray-400 checked:bg-blue-500 checked:border-blue-500 transition-all"
                         id="agreement-checkbox"
                       />
                       <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -1175,16 +1175,16 @@ function Register() {
                     </div>
                     <div className="ml-3">
                       <p className="text-[13px] text-black leading-relaxed">
-                        I have read and I agree to all the points in <span className="font-bold underline">Solitaire Markets</span> policies:
+                        I have read and I agree to all the points in <span className="font-bold underline">fxbrokersuite Markets</span> policies:
                       </p>
                       <div className="mt-3 flex flex-col gap-y-2.5">
                         <a
                           href="/20260104 Risk Disclosure Policy.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[12px] font-bold text-black hover:text-brand-600 transition-all flex items-center gap-2 group/link"
+                          className="text-[12px] font-bold text-black hover:text-blue-600 transition-all flex items-center gap-2 group/link"
                         >
-                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-brand-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                           Risk Disclosure Policy
@@ -1193,9 +1193,9 @@ function Register() {
                           href="/20260104Order ExecutionPolicy.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[12px] font-bold text-black hover:text-brand-600 transition-all flex items-center gap-2 group/link"
+                          className="text-[12px] font-bold text-black hover:text-blue-600 transition-all flex items-center gap-2 group/link"
                         >
-                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-brand-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                           Order Execution Policy
@@ -1204,9 +1204,9 @@ function Register() {
                           href="/20260104Cookies Policy.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[12px] font-bold text-black hover:text-brand-600 transition-all flex items-center gap-2 group/link"
+                          className="text-[12px] font-bold text-black hover:text-blue-600 transition-all flex items-center gap-2 group/link"
                         >
-                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-brand-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                           Cookies Policy
@@ -1215,9 +1215,9 @@ function Register() {
                           href="/20260104Privacy Policy.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[12px] font-bold text-black hover:text-brand-600 transition-all flex items-center gap-2 group/link"
+                          className="text-[12px] font-bold text-black hover:text-blue-600 transition-all flex items-center gap-2 group/link"
                         >
-                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-brand-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 text-black group-hover/link:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                           Privacy Policy
@@ -1231,7 +1231,7 @@ function Register() {
                 <button
                   type="submit"
                   disabled={loading || !allPasswordRequirementsMet || !usTaxChecked || !agreementChecked}
-                  className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white border border-blue-500 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
                 >
                   {loading ? 'Sending OTP...' : 'CONTINUE'}
                 </button>
@@ -1254,8 +1254,8 @@ function Register() {
 
               <div className="text-center mb-6">
                 <div className="mb-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-100 rounded-full mb-4">
-                    <svg className="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -1282,7 +1282,7 @@ function Register() {
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
                     onPaste={index === 0 ? handleOtpPaste : undefined}
-                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-sans"
+                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-sans"
                     style={{
                       fontFamily: 'Courier New, monospace',
                       fontSize: '24px',
@@ -1296,7 +1296,7 @@ function Register() {
               <button
                 onClick={handleVerifyOtp}
                 disabled={verifying || otp.join('').length !== 6}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
               >
                 {verifying ? 'Verifying...' : 'VERIFY & CONTINUE'}
               </button>
@@ -1341,7 +1341,7 @@ function Register() {
                     }
                   }}
                   disabled={loading}
-                  className="text-sm text-brand-600 hover:text-brand-700 font-medium font-sans disabled:opacity-50"
+                  className="text-sm text-blue-600 hover:text-blue-700 font-medium font-sans disabled:opacity-50"
                 >
                   Resend OTP
                 </button>
@@ -1357,14 +1357,14 @@ function Register() {
             <div className="text-xs text-dark-base/50 space-y-2 font-sans">
               <p className="font-semibold mb-2">Risk Statement:</p>
               <p>
-                A trading amount in derivatives may mean Trader may lose an amount even greater than their original trading amount. Anyone wishing to Trade in any of the products mentioned in www.solitaireprime.com should seek their own financial or professional advice. Trading of securities, forex, stock market, commodities, options and futures may not be suitable for everyone and involves the risk of losing part or all of your money. Trading in the financial markets has large potential rewards, but also large potential risk. You must be aware of the risks and be willing to accept them in order to Trade in the markets. Don't trade with money which you can't afford to lose. Forex Trading are not allowed in some countries, before trading your money, make sure whether your country is allowing this or not. You are strongly advised to obtain independent financial, legal and tax advice before proceeding with any currency or spot metals trade. Nothing in this site should be read or construed as constituting advice on the part of Solitaire Prime Limited. or any of its affiliates, directors, officers or employees.
+                Trading in financial markets involves a high degree of risk and may not be suitable for all investors. You should carefully consider your investment objectives, level of experience, and risk appetite before deciding to trade. There is a possibility that you could sustain a loss of some or all of your initial investment and therefore you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with trading and seek advice from an independent financial advisor if you have any doubts.
               </p>
               <p className="font-semibold mt-3 mb-2">Restricted Regions:</p>
               <p>
-                Solitaire Prime Limited. does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of Solitaire Prime Limited. are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
+                FxBrokerSuite does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of FxBrokerSuite are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
               </p>
               <p className="mt-3">
-                Solitaire Prime Limited. Registration Number: 2025-00567. Registered Address: Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@solitaireprime.com
+                FxBrokerSuite. Registration Number: 12345678. Registered Address: 123 Dummy Street, Dummy City, Country. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@fxbrokersuite.com
               </p>
             </div>
           </div>

@@ -238,7 +238,7 @@ function ForgotPassword() {
                     required
                     disabled={loading}
                     placeholder="Enter your email address"
-                    className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-sans text-sm transition-colors disabled:bg-gray-100"
+                    className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 font-sans text-sm transition-colors disabled:bg-gray-100"
                   />
                 </div>
 
@@ -246,7 +246,7 @@ function ForgotPassword() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base border border-blue-600 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
                 >
                   {loading ? 'Sending OTP...' : 'Send OTP'}
                 </button>
@@ -260,7 +260,7 @@ function ForgotPassword() {
               <div className="text-center mb-6">
                 <div className="mb-4">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-100 rounded-full mb-4">
-                    <svg className="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -296,7 +296,7 @@ function ForgotPassword() {
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
                     onPaste={index === 0 ? handleOtpPaste : undefined}
-                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-sans"
+                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all font-sans"
                     style={{
                       fontFamily: 'Courier New, monospace',
                       fontSize: '24px',
@@ -310,7 +310,7 @@ function ForgotPassword() {
               <button
                 onClick={handleVerifyOtp}
                 disabled={verifying || otp.join('').length !== 6}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm mb-4"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm mb-4"
               >
                 {verifying ? 'Verifying...' : 'VERIFY OTP'}
               </button>
@@ -338,7 +338,7 @@ function ForgotPassword() {
                     }
                   }}
                   disabled={loading}
-                  className="text-sm text-brand-600 hover:text-brand-700 font-medium font-sans disabled:opacity-50"
+                  className="text-sm text-blue-700 hover:text-brand-700 font-medium font-sans disabled:opacity-50"
                 >
                   Resend OTP
                 </button>
@@ -393,7 +393,7 @@ function ForgotPassword() {
                         required
                         disabled={resetting}
                         placeholder="Enter new password"
-                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
+                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
                       />
                       <button
                         type="button"
@@ -427,7 +427,7 @@ function ForgotPassword() {
                         required
                         disabled={resetting}
                         placeholder="Confirm new password"
-                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
+                        className="w-full px-4 py-2.5 bg-neutral-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 pr-10 disabled:bg-gray-100 font-sans text-sm transition-colors"
                       />
                       <button
                         type="button"
@@ -452,7 +452,7 @@ function ForgotPassword() {
                   <button
                     type="submit"
                     disabled={resetting}
-                    className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base border border-blue-600 py-2.5 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm"
                   >
                     {resetting ? 'Resetting...' : 'Reset Password'}
                   </button>
@@ -478,14 +478,14 @@ function ForgotPassword() {
             <div className="text-xs text-dark-base/50 space-y-2 font-sans">
               <p className="font-semibold mb-2">Risk Statement:</p>
               <p>
-                A trading amount in derivatives may mean Trader may lose an amount even greater than their original trading amount. Anyone wishing to Trade in any of the products mentioned in www.solitaireprime.com should seek their own financial or professional advice. Trading of securities, forex, stock market, commodities, options and futures may not be suitable for everyone and involves the risk of losing part or all of your money. Trading in the financial markets has large potential rewards, but also large potential risk. You must be aware of the risks and be willing to accept them in order to Trade in the markets. Don't trade with money which you can't afford to lose. Forex Trading are not allowed in some countries, before trading your money, make sure whether your country is allowing this or not. You are strongly advised to obtain independent financial, legal and tax advice before proceeding with any currency or spot metals trade. Nothing in this site should be read or construed as constituting advice on the part of Solitaire Prime Limited. or any of its affiliates, directors, officers or employees.
+                Trading in financial markets involves a high degree of risk and may not be suitable for all investors. You should carefully consider your investment objectives, level of experience, and risk appetite before deciding to trade. There is a possibility that you could sustain a loss of some or all of your initial investment and therefore you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with trading and seek advice from an independent financial advisor if you have any doubts.
               </p>
               <p className="font-semibold mt-3 mb-2">Restricted Regions:</p>
               <p>
-                Solitaire Prime Limited. does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of Solitaire Prime Limited. are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
+                FxBrokerSuite does not provide services for citizens/residents of the United States, Cuba, Iraq, Myanmar, North Korea, Sudan. The services of FxBrokerSuite are not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
               </p>
               <p className="mt-3">
-                Solitaire Prime Limited. Registration Number: 2025-00567. Registered Address: Ground Floor, The Sotheby Building, Rodney Village, Rodney Bay, Gros-Islet, Saint Lucia. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@solitaireprime.com
+                FxBrokerSuite. Registration Number: 12345678. Registered Address: 123 Dummy Street, Dummy City, Country. Our dedicated team of experts is always ready to assist you with any questions or concerns you may have. Whether you need support or have inquiries, we're just a message away. Email: support@fxbrokersuite.com
               </p>
             </div>
           </div>

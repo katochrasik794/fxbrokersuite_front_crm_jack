@@ -415,22 +415,22 @@ function DepositRequest() {
 
           {/* Step Indicators */}
           <div className="flex items-center justify-center gap-2">
-            <div className={`flex items-center ${step >= 1 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 1 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step > 1 ? <CheckCircle className="w-6 h-6" /> : '1'}
               </div>
               <span className="ml-2 text-sm font-medium">Details</span>
             </div>
             <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 2 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 2 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step > 2 ? <CheckCircle className="w-6 h-6" /> : '2'}
               </div>
               <span className="ml-2 text-sm font-medium">Confirmation</span>
             </div>
             <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 3 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 3 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step >= 3 ? <CheckCircle className="w-6 h-6" /> : '3'}
               </div>
               <span className="ml-2 text-sm font-medium">Confirmed</span>
@@ -617,7 +617,7 @@ function DepositRequest() {
                               showConfirmButton: false
                             });
                           }}
-                          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-brand-500 text-dark-base px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-brand-600 transition-colors flex items-center gap-1 shadow-lg"
+                          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-dark-base px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors flex items-center gap-1 shadow-lg"
                         >
                           {copiedField === 'qr_address' ? (
                             <>
@@ -647,14 +647,14 @@ function DepositRequest() {
                     width={200}
                     onClick={() => setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' })}
                     className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.deposit_to === 'wallet'
-                        ? 'border-brand-500 bg-brand-50'
+                        ? 'border-blue-600 bg-brand-50'
                         : 'border-gray-200 hover:border-gray-300'
                       }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.deposit_to === 'wallet'
-                            ? 'border-brand-500 bg-brand-500'
+                            ? 'border-blue-600 bg-blue-600'
                             : 'border-gray-300'
                           }`}>
                           {formData.deposit_to === 'wallet' && (
@@ -688,7 +688,7 @@ function DepositRequest() {
                           setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' });
                         }
                       }}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white"
                     >
                     <option value="">Select MT5 Account</option>
                     {mt5Accounts.map((account) => (
@@ -745,7 +745,7 @@ function DepositRequest() {
               className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-all ${
                 amountError 
                   ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-200' 
-                  : 'border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200'
+                  : 'border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200'
               }`}
               placeholder="0.00"
               required
@@ -769,7 +769,7 @@ function DepositRequest() {
               type="text"
               value={formData.transaction_hash}
               onChange={(e) => setFormData({ ...formData, transaction_hash: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all required"
+              className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200 outline-none transition-all required"
               placeholder="Enter transaction hash/ID"
             />
           </div>
@@ -783,7 +783,7 @@ function DepositRequest() {
               <div className="space-y-1 text-center">
                 <Upload className="mx-auto h-12 w-12 text-gray-400" />
                 <div className="flex text-sm text-gray-600">
-                  <label htmlFor="proof-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-brand-500 focus-within:outline-none">
+                  <label htmlFor="proof-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-blue-700 hover:text-blue-600 focus-within:outline-none">
                     <span>Upload a file</span>
                     <input
                       id="proof-upload"
@@ -819,7 +819,7 @@ function DepositRequest() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-brand-500 text-dark-base py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors shadow-lg hover:shadow-xl"
+            className="w-full bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
           >
             Continue
           </button>
@@ -876,7 +876,7 @@ function DepositRequest() {
               <button
                 onClick={handleConfirm}
                 disabled={submitting}
-                className="flex-1 bg-brand-500 text-dark-base py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? 'Submitting...' : 'Confirm & Submit'}
               </button>
@@ -893,7 +893,7 @@ function DepositRequest() {
             </p>
             <button
               onClick={handleSuccess}
-              className="bg-brand-500 text-dark-base px-8 py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors shadow-lg hover:shadow-xl"
+              className="bg-blue-600 text-dark-base px-8 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
             >
               Go to Reports
             </button>

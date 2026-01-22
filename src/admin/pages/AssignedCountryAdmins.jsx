@@ -217,7 +217,7 @@ function EditCountryAdmin({ row, onClose }) {
       </div>
       <div className="flex justify-end gap-2">
         <button type="button" onClick={onClose} className="px-4 h-10 rounded-md border">Cancel</button>
-        <button type="submit" className="px-4 h-10 rounded-md bg-brand-500 text-dark-base">Save Changes</button>
+        <button type="submit" className="px-4 h-10 rounded-md bg-blue-600 text-dark-base">Save Changes</button>
       </div>
     </form>
   );

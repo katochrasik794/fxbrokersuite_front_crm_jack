@@ -182,7 +182,7 @@ export default function MenuManagement() {
         <button
           onClick={handleFetchNewMenus}
           disabled={fetching}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <RefreshCw className={`w-4 h-4 ${fetching ? 'animate-spin' : ''}`} />
           {fetching ? 'Fetching...' : 'Fetch New Menus'}
@@ -204,7 +204,7 @@ export default function MenuManagement() {
             <button
               onClick={handleFetchNewMenus}
               disabled={fetching}
-              className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition-colors disabled:opacity-50"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 inline mr-2 ${fetching ? 'animate-spin' : ''}`} />
               Fetch New Menus

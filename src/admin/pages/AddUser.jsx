@@ -136,7 +136,7 @@ export default function AddUser() {
                     <input
                       value={state.name}
                       onChange={e => setState({ ...state, name: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                       placeholder="Enter full name"
                     />
                   </div>
@@ -147,7 +147,7 @@ export default function AddUser() {
                       type="email"
                       value={state.email}
                       onChange={e => setState({ ...state, email: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                       placeholder="user@example.com"
                     />
                   </div>
@@ -161,7 +161,7 @@ export default function AddUser() {
                         // Reset phone when country changes
                         setState({ ...state, country: iso2, phone: '' });
                       }}
-                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                     >
                       <option value="">Select country</option>
                       {countries.map((c, idx) => (
@@ -189,7 +189,7 @@ export default function AddUser() {
                             const value = e.target.value.replace(/[^\d\s]/g, '');
                             setState({ ...state, phone: value });
                           }}
-                          className="flex-1 rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                          className="flex-1 rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                           placeholder="Enter phone number"
                         />
                       </div>
@@ -205,7 +205,7 @@ export default function AddUser() {
                       type="password"
                       value={state.password}
                       onChange={e => setState({ ...state, password: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                       placeholder="Enter secure password"
                     />
                   </div>
@@ -221,7 +221,7 @@ export default function AddUser() {
                     <select
                       value={state.status}
                       onChange={e => setState({ ...state, status: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+                      className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                     >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
@@ -236,7 +236,7 @@ export default function AddUser() {
                         type="checkbox"
                         checked={state.emailVerified}
                         onChange={e => setState({ ...state, emailVerified: e.target.checked })}
-                        className="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-blue-700 focus:ring-blue-600 border-gray-300 rounded"
                       />
                       <label htmlFor="ev" className="text-sm text-gray-700">Mark email as verified</label>
                     </div>
@@ -249,7 +249,7 @@ export default function AddUser() {
                         type="checkbox"
                         checked={state.kycVerified}
                         onChange={e => setState({ ...state, kycVerified: e.target.checked })}
-                        className="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-blue-700 focus:ring-blue-600 border-gray-300 rounded"
                       />
                       <label htmlFor="kv" className="text-sm text-gray-700">Mark KYC as verified</label>
                     </div>
@@ -278,7 +278,7 @@ export default function AddUser() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="px-6 sm:px-8 py-2 sm:py-3 rounded-lg bg-brand hover:bg-brand-600 text-dark-base disabled:opacity-60 disabled:cursor-not-allowed transition-all font-medium shadow-sm hover:shadow-md text-sm sm:text-base"
+                    className="px-6 sm:px-8 py-2 sm:py-3 rounded-lg bg-brand hover:bg-blue-700 text-dark-base disabled:opacity-60 disabled:cursor-not-allowed transition-all font-medium shadow-sm hover:shadow-md text-sm sm:text-base"
                   >
                     {submitting ? (
                       <span className="flex items-center gap-2">

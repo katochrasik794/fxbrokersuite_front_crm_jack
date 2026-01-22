@@ -4,7 +4,7 @@ function UserHome() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-brand-600 mb-2">
+            <h1 className="text-4xl font-bold text-blue-700 mb-2">
               User Dashboard
             </h1>
             <p className="text-gray-600">

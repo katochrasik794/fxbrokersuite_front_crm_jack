@@ -54,10 +54,10 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
       {/* Logo with Close Button */}
       <div className={`bg-transparent pt-2 pb-2 flex-shrink-0 flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between pl-8 pr-6'}`}>
         {collapsed ? (
-          <img src="/logo.png" alt="Solitaire Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
+          <img src="/logo.png" alt="fxbrokersuite Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
         ) : (
           <>
-            <img src="/logo.png" alt="Solitaire Markets" className="h-10 w-auto " style={{ background: 'transparent' }} />
+            <img src="/logo.png" alt="fxbrokersuite Markets" className="h-10 w-auto " style={{ background: 'transparent' }} />
             {/* Close button for mobile */}
             <button
               onClick={onClose}
@@ -81,8 +81,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/dashboard"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/dashboard')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'IB Dashboard' : undefined}
@@ -97,8 +97,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/overview"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/overview')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Overview' : undefined}
@@ -113,8 +113,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/ib-profile"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/ib-profile')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'IB Profile' : undefined}
@@ -129,8 +129,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/ib-requests"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/ib-requests')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'IB Requests' : undefined}
@@ -145,8 +145,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/commission-distribution"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/commission-distribution')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Commission Distribution' : undefined}
@@ -161,8 +161,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           <Link
             to="/admin/ib/symbols-pip-values"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/symbols-pip-values')
-              ? 'bg-[#c8f300] text-dark-base'
-              : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+              ? 'bg-blue-600 text-white'
+              : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
               }`}
             style={{}}
             title={collapsed ? 'Symbols Pip Values' : undefined}
@@ -178,8 +178,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <button
               onClick={() => toggleSubmenu('groupManagement')}
               className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} ${collapsed ? 'px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${location.pathname.startsWith('/admin/ib/group-management')
-                ? 'bg-[#c8f300] text-dark-base'
-                : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
                 }`}
               style={{}}
               title={collapsed ? 'Group Management' : undefined}
@@ -206,8 +206,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 <Link
                   to="/admin/ib/group-management/trading-groups"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/group-management/trading-groups')
-                    ? 'bg-[#effe92] hover:bg-[#dbfb3d] text-gray-900 font-medium'
-                    : 'text-gray-600 hover:bg-[#effe92] hover:text-gray-900'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:bg-brand-50 hover:text-gray-900'
                     }`}
                 >
                   <span className="text-sm font-normal">Trading Groups</span>
@@ -215,8 +215,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 <Link
                   to="/admin/ib/group-management/commission-distribution"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/group-management/commission-distribution')
-                    ? 'bg-[#effe92] hover:bg-[#dbfb3d] text-gray-900 font-medium'
-                    : 'text-gray-600 hover:bg-[#effe92] hover:text-gray-900'
+                    ? 'bg-brand-50 hover:bg-brand-100 text-gray-900 font-medium'
+                    : 'text-gray-600 hover:bg-brand-50 hover:text-gray-900'
                     }`}
                 >
                   <span className="text-sm font-normal">Commission Distribution</span>
@@ -230,8 +230,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <button
               onClick={() => toggleSubmenu('ibManagement')}
               className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} ${collapsed ? 'px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${location.pathname.startsWith('/admin/ib/ib-management')
-                ? 'bg-[#c8f300] text-dark-base'
-                : 'text-gray-700 hover:bg-[#effe92] hover:text-gray-900'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-700 hover:bg-brand-50 hover:text-gray-900'
                 }`}
               style={{}}
               title={collapsed ? 'IB Management' : undefined}
@@ -258,8 +258,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 <Link
                   to="/admin/ib/ib-management/client-linking"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/ib-management/client-linking')
-                    ? 'bg-[#effe92] hover:bg-[#dbfb3d] text-gray-900 font-medium'
-                    : 'text-gray-600 hover:bg-[#effe92] hover:text-gray-900'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:bg-brand-50 hover:text-gray-900'
                     }`}
                 >
                   <span className="text-sm font-normal">Client Linking</span>
@@ -267,8 +267,8 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 <Link
                   to="/admin/ib/ib-management/withdrawal-management"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/ib-management/withdrawal-management')
-                    ? 'bg-[#effe92] hover:bg-[#dbfb3d] text-gray-900 font-medium'
-                    : 'text-gray-600 hover:bg-[#effe92] hover:text-gray-900'
+                    ? 'bg-brand-50 hover:bg-brand-100 text-gray-900 font-medium'
+                    : 'text-gray-600 hover:bg-brand-50 hover:text-gray-900'
                     }`}
                 >
                   <span className="text-sm font-normal">Withdrawal Management</span>

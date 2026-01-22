@@ -45,7 +45,7 @@ function TradingGroups() {
           groupName: group.dedicated_name || group.group,
           originalGroupName: group.group,
           server: group.server || 1,
-          company: group.company || 'Solitaire Markets Limited',
+          company: group.company || 'fxbrokersuite Markets Limited',
           currency: group.currency || 'USD',
           marginCall: group.margin_call ? `${group.margin_call}%` : '100%',
           stopOut: group.margin_stop_out ? `${group.margin_stop_out}%` : '50%',

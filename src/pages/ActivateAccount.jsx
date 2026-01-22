@@ -171,14 +171,14 @@ function ActivateAccount() {
   if (loading || sendingOtp) {
     const loaderMessage = sendingOtp ? "Sending OTP..." : "Loading..."
     return (
-      <div className="min-h-screen bg-neutral-50 flex flex-col font-sans">
+      <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
         <AuthLoader message={loaderMessage} />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Main Content - Centered */}
       <div className="flex-1 flex flex-col items-center justify-center px-4">
         {/* Header with Logo */}
@@ -206,7 +206,7 @@ function ActivateAccount() {
                   </p>
                   <Link
                     to="/login"
-                    className="text-sm text-brand-600 hover:text-brand-700 font-medium font-sans"
+                    className="text-sm text-blue-700 hover:text-brand-700 font-medium font-sans"
                   >
                     Go to Login
                   </Link>
@@ -221,7 +221,7 @@ function ActivateAccount() {
               <div className="text-center mb-6">
                 <div className="mb-4">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-100 rounded-full mb-4">
-                    <svg className="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -257,7 +257,7 @@ function ActivateAccount() {
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
                     onPaste={index === 0 ? handleOtpPaste : undefined}
-                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-sans"
+                    className="w-14 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all font-sans"
                     style={{
                       fontFamily: 'Courier New, monospace',
                       fontSize: '24px',
@@ -271,7 +271,7 @@ function ActivateAccount() {
               <button
                 onClick={handleVerifyOtp}
                 disabled={verifying || otp.join('').length !== 6}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-dark-base border border-brand-500 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm mb-4"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-dark-base border border-blue-600 py-3 rounded-lg transition-colors font-semibold uppercase disabled:opacity-50 disabled:cursor-not-allowed font-sans text-sm mb-4"
               >
                 {verifying ? 'Verifying...' : 'VERIFY & ACTIVATE'}
               </button>
@@ -281,7 +281,7 @@ function ActivateAccount() {
                 <button
                   onClick={sendActivationOTP}
                   disabled={sendingOtp}
-                  className="text-sm text-brand-600 hover:text-brand-700 font-medium font-sans disabled:opacity-50"
+                  className="text-sm text-blue-700 hover:text-brand-700 font-medium font-sans disabled:opacity-50"
                 >
                   Resend OTP
                 </button>

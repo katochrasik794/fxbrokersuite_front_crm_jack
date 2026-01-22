@@ -793,7 +793,7 @@ export default function AssignRoles() {
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 onClick={() => setShowCreateRoleModal(true)}
-                className="bg-brand-500 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+                className="bg-blue-600 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
               >
                 <Shield className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span className="hidden sm:inline">Create Role</span>
@@ -801,7 +801,7 @@ export default function AssignRoles() {
               </button>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="bg-brand-500 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+                className="bg-blue-600 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
               >
                 <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span className="hidden sm:inline">Create Admin</span>
@@ -996,7 +996,7 @@ export default function AssignRoles() {
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
                             <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-brand-100 flex items-center justify-center">
-                              <UserCheck className="h-4 w-4 sm:h-5 sm:w-5 text-brand-600" />
+                              <UserCheck className="h-4 w-4 sm:h-5 sm:w-5 text-blue-700" />
                             </div>
                           </div>
                           <div className="ml-2 sm:ml-4">
@@ -1009,7 +1009,7 @@ export default function AssignRoles() {
                         <div className="role-dropdown">
                           <button
                             onClick={(e) => handleRoleDropdownToggle(adminUser.id, e)}
-                            className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-900 hover:text-brand-600 transition-colors"
+                            className="flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-900 hover:text-blue-700 transition-colors"
                           >
                             <span className={`px-2 py-1 rounded-full text-xs ${roleColor}`}>
                               {roleLabel}
@@ -1231,7 +1231,7 @@ export default function AssignRoles() {
                         type="text"
                         value={newAdmin.username}
                         onChange={(e) => setNewAdmin({ ...newAdmin, username: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder="Enter username"
                         required
                       />
@@ -1245,7 +1245,7 @@ export default function AssignRoles() {
                         type="email"
                         value={newAdmin.email}
                         onChange={(e) => setNewAdmin({ ...newAdmin, email: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder="Enter email"
                         required
                       />
@@ -1259,7 +1259,7 @@ export default function AssignRoles() {
                         type="password"
                         value={newAdmin.password}
                         onChange={(e) => setNewAdmin({ ...newAdmin, password: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder="Enter password"
                         required
                       />
@@ -1272,7 +1272,7 @@ export default function AssignRoles() {
                       <select
                         value={newAdmin.admin_role}
                         onChange={(e) => setNewAdmin({ ...newAdmin, admin_role: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         required
                       >
                         {/* Super admin - only show to superadmins */}
@@ -1319,7 +1319,7 @@ export default function AssignRoles() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                   >
                     <Save className="h-4 w-4" />
                     Create Admin
@@ -1379,7 +1379,7 @@ export default function AssignRoles() {
                               type="checkbox"
                               checked={isSelected}
                               onChange={() => handleFeatureToggle(feature.path)}
-                              className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                              className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                             />
                             <feature.icon className="h-4 w-4 text-gray-500" />
                             <span>{feature.name}</span>
@@ -1396,7 +1396,7 @@ export default function AssignRoles() {
                                       type="checkbox"
                                       checked={perms[action] || false}
                                       onChange={() => handlePermissionToggle(feature.path, action)}
-                                      className="rounded border-gray-300 text-brand-600 focus:ring-brand-500 h-3 w-3"
+                                      className="rounded border-gray-300 text-blue-700 focus:ring-blue-600 h-3 w-3"
                                     />
                                     <span className="capitalize text-gray-700">{action}</span>
                                   </label>
@@ -1424,7 +1424,7 @@ export default function AssignRoles() {
                   </button>
                   <button
                     onClick={handleSaveFeatures}
-                    className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                   >
                     <Save className="h-4 w-4" />
                     Save Features
@@ -1466,7 +1466,7 @@ export default function AssignRoles() {
                       type="password"
                       value={passwordForm.newPassword}
                       onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                       placeholder="Enter new password"
                       required
                     />
@@ -1480,7 +1480,7 @@ export default function AssignRoles() {
                       type="password"
                       value={passwordForm.confirmPassword}
                       onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                       placeholder="Confirm new password"
                       required
                     />
@@ -1500,7 +1500,7 @@ export default function AssignRoles() {
                   </button>
                   <button
                     onClick={handleChangePassword}
-                    className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                   >
                     <Save className="h-4 w-4" />
                     Update Password
@@ -1546,7 +1546,7 @@ export default function AssignRoles() {
                         type="text"
                         value={newRole.name}
                         onChange={(e) => setNewRole({ ...newRole, name: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder="e.g., Manager, Supervisor, Coordinator"
                         required
                       />
@@ -1560,7 +1560,7 @@ export default function AssignRoles() {
                         type="text"
                         value={newRole.description}
                         onChange={(e) => setNewRole({ ...newRole, description: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         placeholder="Brief description of this role"
                       />
                     </div>
@@ -1604,7 +1604,7 @@ export default function AssignRoles() {
                                   });
                                 }
                               }}
-                              className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                              className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                             />
                             <feature.icon className="h-4 w-4 text-gray-500" />
                             <span>{feature.name}</span>
@@ -1630,7 +1630,7 @@ export default function AssignRoles() {
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                      className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                     >
                       <Save className="h-4 w-4" />
                       Create Role
@@ -1696,7 +1696,7 @@ export default function AssignRoles() {
                       type="text"
                       value={editRole.name}
                       onChange={(e) => setEditRole({ ...editRole, name: e.target.value })}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                       required
                     />
                   </div>
@@ -1706,7 +1706,7 @@ export default function AssignRoles() {
                       type="text"
                       value={editRole.description}
                       onChange={(e) => setEditRole({ ...editRole, description: e.target.value })}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     />
                   </div>
                 </div>
@@ -1741,7 +1741,7 @@ export default function AssignRoles() {
                                 setEditRole({ ...editRole, features: editRole.features.filter(f => f !== feature.path) });
                               }
                             }}
-                            className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                            className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                           />
                           <feature.icon className="h-4 w-4 text-gray-500" />
                           <span>{feature.name}</span>
@@ -1785,7 +1785,7 @@ export default function AssignRoles() {
                         Swal.fire({ icon: 'error', title: 'Update failed', text: err.message || 'Unable to update role' });
                       }
                     }}
-                    className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                   >
                     <Save className="h-4 w-4" />
                     Save Changes

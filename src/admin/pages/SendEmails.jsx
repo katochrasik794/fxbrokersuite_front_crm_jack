@@ -535,7 +535,7 @@ export default function SendEmails() {
         {/* Decorative gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-brand-500/10 pointer-events-none" />
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10 flex flex-col h-full">
           {/* Header */}
@@ -546,7 +546,7 @@ export default function SendEmails() {
                 <div className="relative bg-gradient-to-br from-white/30 to-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
                   <img
                     src="/favicon-32x32.png"
-                    alt="Solitaire"
+                    alt="fxbrokersuite"
                     className="h-8 w-8 rounded-lg"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -560,7 +560,7 @@ export default function SendEmails() {
               </div>
               <div className="hidden sm:block">
                 <h2 className="text-lg md:text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  Solitaire Mail
+                  fxbrokersuite Mail
                 </h2>
                 <p className="text-xs text-white/70 mt-0.5">Professional Email Suite</p>
               </div>
@@ -620,7 +620,7 @@ export default function SendEmails() {
           <div className="p-4 border-t border-gray-700">
             <div className="flex items-center gap-2 text-white/70 text-xs">
               <Sparkles size={14} />
-              <span>Powered by Solitaire</span>
+              <span>Powered by fxbrokersuite</span>
             </div>
           </div>
         </div>
@@ -636,7 +636,7 @@ export default function SendEmails() {
               <input
                 type="text"
                 placeholder="Search messages..."
-                className="w-full pl-10 pr-4 py-2 md:py-2.5 border border-gray-200 rounded-xl bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent shadow-sm text-sm md:text-base"
+                className="w-full pl-10 pr-4 py-2 md:py-2.5 border border-gray-200 rounded-xl bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent shadow-sm text-sm md:text-base"
               />
             </div>
           </div>
@@ -679,7 +679,7 @@ export default function SendEmails() {
                         {isActive && (
                           <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
                         )}
-                        <div className={`relative ${isActive ? 'text-white' : `text-gray-600 group-hover:text-brand-600`}`}>
+                        <div className={`relative ${isActive ? 'text-white' : `text-gray-600 group-hover:text-blue-700`}`}>
                           <Icon size={16} className="md:w-5 md:h-5" />
                         </div>
                         <span className={`text-[10px] md:text-xs font-medium relative text-center ${isActive ? 'text-white' : 'text-gray-700'}`}>
@@ -706,7 +706,7 @@ export default function SendEmails() {
                           if (searchResults.length > 0) setShowSearchResults(true);
                         }}
                         placeholder="Search users by email or name..."
-                        className="w-full rounded-xl border border-gray-300 h-12 px-4 pr-12 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white shadow-sm"
+                        className="w-full rounded-xl border border-gray-300 h-12 px-4 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white shadow-sm"
                       />
                       <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
 
@@ -769,7 +769,7 @@ export default function SendEmails() {
                   <select
                     value={selectedTemplateId || ''}
                     onChange={handleTemplateChange}
-                    className="w-full rounded-xl border border-gray-300 h-10 md:h-12 px-3 md:px-4 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white shadow-sm text-sm md:text-base"
+                    className="w-full rounded-xl border border-gray-300 h-10 md:h-12 px-3 md:px-4 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white shadow-sm text-sm md:text-base"
                     disabled={loadingTemplates}
                   >
                     <option value="">Use Default Template</option>
@@ -804,7 +804,7 @@ export default function SendEmails() {
                             type="text"
                             value={templateVariables[variable] || ''}
                             onChange={(e) => handleVariableChange(variable, e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                             placeholder={`Enter ${variable}`}
                           />
                         </div>
@@ -824,7 +824,7 @@ export default function SendEmails() {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                     placeholder="Email subject"
-                    className="w-full rounded-xl border border-gray-300 h-10 md:h-12 px-3 md:px-4 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white shadow-sm text-sm md:text-base"
+                    className="w-full rounded-xl border border-gray-300 h-10 md:h-12 px-3 md:px-4 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white shadow-sm text-sm md:text-base"
                     readOnly={!!selectedTemplateId}
                   />
                 </div>
@@ -888,7 +888,7 @@ export default function SendEmails() {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="https://example.com/image.jpg"
-                    className="w-full rounded-xl border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white shadow-sm"
+                    className="w-full rounded-xl border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white shadow-sm"
                   />
                   <p className="text-xs text-gray-500 mt-2">Image will be displayed at the bottom of the email</p>
                 </div>
@@ -998,7 +998,7 @@ export default function SendEmails() {
                   <button
                     onClick={() => setSentFilter('all')}
                     className={`px-4 py-2 text-sm rounded-xl font-medium transition-colors ${sentFilter === 'all'
-                      ? 'bg-brand-500 text-dark-base shadow-sm'
+                      ? 'bg-blue-600 text-dark-base shadow-sm'
                       : 'text-gray-700 hover:bg-brand-50 hover:text-brand-700'
                       }`}
                   >
@@ -1007,7 +1007,7 @@ export default function SendEmails() {
                   <button
                     onClick={() => setSentFilter('successful')}
                     className={`px-4 py-2 text-sm rounded-xl font-medium transition-colors ${sentFilter === 'successful'
-                      ? 'bg-brand-500 text-dark-base shadow-sm'
+                      ? 'bg-blue-600 text-dark-base shadow-sm'
                       : 'text-gray-700 hover:bg-brand-50 hover:text-brand-700'
                       }`}
                   >
@@ -1016,7 +1016,7 @@ export default function SendEmails() {
                   <button
                     onClick={() => setSentFilter('failed')}
                     className={`px-4 py-2 text-sm rounded-xl font-medium transition-colors ${sentFilter === 'failed'
-                      ? 'bg-brand-500 text-dark-base shadow-sm'
+                      ? 'bg-blue-600 text-dark-base shadow-sm'
                       : 'text-gray-700 hover:bg-brand-50 hover:text-brand-700'
                       }`}
                   >
@@ -1175,7 +1175,7 @@ export default function SendEmails() {
                       <div className="text-sm font-semibold text-gray-900">
                         {selectedSentEmail.recipientCount ?? '-'}
                       </div>
-                      <div className="text-[11px] text-brand-600 mt-1">View all</div>
+                      <div className="text-[11px] text-blue-700 mt-1">View all</div>
                     </button>
                     <button
                       type="button"
@@ -1240,7 +1240,7 @@ export default function SendEmails() {
                     <div className="flex gap-1 text-[11px]">
                       <span
                         className={`px-2 py-0.5 rounded-full cursor-pointer ${recipientListFilter === 'all'
-                          ? 'bg-brand-500 text-dark-base'
+                          ? 'bg-blue-600 text-dark-base'
                           : 'text-gray-600 hover:bg-brand-50 hover:text-brand-700'
                           }`}
                         onClick={() => setRecipientListFilter('all')}

@@ -206,7 +206,7 @@ export default function SupportTicketView() {
               <ArrowLeft className="h-5 w-5 text-gray-600" />
             </button>
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <Headphones className="h-6 w-6 text-brand-600" /> {ticket.subject || '(No subject)'}
+              <Headphones className="h-6 w-6 text-blue-700" /> {ticket.subject || '(No subject)'}
             </h1>
           </div>
           <p className="text-gray-600 text-sm ml-[52px]">
@@ -258,14 +258,14 @@ export default function SupportTicketView() {
               onChange={(e) => setMessage(e.target.value)}
               rows={3}
               disabled={sendingReply}
-              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
               placeholder="Write a reply..."
             />
             <div className="flex items-center justify-end mt-2">
               <button 
                 onClick={sendReply} 
                 disabled={sendingReply || !message.trim()}
-                className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-brand-600 transition-colors"
+                className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
               >
                 {sendingReply ? (
                   <>
@@ -364,7 +364,7 @@ export default function SupportTicketView() {
               <select
                 value={selectedRoleId || ''}
                 onChange={(e) => setSelectedRoleId(e.target.value ? parseInt(e.target.value) : null)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="">Unassigned (All admins can see)</option>
                 {roles.length > 0 ? (
@@ -386,7 +386,7 @@ export default function SupportTicketView() {
               <button
                 onClick={handleAssign}
                 disabled={assigning}
-                className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 disabled:opacity-50"
+                className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 disabled:opacity-50"
               >
                 {assigning ? 'Assigning...' : 'Assign'}
               </button>

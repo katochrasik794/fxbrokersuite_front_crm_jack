@@ -12,9 +12,9 @@ function Platforms() {
 
   // Download links
   const MT5_DESKTOP_MAC = 'https://download.mql5.com/cdn/web/metaquotes.ltd/mt5/MetaTrader5.pkg.zip?utm_source=support.metaquotes.net&utm_campaign=download.mt5.macos'
-  const MT5_DESKTOP_WINDOWS = 'https://download.mql5.com/cdn/web/solitaire.prime.ltd/mt5/solitaireprime5setup.exe'
-  const MT5_MOBILE_IOS = 'https://download.mql5.com/cdn/mobile/mt5/ios?server=SolitairePrime-Live'
-  const MT5_MOBILE_ANDROID = 'https://download.mql5.com/cdn/mobile/mt5/android?server=SolitairePrime-Live'
+  const MT5_DESKTOP_WINDOWS = 'https://download.mql5.com/cdn/web/fxbrokersuite.com/mt5/fxbrokersuite5setup.exe'
+  const MT5_MOBILE_IOS = 'https://download.mql5.com/cdn/mobile/mt5/ios?server=FxBrokerSuite-Live'
+  const MT5_MOBILE_ANDROID = 'https://download.mql5.com/cdn/mobile/mt5/android?server=FxBrokerSuite-Live'
 
   const handleDownload = (url, platformName) => {
     if (url) {
@@ -24,7 +24,7 @@ function Platforms() {
         icon: 'info',
         title: 'Coming Soon',
         text: `${platformName} will be available soon. Please check back later.`,
-        confirmButtonColor: '#c8f300'
+        confirmButtonColor: '#3b82f6'
       })
     }
   }
@@ -37,7 +37,7 @@ function Platforms() {
         icon: 'info',
         title: 'Coming Soon',
         text: `${platformName} will be available soon. Please check back later.`,
-        confirmButtonColor: '#c8f300'
+        confirmButtonColor: '#3b82f6'
       })
     }
   }
@@ -47,9 +47,9 @@ function Platforms() {
     const baseClasses = "flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
     
     const variants = {
-      primary: 'bg-brand-500 hover:bg-brand-600 text-dark-base',
-      secondary: 'bg-brand-500 hover:bg-brand-600 text-dark-base border-2 border-brand-500',
-      outline: 'bg-white border-2 border-brand-500 hover:bg-brand-50 text-dark-base'
+      primary: 'bg-blue-600 hover:bg-blue-700 text-dark-base',
+      secondary: 'bg-blue-600 hover:bg-blue-700 text-dark-base border-2 border-blue-600',
+      outline: 'bg-white border-2 border-blue-600 hover:bg-brand-50 text-dark-base'
     }
 
     return (
@@ -113,19 +113,19 @@ function Platforms() {
                   </p>
                   <ul className="space-y-3 mb-8" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px' }}>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Twice as many time frames as MT4 with enhanced charting</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Integrated Economic Calendar with real-time news</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>38 built-in technical indicators and 44 graphical objects</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Advanced order management and position tracking</span>
                     </li>
                   </ul>
@@ -176,7 +176,7 @@ function Platforms() {
                 </div>
                 <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <Globe className="w-8 h-8 text-brand-500" />
+                    <Globe className="w-8 h-8 text-blue-600" />
                     <h3 className="text-2xl font-bold" style={{ fontFamily: 'Roboto, sans-serif', color: '#000000' }}>
                       MT5 WebTrader
                     </h3>
@@ -186,15 +186,15 @@ function Platforms() {
                   </p>
                   <ul className="space-y-2 mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '15px' }}>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>Mirror successful traders in real-time</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>2,000+ products with dynamic leverage</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>Robust security and built-in tools</span>
                     </li>
                   </ul>
@@ -209,26 +209,26 @@ function Platforms() {
                 </div>
               </div>
 
-              {/* Solitaire Copy */}
+              {/* fxbrokersuite Copy */}
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group relative w-full">
                 <div className="absolute top-6 right-6 z-10">
-                  <span className="px-3 py-1 bg-brand-500 text-dark-base text-sm font-bold rounded-full shadow-lg" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  <span className="px-3 py-1 bg-blue-600 text-dark-base text-sm font-bold rounded-full shadow-lg" style={{ fontFamily: 'Roboto, sans-serif' }}>
                     New
                   </span>
                 </div>
                 <div className="relative h-64 lg:h-80 bg-gradient-to-br from-purple-50 to-pink-100 overflow-hidden w-full">
                   <img 
                     src="/copier_banner.png" 
-                    alt="Solitaire Copy" 
+                    alt="fxbrokersuite Copy" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => { e.target.src = '/copy-trade-banner-secondary.svg' }}
                   />
                 </div>
                 <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <Copy className="w-8 h-8 text-brand-500" />
+                    <Copy className="w-8 h-8 text-blue-600" />
                     <h3 className="text-2xl font-bold" style={{ fontFamily: 'Roboto, sans-serif', color: '#000000' }}>
-                      Solitaire Copy
+                      fxbrokersuite Copy
                     </h3>
                   </div>
                   <p className="text-gray-700 mb-6 leading-relaxed" style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -236,25 +236,25 @@ function Platforms() {
                   </p>
                   <ul className="space-y-2 mb-6" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '15px' }}>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>Copy trades and portfolios instantly</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>2000+ products with dynamic leverage</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-brand-500">•</span>
+                      <span className="text-blue-600">•</span>
                       <span>Robust security and built-in analytics</span>
                     </li>
                   </ul>
                   <ActionButton 
-                    onClick={() => handleLaunch(null, 'Solitaire Copy')}
+                    onClick={() => handleLaunch(null, 'fxbrokersuite Copy')}
                     variant="primary"
                     icon={Play}
                     className="w-full"
                   >
-                    Launch Solitaire Copy
+                    Launch fxbrokersuite Copy
                   </ActionButton>
                 </div>
               </div>
@@ -277,7 +277,7 @@ function Platforms() {
                 {/* Content Section */}
                 <div className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center order-2 md:order-1 w-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <Smartphone className="w-8 h-8 text-brand-500" />
+                    <Smartphone className="w-8 h-8 text-blue-600" />
                     <h3 className="text-3xl font-bold" style={{ fontFamily: 'Roboto, sans-serif', color: '#000000' }}>
                       MetaTrader 5 Mobile
                     </h3>
@@ -287,19 +287,19 @@ function Platforms() {
                   </p>
                   <ul className="space-y-3 mb-8" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '16px' }}>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>One Click Trading for instant execution</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Trade from the price chart or Market Depth window</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Full-featured technical analysis on mobile</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-brand-500 text-xl mt-1">•</span>
+                      <span className="text-blue-600 text-xl mt-1">•</span>
                       <span>Real-time quotes and market notifications</span>
                     </li>
                   </ul>
@@ -361,8 +361,8 @@ function Platforms() {
 
                     {/* Decorative background elements */}
                     <div className="absolute inset-0 opacity-10">
-                      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-brand-500 rounded-full blur-3xl"></div>
-                      <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-brand-500 rounded-full blur-3xl"></div>
+                      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-600 rounded-full blur-3xl"></div>
+                      <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-600 rounded-full blur-3xl"></div>
                     </div>
                   </div>
                 </div>

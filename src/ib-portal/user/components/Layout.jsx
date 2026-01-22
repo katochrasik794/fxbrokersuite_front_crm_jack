@@ -56,7 +56,7 @@ function Layout() {
   useEffect(() => {
     const pathname = location.pathname;
     const pageTitle = pathname.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'IB Dashboard';
-    document.title = `Solitaire IB Portal : ${pageTitle}`;
+    document.title = `fxbrokersuite IB Portal : ${pageTitle}`;
   }, [location.pathname]);
 
   // Real-time ban/lock check

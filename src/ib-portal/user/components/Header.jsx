@@ -123,7 +123,7 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
             {/* Mobile logo - moved to start */}
             <div className="lg:hidden flex-shrink-0">
               <Link to="/user/ib/dashboard">
-                <img src="/logo.png" alt="Solitaire Markets" className="h-7 md:h-8 w-auto" style={{ background: 'transparent' }} />
+                <img src="/logo.png" alt="fxbrokersuite Markets" className="h-7 md:h-8 w-auto" style={{ background: 'transparent' }} />
               </Link>
             </div>
 

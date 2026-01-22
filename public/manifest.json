@@ -1,19 +1,19 @@
 {
-  "name": "Solitaire Markets CRM",
-  "short_name": "Solitaire",
-  "description": "Solitaire Markets Customer Relationship Management System",
+  "name": "fxbrokersuite Markets CRM",
+  "short_name": "fxbrokersuite",
+  "description": "fxbrokersuite Markets Customer Relationship Management System",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffd700",
   "icons": [
     {
-      "src": "/logo.svg",
+      "src": "/logo.png",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "/logo.svg",
+      "src": "/logo.png",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }

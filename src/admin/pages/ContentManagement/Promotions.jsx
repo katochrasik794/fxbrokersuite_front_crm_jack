@@ -326,7 +326,7 @@ export default function Promotions() {
         </div>
         <button
           onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition font-medium"
         >
           <Plus className="w-5 h-5" />
           Create Promotion
@@ -363,7 +363,7 @@ export default function Promotions() {
               type="text"
               value={formData.title}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               placeholder="Enter promotion title (optional)"
               maxLength={255}
             />
@@ -393,7 +393,7 @@ export default function Promotions() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               required={!editingPromotion || !formData.existingImageUrl}
             />
             <p className="text-xs text-gray-500 mt-1">Max 5MB. Supported: JPEG, PNG, GIF, WebP</p>
@@ -408,7 +408,7 @@ export default function Promotions() {
                 type="text"
                 value={formData.button_text}
                 onChange={(e) => setFormData(prev => ({ ...prev, button_text: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="e.g., Learn More"
                 maxLength={100}
               />
@@ -421,7 +421,7 @@ export default function Promotions() {
               <select
                 value={formData.button_position}
                 onChange={(e) => setFormData(prev => ({ ...prev, button_position: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="right-center">Right Center</option>
                 <option value="left-center">Left Center</option>
@@ -442,7 +442,7 @@ export default function Promotions() {
               type="url"
               value={formData.button_link}
               onChange={(e) => setFormData(prev => ({ ...prev, button_link: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               placeholder="https://example.com"
             />
             <p className="text-xs text-gray-500 mt-1">URL to navigate when button is clicked</p>
@@ -457,7 +457,7 @@ export default function Promotions() {
                 type="number"
                 value={formData.priority}
                 onChange={(e) => setFormData(prev => ({ ...prev, priority: parseInt(e.target.value) || 0 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 min="0"
               />
               <p className="text-xs text-gray-500 mt-1">Higher priority shows first</p>
@@ -471,7 +471,7 @@ export default function Promotions() {
                 type="number"
                 value={formData.display_order}
                 onChange={(e) => setFormData(prev => ({ ...prev, display_order: parseInt(e.target.value) || 0 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 min="0"
               />
               <p className="text-xs text-gray-500 mt-1">Order within same priority</p>
@@ -484,7 +484,7 @@ export default function Promotions() {
               id="is_active"
               checked={formData.is_active}
               onChange={(e) => setFormData(prev => ({ ...prev, is_active: e.target.checked }))}
-              className="w-4 h-4 text-brand-500 border-gray-300 rounded focus:ring-brand-500"
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
             />
             <label htmlFor="is_active" className="ml-2 text-sm font-medium text-gray-700">
               Active (promotion will be displayed)
@@ -502,7 +502,7 @@ export default function Promotions() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {submitting ? 'Saving...' : editingPromotion ? 'Update' : 'Create'}
             </button>

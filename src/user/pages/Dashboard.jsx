@@ -588,7 +588,7 @@ function Dashboard() {
         <div className="w-full">
           {/* Header with Icon */}
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-3 h-3 rounded-full bg-brand-500 flex-shrink-0"></div>
+            <div className="w-3 h-3 rounded-full bg-blue-600 flex-shrink-0"></div>
             <h2 className="text-sm md:text-md font-bold text-gray-800">
               Recent Activity
             </h2>

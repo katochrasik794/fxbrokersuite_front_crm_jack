@@ -464,22 +464,22 @@ function CregisUSDTTRC20() {
 
           {/* Step Indicators */}
           <div className="flex items-center justify-center gap-2">
-            <div className={`flex items-center ${step >= 1 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 1 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step > 1 ? <CheckCircle className="w-6 h-6" /> : '1'}
               </div>
               <span className="ml-2 text-sm font-medium">Account & Amount</span>
             </div>
             <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 2 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 2 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step > 2 ? <CheckCircle className="w-6 h-6" /> : '2'}
               </div>
               <span className="ml-2 text-sm font-medium">Confirmation</span>
             </div>
             <ArrowRight className="w-5 h-5 text-gray-400" />
-            <div className={`flex items-center ${step >= 3 ? 'text-brand-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-brand-500 text-dark-base' : 'bg-gray-200'}`}>
+            <div className={`flex items-center ${step >= 3 ? 'text-blue-700' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 text-dark-base' : 'bg-gray-200'}`}>
                 {step >= 3 ? <CheckCircle className="w-6 h-6" /> : '3'}
               </div>
               <span className="ml-2 text-sm font-medium">Payment</span>
@@ -501,14 +501,14 @@ function CregisUSDTTRC20() {
                   <div
                     onClick={() => setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' })}
                     className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.deposit_to === 'wallet'
-                        ? 'border-brand-500 bg-brand-50'
+                        ? 'border-blue-600 bg-brand-50'
                         : 'border-gray-200 hover:border-gray-300'
                       }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.deposit_to === 'wallet'
-                            ? 'border-brand-500 bg-brand-500'
+                            ? 'border-blue-600 bg-blue-600'
                             : 'border-gray-300'
                           }`}>
                           {formData.deposit_to === 'wallet' && (
@@ -539,7 +539,7 @@ function CregisUSDTTRC20() {
                           type="button"
                           onClick={() => fetchAccountBalance(formData.mt5_account_id)}
                           disabled={syncingBalance === formData.mt5_account_id}
-                          className="flex items-center gap-1 text-xs text-brand-600 hover:text-brand-700 disabled:opacity-50"
+                          className="flex items-center gap-1 text-xs text-blue-700 hover:text-brand-700 disabled:opacity-50"
                           title="Refresh balance"
                         >
                           {syncingBalance === formData.mt5_account_id ? (
@@ -563,13 +563,13 @@ function CregisUSDTTRC20() {
                         }
                       }}
                       className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.deposit_to === 'mt5'
-                          ? 'border-brand-500 bg-brand-50'
+                          ? 'border-blue-600 bg-brand-50'
                           : 'border-gray-200 hover:border-gray-300'
                         }`}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.deposit_to === 'mt5'
-                            ? 'border-brand-500 bg-brand-500'
+                            ? 'border-blue-600 bg-blue-600'
                             : 'border-gray-300'
                           }`}>
                           {formData.deposit_to === 'mt5' && (
@@ -589,7 +589,7 @@ function CregisUSDTTRC20() {
                             setFormData({ ...formData, deposit_to: 'wallet', mt5_account_id: '' });
                           }
                         }}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white"
                       >
                         <option value="">Select MT5 Account</option>
                         {mt5Accounts.map((account) => {
@@ -683,7 +683,7 @@ function CregisUSDTTRC20() {
                   className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-all ${
                     amountError 
                       ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-200' 
-                      : 'border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200'
+                      : 'border-gray-200 focus:border-blue-600 focus:ring-2 focus:ring-brand-200'
                   }`}
                   placeholder="0.00"
                   required
@@ -700,7 +700,7 @@ function CregisUSDTTRC20() {
                 className={`w-full py-3 rounded-xl font-medium transition-colors shadow-lg hover:shadow-xl ${
                   amountError || !formData.amount || parseFloat(formData.amount) <= 0
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-brand-500 text-dark-base hover:bg-brand-600'
+                    : 'bg-blue-600 text-dark-base hover:bg-blue-700'
                 }`}
               >
                 Continue
@@ -747,7 +747,7 @@ function CregisUSDTTRC20() {
                 <button
                   onClick={handleConfirm}
                   disabled={submitting}
-                  className="flex-1 bg-brand-500 text-dark-base py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? 'Creating Payment...' : 'Confirm & Create Payment'}
                 </button>
@@ -767,7 +767,7 @@ function CregisUSDTTRC20() {
                   </p>
                   <button
                     onClick={() => navigate('/user/dashboard')}
-                    className="bg-brand-500 text-dark-base px-8 py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors shadow-lg hover:shadow-xl"
+                    className="bg-blue-600 text-dark-base px-8 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
                   >
                     Go to Dashboard
                   </button>
@@ -775,8 +775,8 @@ function CregisUSDTTRC20() {
               ) : (
                 <>
                   <div className="flex items-center justify-center gap-2 mb-4">
-                    <Clock className="w-6 h-6 text-brand-600" />
-                    <span className="text-2xl font-mono font-semibold text-brand-600">
+                    <Clock className="w-6 h-6 text-blue-700" />
+                    <span className="text-2xl font-mono font-semibold text-blue-700">
                       {formatTime(timeLeft)}
                     </span>
                   </div>
@@ -804,7 +804,7 @@ function CregisUSDTTRC20() {
                     <div className="bg-gray-50 rounded-xl p-4 mb-6">
                       <p className="text-sm text-gray-600 mb-2">Send USDT TRC20 to this address:</p>
                       <div className="flex items-center gap-2">
-                        <code className="text-brand-600 font-mono text-sm break-all flex-1">
+                        <code className="text-blue-700 font-mono text-sm break-all flex-1">
                           {paymentData.paymentAddress}
                         </code>
                         <button
@@ -812,7 +812,7 @@ function CregisUSDTTRC20() {
                             navigator.clipboard.writeText(paymentData.paymentAddress);
                             alert('Address copied to clipboard!');
                           }}
-                          className="px-3 py-1 bg-brand-500 text-dark-base rounded text-sm hover:bg-brand-600"
+                          className="px-3 py-1 bg-blue-600 text-dark-base rounded text-sm hover:bg-blue-700"
                         >
                           Copy
                         </button>
@@ -828,7 +828,7 @@ function CregisUSDTTRC20() {
                         href={paymentData.checkoutUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-brand-600 hover:text-brand-700 underline break-all"
+                        className="text-blue-700 hover:text-brand-700 underline break-all"
                       >
                         {paymentData.checkoutUrl}
                       </a>
@@ -899,7 +899,7 @@ function CregisUSDTTRC20() {
                 setPaymentStatus('pending');
                 navigate('/user/deposits');
               }}
-              className="w-full bg-brand-500 text-dark-base py-3 rounded-xl font-medium hover:bg-brand-600 transition-colors"
+              className="w-full bg-blue-600 text-dark-base py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors"
             >
               Back to Deposits
             </button>

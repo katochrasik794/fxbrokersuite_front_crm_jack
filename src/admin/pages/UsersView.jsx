@@ -936,7 +936,7 @@ export default function UsersView() {
           <div className="text-sm font-semibold">MT5 Accounts</div>
           <button
             onClick={() => setCreateAccountModal(true)}
-            className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg text-sm font-medium transition"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg text-sm font-medium transition"
           >
             Create {mt5Tab === 'real' ? 'Live' : 'Demo'} Account
           </button>
@@ -1053,7 +1053,7 @@ export default function UsersView() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleAddBonus(row.accountId)}
-                      className="px-2 py-1 rounded-full bg-brand-500 text-dark-base text-xs hover:bg-brand-600 shadow-sm"
+                      className="px-2 py-1 rounded-full bg-blue-600 text-dark-base text-xs hover:bg-blue-700 shadow-sm"
                     >
                       Add Bonus
                     </button>
@@ -1293,11 +1293,11 @@ export default function UsersView() {
                         className="sr-only"
                       />
                       <div className={`border-2 rounded-lg p-3 transition-all ${createAccountForm.mt5GroupId === group.id.toString()
-                        ? 'border-brand-500 bg-brand-500 bg-opacity-5'
+                        ? 'border-blue-600 bg-blue-600 bg-opacity-5'
                         : 'border-gray-200 hover:border-gray-300'
                         }`}>
                         <div className="flex items-center gap-2 mb-2">
-                          <div className={`w-4 h-4 rounded-full ${createAccountForm.mt5GroupId === group.id.toString() ? 'bg-brand-500' : 'bg-gray-300'
+                          <div className={`w-4 h-4 rounded-full ${createAccountForm.mt5GroupId === group.id.toString() ? 'bg-blue-600' : 'bg-gray-300'
                             }`}></div>
                           <span className="font-semibold text-gray-900 text-sm">
                             {group.dedicated_name || 'Unnamed Group'}
@@ -1323,7 +1323,7 @@ export default function UsersView() {
               value={createAccountForm.leverage}
               onChange={(e) => setCreateAccountForm(prev => ({ ...prev, leverage: parseInt(e.target.value) }))}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
             >
               <option value="50">1:50</option>
               <option value="100">1:100</option>
@@ -1349,7 +1349,7 @@ export default function UsersView() {
                 value={createAccountForm.masterPassword}
                 onChange={(e) => setCreateAccountForm(prev => ({ ...prev, masterPassword: e.target.value }))}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 pr-10"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 pr-10"
                 placeholder="Set your MT5 master password"
               />
               <button
@@ -1385,7 +1385,7 @@ export default function UsersView() {
             <button
               onClick={handleCreateAccount}
               disabled={submitting || loadingGroups || !createAccountForm.mt5GroupId || !createAccountForm.masterPassword}
-              className="px-4 h-10 rounded-md bg-brand-500 hover:bg-brand-600 text-dark-base disabled:opacity-70 disabled:cursor-not-allowed"
+              className="px-4 h-10 rounded-md bg-blue-600 hover:bg-blue-700 text-dark-base disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {submitting ? 'Creating...' : 'Create Account'}
             </button>
@@ -1418,7 +1418,7 @@ export default function UsersView() {
                   onChange={e => setActionModal({ ...actionModal, txId: e.target.value })}
                   disabled={submitting}
                   placeholder="Paste blockchain tx hash or bank reference (optional)"
-                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:bg-gray-100 disabled:text-gray-500" />
+                  className="w-full rounded-md border border-gray-300 h-10 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 disabled:bg-gray-100 disabled:text-gray-500" />
               </div>
             )}
             <div className="flex justify-end gap-2">
@@ -1530,7 +1530,7 @@ export default function UsersView() {
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                   minLength={8}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 pr-10"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 pr-10"
                   placeholder="Enter new password (min 8 characters)"
                 />
                 <button

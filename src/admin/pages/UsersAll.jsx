@@ -333,7 +333,7 @@ export default function UsersAll({ initialTitle = 'All Users', queryParams = {} 
       setRows(list => list.map(it => it.id === state.id ? { ...it, name: state.name, phone: state.phone, country: state.country, status: state.status } : it));
 
       // Update KYC verification status based on checkbox
-      const wasKycApproved = user.KYC?.verificationStatus && String(user.KYC.verificationStatus).toLowerCase() === 'approved';
+      const wasKycApproved = editing.KYC?.verificationStatus && String(editing.KYC.verificationStatus).toLowerCase() === 'approved';
       if (state.kycVerified !== wasKycApproved) {
         try {
           const kycRes = await fetch(`${BASE}/admin/users/${state.id}/kyc-verify`, {
@@ -657,7 +657,7 @@ function UserEditForm({ user, onCancel, onSubmit }) {
         </div>
         <div>
           <label className="text-xs text-gray-600">Email</label>
-          <input value={user.email} disabled className="mt-1 w-full rounded-md border border-gray-200 bg-gray-50 h-10 px-3" />
+          <input value={user.email || ""} disabled className="mt-1 w-full rounded-md border border-gray-200 bg-gray-50 h-10 px-3" />
         </div>
         <div>
           <label className="text-xs text-gray-600">Phone</label>

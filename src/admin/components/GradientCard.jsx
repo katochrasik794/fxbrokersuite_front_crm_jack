@@ -1,4 +1,4 @@
-// Solitaire Trader brand card — clean, subtle, responsive
+// fxbrokersuite Trader brand card — clean, subtle, responsive
 export default function BrandCard({
   label,
   value,
@@ -7,7 +7,7 @@ export default function BrandCard({
   tone = "teal",        // "teal" | "slate" | "amber" | "red"
 }) {
   const ring = {
-    teal:  "from-[#0dd5c4] to-[#0ab3a5]", // Solitaire Trader teal gradient edge
+    teal:  "from-[#0dd5c4] to-[#0ab3a5]", // fxbrokersuite Trader teal gradient edge
     slate: "from-[#334155] to-[#1f2937]",
     amber: "from-[#f59e0b] to-[#f59e0b]",
     red:   "from-[#ef4444] to-[#ef4444]",

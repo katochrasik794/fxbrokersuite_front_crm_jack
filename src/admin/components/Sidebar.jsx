@@ -24,10 +24,10 @@ function Section({ title, items, pathname, openMap, onToggle, onNavigate, isDark
           const withinChild = hasChildren && it.children.some((c) => pathname.startsWith(c.to));
           const isOpen = openMap?.[it.to || it.label] ?? withinChild;
 
-          const parentBase = isDark ? "text-slate-200 hover:bg-neutral-800/20 hover:text-white" : "text-dark-base hover:bg-brand-500/10 hover:text-dark-base";
-          const parentActive = isDark ? "bg-neutral-800/40 text-white shadow-sm" : "bg-brand-500 text-dark-base shadow-sm ring-1 ring-black/5";
-          const childBase = isDark ? "text-slate-300 hover:bg-neutral-800/15 hover:text-white" : "text-dark-base/70 hover:bg-brand-500/10 hover:text-dark-base";
-          const childActive = isDark ? "bg-neutral-800/25 text-white" : "bg-brand-500/20 text-dark-base font-medium";
+          const parentBase = isDark ? "text-slate-200 hover:bg-neutral-800/20 hover:text-white" : "text-dark-base hover:bg-blue-600/10 hover:text-dark-base";
+          const parentActive = isDark ? "bg-neutral-800/40 text-white shadow-sm" : "bg-blue-600 text-white shadow-sm ring-1 ring-black/5";
+          const childBase = isDark ? "text-slate-300 hover:bg-neutral-800/15 hover:text-white" : "text-dark-base/70 hover:bg-blue-600/10 hover:text-dark-base";
+          const childActive = isDark ? "bg-neutral-800/25 text-white" : "bg-blue-600 text-white font-medium";
           const dotCls = isDark ? "bg-white/60" : "bg-gray-600";
 
           if (hasChildren) {
@@ -40,7 +40,7 @@ function Section({ title, items, pathname, openMap, onToggle, onNavigate, isDark
                     }`}
                   title={collapsed ? it.label : undefined}
                 >
-                  <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-500 transition-all duration-200 ${isOpen || active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-blue-600 transition-all duration-200 ${isOpen || active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                     }`} />
                   <span className="flex items-center gap-2 min-w-0">
                     {it.icon ? <it.icon size={16} className="shrink-0" /> : <span className={`h-2 w-2 rounded-full ${dotCls} shrink-0`} />}
@@ -72,7 +72,7 @@ function Section({ title, items, pathname, openMap, onToggle, onNavigate, isDark
                         >
                           {({ isActive }) => (
                             <>
-                              <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-500 transition-all duration-200 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-blue-600 transition-all duration-200 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                                 }`} />
                               {child.icon ? (
                                 <child.icon size={14} className="shrink-0 opacity-80" />
@@ -104,7 +104,7 @@ function Section({ title, items, pathname, openMap, onToggle, onNavigate, isDark
             >
               {({ isActive }) => (
                 <>
-                  <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-brand-500 transition-all duration-200 ${active || isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  <span className={`absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-blue-600 transition-all duration-200 ${active || isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                     }`} />
                   {it.icon ? <it.icon size={16} className="shrink-0" /> : <span className={`h-2 w-2 rounded-full ${dotCls} shrink-0`} />}
                   {!collapsed && <span className="font-medium truncate text-sm">{it.label}</span>}
@@ -124,9 +124,9 @@ function Header({ role, collapsed = false }) {
     <div className="p-4">
       <div className="flex items-center justify-center">
         {collapsed ? (
-          <img src="/logo.svg" alt="Solitaire Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
+          <img src="/logo.png" alt="fxbrokersuite Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
         ) : (
-          <img src="/logo.svg" alt="Solitaire Markets" className="h-14 w-auto" style={{ background: 'transparent' }} />
+          <img src="/logo.png" alt="fxbrokersuite Markets" className="h-14 w-auto" style={{ background: 'transparent' }} />
         )}
       </div>
     </div>
@@ -354,7 +354,7 @@ export default function Sidebar({
   };
 
   const lightStyle = {
-    background: "#F1F6EC" // neutral-50
+    background: "#ffffff"
   };
 
   const backgroundStyle = lightStyle;

@@ -1,4 +1,4 @@
-# Solitaire - React + Tailwind CSS Project
+# fxbrokersuite - React + Tailwind CSS Project
 
 A modern React application built with Vite and styled with Tailwind CSS.
 
@@ -49,7 +49,7 @@ npm run preview
 ## 📁 Project Structure
 
 ```
-Solitaire/
+fxbrokersuite/
 ├── src/
 │   ├── App.jsx       # Main App component
 │   ├── main.jsx      # Entry point

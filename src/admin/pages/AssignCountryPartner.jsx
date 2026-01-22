@@ -146,19 +146,19 @@ export default function AssignCountryPartner() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Full Name *</label>
-                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Enter full name" />
+                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Enter full name" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Email Address *</label>
-                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all" required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="user@example.com" />
+                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all" required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="user@example.com" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Password *</label>
-                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all" required type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="Enter secure password" />
+                    <input className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all" required type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="Enter secure password" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Country</label>
-                    <select className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all" required value={form.country || ""} onChange={e => setForm(f => ({ ...f, country: e.target.value }))}>
+                    <select className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all" required value={form.country || ""} onChange={e => setForm(f => ({ ...f, country: e.target.value }))}>
                       <option value="" disabled>Select country...</option>
                       {countries.map((c) => c && c.code ? (
                         <option key={c.code} value={c.code}>{c.country}</option>
@@ -173,7 +173,7 @@ export default function AssignCountryPartner() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Status</label>
-                    <select className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}>
+                    <select className="w-full rounded-lg border border-gray-300 h-11 px-4 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}>
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
@@ -185,7 +185,7 @@ export default function AssignCountryPartner() {
                         <button
                           type="button"
                           onClick={() => setForm(f => ({ ...f, features: FLATTENED_FEATURES.map(feat => feat.key) }))}
-                          className="px-3 py-1 text-xs font-medium text-brand-600 hover:text-brand-700 hover:bg-brand-50 rounded-md transition-all"
+                          className="px-3 py-1 text-xs font-medium text-blue-700 hover:text-brand-700 hover:bg-brand-50 rounded-md transition-all"
                         >
                           Select All
                         </button>
@@ -220,7 +220,7 @@ export default function AssignCountryPartner() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="px-6 sm:px-8 py-2 sm:py-3 rounded-lg bg-brand-500 hover:bg-brand-600 text-dark-base disabled:opacity-60 disabled:cursor-not-allowed transition-all font-medium shadow-sm hover:shadow-md text-sm sm:text-base"
+                    className="px-6 sm:px-8 py-2 sm:py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-dark-base disabled:opacity-60 disabled:cursor-not-allowed transition-all font-medium shadow-sm hover:shadow-md text-sm sm:text-base"
                   >{loading ? "Creating..." : "Create Partner"}</button>
                 </div>
               </div>

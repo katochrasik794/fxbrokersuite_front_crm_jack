@@ -318,7 +318,7 @@ export default function Tickers() {
         </div>
         <button
           onClick={handleCreate}
-          className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition font-medium"
         >
           <Plus className="w-5 h-5" />
           Create Ticker
@@ -355,7 +355,7 @@ export default function Tickers() {
               type="text"
               value={formData.title}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               placeholder="Enter ticker title"
               maxLength={255}
               required
@@ -369,7 +369,7 @@ export default function Tickers() {
             <textarea
               value={formData.message}
               onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               placeholder="Enter ticker message (optional)"
               rows={3}
             />
@@ -403,7 +403,7 @@ export default function Tickers() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
             <p className="text-xs text-gray-500 mt-1">Max 5MB. Supported: JPEG, PNG, GIF, WebP</p>
           </div>
@@ -416,7 +416,7 @@ export default function Tickers() {
               type="url"
               value={formData.link_url}
               onChange={(e) => setFormData(prev => ({ ...prev, link_url: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               placeholder="https://example.com (optional)"
             />
           </div>
@@ -429,7 +429,7 @@ export default function Tickers() {
               <select
                 value={formData.position}
                 onChange={(e) => setFormData(prev => ({ ...prev, position: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 <option value="top">Top (Above verification banner)</option>
                 <option value="middle">Middle (Between navbar and content)</option>
@@ -444,7 +444,7 @@ export default function Tickers() {
                 type="number"
                 value={formData.priority}
                 onChange={(e) => setFormData(prev => ({ ...prev, priority: parseInt(e.target.value) || 0 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 min="0"
                 max="5"
               />
@@ -461,7 +461,7 @@ export default function Tickers() {
                 type="number"
                 value={formData.display_duration}
                 onChange={(e) => setFormData(prev => ({ ...prev, display_duration: parseInt(e.target.value) || 5 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 min="1"
                 required
               />
@@ -475,7 +475,7 @@ export default function Tickers() {
                 type="number"
                 value={formData.animation_speed}
                 onChange={(e) => setFormData(prev => ({ ...prev, animation_speed: parseInt(e.target.value) || 50 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 min="10"
                 required
               />
@@ -488,7 +488,7 @@ export default function Tickers() {
               id="is_active"
               checked={formData.is_active}
               onChange={(e) => setFormData(prev => ({ ...prev, is_active: e.target.checked }))}
-              className="w-4 h-4 text-brand-500 border-gray-300 rounded focus:ring-brand-500"
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-600"
             />
             <label htmlFor="is_active" className="ml-2 text-sm font-medium text-gray-700">
               Active (ticker will be displayed)
@@ -506,7 +506,7 @@ export default function Tickers() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-dark-base rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-dark-base rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {submitting ? 'Saving...' : editingTicker ? 'Update' : 'Create'}
             </button>

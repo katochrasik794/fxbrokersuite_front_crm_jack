@@ -59,7 +59,7 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
             {/* Mobile logo - centered */}
             <div className="lg:hidden absolute left-1/2 transform -translate-x-1/2">
               <Link to="/admin/ib/dashboard">
-                <img src="/logo.png" alt="Solitaire Markets" className="h-7 w-auto" style={{ background: 'transparent' }} />
+                <img src="/logo.png" alt="fxbrokersuite Markets" className="h-7 w-auto" style={{ background: 'transparent' }} />
               </Link>
             </div>
           </div>

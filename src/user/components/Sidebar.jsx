@@ -179,10 +179,10 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
       {/* Logo with Close Button */}
       <div className={`bg-transparent pt-4 pb-2 flex-shrink-0 flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between pl-8 pr-6'}`}>
         {collapsed ? (
-          <img src="/logo.png" alt="Solitaire Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
+          <img src="/logo.png" alt="fxbrokersuite Markets" className="h-8 w-8 object-contain" style={{ background: 'transparent' }} />
         ) : (
           <>
-            <img src="/logo.png" alt="Solitaire Markets" className="h-14 w-auto " style={{ background: 'transparent' }} />
+            <img src="/logo.png" alt="fxbrokersuite Markets" className="h-14 w-auto " style={{ background: 'transparent' }} />
             {/* Close button for mobile */}
             <button
               onClick={onClose}
@@ -206,7 +206,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('dashboard') && <Link
             to="/user/dashboard"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/dashboard')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -222,7 +222,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('deposits') && <Link
             to="/user/deposits"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/deposits')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -239,7 +239,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('withdrawals') && <Link
             to="/user/withdrawals"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/withdrawals') || isActive('/withdrawals/crypto')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -256,7 +256,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('transfers') && <Link
             to="/user/transfers"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/transfers')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -272,7 +272,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('payment-details') && <Link
             to="/user/payment-details"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/payment-details')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -288,7 +288,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('reports') && <Link
             to="/user/reports"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/reports')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -305,7 +305,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <Link
               to="/user/trade-performance"
               className={`w-full flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors rounded-lg ${isActive('/trade-performance')
-                ? 'bg-brand-500 text-dark-base'
+                ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
                 }`}
               title={collapsed ? 'Trade Performance' : undefined}
@@ -322,7 +322,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <button
               onClick={() => toggleSubmenu('analysis')}
               className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} ${collapsed ? 'px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isSubmenuActive(['/analysis', '/analysis/signal-centre', '/analysis/assets-overview', '/analysis/market-news', '/analysis/market-calendar', '/analysis/research-terminal'])
-                ? 'bg-brand-500 text-dark-base'
+                ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
                 }`}
               style={{}}
@@ -351,7 +351,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 {isSubMenuEnabled('analysis/signal-centre') && <Link
                   to="/user/analysis/signal-centre"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/signal-centre')
-                    ? 'bg-brand-50 hover:bg-brand-100 text-brand-900 font-medium'
+                    ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -360,7 +360,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 {isSubMenuEnabled('analysis/assets-overview') && <Link
                   to="/user/analysis/assets-overview"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/assets-overview')
-                    ? 'bg-brand-50 hover:bg-brand-100 text-brand-900 font-medium'
+                    ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -369,7 +369,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 {isSubMenuEnabled('analysis/market-news') && <Link
                   to="/user/analysis/market-news"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/market-news')
-                    ? 'bg-brand-50 hover:bg-brand-100 text-brand-900 font-medium'
+                    ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -378,7 +378,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 {isSubMenuEnabled('analysis/market-calendar') && <Link
                   to="/user/analysis/market-calendar"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/market-calendar')
-                    ? 'bg-brand-50 hover:bg-brand-100 text-brand-900 font-medium'
+                    ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -387,7 +387,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
                 {isSubMenuEnabled('analysis/research-terminal') && <Link
                   to="/user/analysis/research-terminal"
                   className={`block px-4 py-2 rounded-lg transition-colors ${isActive('/analysis/research-terminal')
-                    ? 'bg-brand-50 hover:bg-brand-100 text-brand-900 font-medium'
+                    ? 'bg-blue-600 text-white'
                     : 'text-gray-600 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                 >
@@ -401,7 +401,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
           {isMenuEnabled('platforms') && <Link
             to="/user/platforms"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/platforms')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
@@ -413,20 +413,20 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             {!collapsed && <span className="text-sm font-normal">Platforms</span>}
           </Link>}
 
-          {/* Solitaire Support */}
+          {/* fxbrokersuite Support */}
           {isMenuEnabled('support') && <Link
             to="/user/support"
             className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/support')
-              ? 'bg-brand-500 text-dark-base'
+              ? 'bg-blue-600 text-white'
               : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
               }`}
             style={{}}
-            title={collapsed ? 'Solitaire Support' : undefined}
+            title={collapsed ? 'fxbrokersuite Support' : undefined}
           >
             <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={collapsed ? {} : { marginRight: '12px' }}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
-            {!collapsed && <span className="text-sm font-normal">Solitaire Support</span>}
+            {!collapsed && <span className="text-sm font-normal">fxbrokersuite Support</span>}
           </Link>}
 
           {/* Partner's Cabinet / Apply as IB */}
@@ -434,7 +434,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <Link
               to="/user/ib/dashboard"
               className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${location.pathname.startsWith('/user/ib')
-                ? 'bg-brand-500 text-dark-base'
+                ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
                 }`}
               style={{}}
@@ -449,7 +449,7 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
             <Link
               to="/user/apply-as-ib"
               className={`flex items-center ${collapsed ? 'justify-center px-2' : 'px-4'} py-3 transition-colors relative rounded-lg ${isActive('/apply-as-ib')
-                ? 'bg-brand-500 text-dark-base'
+                ? 'bg-blue-600 text-white'
                 : 'text-gray-700 hover:bg-brand-50 hover:text-brand-900'
                 }`}
               style={{}}
@@ -469,13 +469,13 @@ function Sidebar({ isOpen, onClose, collapsed = false }) {
         <button
           onClick={handleLogout}
           className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-start'} ${collapsed ? 'px-2' : 'px-4'} py-3 bg-black hover:bg-gray-900 rounded-lg transition-colors`}
-          style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '500', color: '#c8f300' }}
+          style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '500', color: '#3b82f6' }}
           title={collapsed ? 'Logout' : undefined}
         >
-          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#c8f300', ...(collapsed ? {} : { marginRight: '8px' }) }}>
+          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#3b82f6', ...(collapsed ? {} : { marginRight: '8px' }) }}>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
-          {!collapsed && <span style={{ color: '#c8f300' }}>Logout</span>}
+          {!collapsed && <span style={{ color: '#3b82f6' }}>Logout</span>}
         </button>
       </div>
     </div>

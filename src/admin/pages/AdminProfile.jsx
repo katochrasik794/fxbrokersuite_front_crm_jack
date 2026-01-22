@@ -367,7 +367,7 @@ export default function AdminProfile() {
             </div>
             <button
               onClick={() => setIsEditing(!isEditing)}
-              className="bg-brand-500 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
+              className="bg-blue-600 text-dark-base px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto"
             >
               <Edit className="h-4 w-4 sm:h-5 sm:w-5" />
               <span className="hidden sm:inline">{isEditing ? 'Cancel Edit' : 'Edit Profile'}</span>
@@ -407,7 +407,7 @@ export default function AdminProfile() {
                         type="text"
                         value={editForm.username}
                         onChange={(e) => setEditForm({ ...editForm, username: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         required
                       />
                     </div>
@@ -417,7 +417,7 @@ export default function AdminProfile() {
                         type="email"
                         value={editForm.email}
                         onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         required
                       />
                     </div>
@@ -433,7 +433,7 @@ export default function AdminProfile() {
                             type={showPassword ? "text" : "password"}
                             value={editForm.currentPassword}
                             onChange={(e) => setEditForm({ ...editForm, currentPassword: e.target.value })}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-600"
                           />
                           <button
                             type="button"
@@ -450,7 +450,7 @@ export default function AdminProfile() {
                           type="password"
                           value={editForm.newPassword}
                           onChange={(e) => setEditForm({ ...editForm, newPassword: e.target.value })}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         />
                       </div>
                       <div>
@@ -459,7 +459,7 @@ export default function AdminProfile() {
                           type="password"
                           value={editForm.confirmPassword}
                           onChange={(e) => setEditForm({ ...editForm, confirmPassword: e.target.value })}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         />
                       </div>
                     </div>
@@ -475,7 +475,7 @@ export default function AdminProfile() {
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                      className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                     >
                       <Save className="h-4 w-4" />
                       Save Changes

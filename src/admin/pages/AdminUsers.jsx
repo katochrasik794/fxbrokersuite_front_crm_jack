@@ -10,7 +10,7 @@ function AdminUsers() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-brand-600 mb-2">
+            <h1 className="text-4xl font-bold text-blue-700 mb-2">
               Manage Users
             </h1>
             <p className="text-gray-600">
@@ -61,7 +61,7 @@ function AdminUsers() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button className="text-brand-600 hover:text-brand-900 mr-3">
+                        <button className="text-blue-700 hover:text-brand-900 mr-3">
                           Edit
                         </button>
                         <button className="text-red-600 hover:text-red-900">

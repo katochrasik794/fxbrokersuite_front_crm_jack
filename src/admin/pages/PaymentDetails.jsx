@@ -341,7 +341,7 @@ export default function PaymentDetails() {
     <div className="p-2 sm:p-4">
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-lg bg-brand-500 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
             <CreditCard size={20} className="text-dark-base" />
           </div>
           <h1 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">

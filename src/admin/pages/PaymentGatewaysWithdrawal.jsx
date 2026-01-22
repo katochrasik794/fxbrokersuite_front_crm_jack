@@ -344,7 +344,7 @@ export default function PaymentGatewaysWithdrawal() {
   if (loading) {
     return (
       <div className="p-8 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500 mx-auto"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
         <p className="mt-4 text-gray-600">Loading withdrawal gateways...</p>
       </div>
     );
@@ -355,7 +355,7 @@ export default function PaymentGatewaysWithdrawal() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-            <TrendingDown className="h-7 w-7 sm:h-8 sm:w-8 text-brand-500" />
+            <TrendingDown className="h-7 w-7 sm:h-8 sm:w-8 text-blue-600" />
             Withdrawal Gateways
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">
@@ -364,7 +364,7 @@ export default function PaymentGatewaysWithdrawal() {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-brand-500 text-dark-base px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center gap-2"
+          className="bg-blue-600 text-dark-base px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
           <span className="hidden sm:inline">Add Withdrawal Gateway</span>
@@ -628,7 +628,7 @@ export default function PaymentGatewaysWithdrawal() {
                     id="is_active"
                     checked={formData.is_active}
                     onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_active" className="text-sm text-gray-700">
                     Active Gateway
@@ -641,7 +641,7 @@ export default function PaymentGatewaysWithdrawal() {
                     id="is_deposit_enabled"
                     checked={formData.is_deposit_enabled}
                     onChange={(e) => setFormData({ ...formData, is_deposit_enabled: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_deposit_enabled" className="text-sm text-gray-700">
                     Enable for Deposits
@@ -654,7 +654,7 @@ export default function PaymentGatewaysWithdrawal() {
                     id="is_withdrawal_enabled"
                     checked={formData.is_withdrawal_enabled}
                     onChange={(e) => setFormData({ ...formData, is_withdrawal_enabled: e.target.checked })}
-                    className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="rounded border-gray-300 text-blue-700 focus:ring-blue-600"
                   />
                   <label htmlFor="is_withdrawal_enabled" className="text-sm text-gray-700">
                     Enable for Withdrawals *
@@ -694,7 +694,7 @@ export default function PaymentGatewaysWithdrawal() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-brand-500 text-dark-base rounded-lg hover:bg-brand-600 flex items-center gap-2"
+                  className="px-4 py-2 bg-blue-600 text-dark-base rounded-lg hover:bg-blue-700 flex items-center gap-2"
                 >
                   <Save className="h-4 w-4" />
                   {editingGateway ? 'Update Gateway' : 'Save Gateway'}
@@ -719,7 +719,7 @@ export default function PaymentGatewaysWithdrawal() {
               <p className="text-gray-500 mb-4">Get started by adding your first withdrawal gateway</p>
               <button
                 onClick={() => setShowForm(true)}
-                className="bg-brand-500 text-dark-base px-4 py-2 rounded-lg hover:bg-brand-600 flex items-center gap-2 mx-auto"
+                className="bg-blue-600 text-dark-base px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 mx-auto"
               >
                 <Plus className="h-4 w-4" />
                 Add Gateway
@@ -869,7 +869,7 @@ export default function PaymentGatewaysWithdrawal() {
                             <div className="flex flex-col items-center gap-0.5">
                               <button
                                 onClick={() => setViewingImage({ type: 'qr', url: fileUrl(gateway.qr_code_url) })}
-                                className="p-1.5 w-8 h-8 flex items-center justify-center text-brand-600 hover:text-brand-900 hover:bg-brand-50 border border-brand-200 rounded"
+                                className="p-1.5 w-8 h-8 flex items-center justify-center text-blue-700 hover:text-brand-900 hover:bg-brand-50 border border-brand-200 rounded"
                                 title="View QR Code"
                               >
                                 <Eye className="h-3 w-3" />

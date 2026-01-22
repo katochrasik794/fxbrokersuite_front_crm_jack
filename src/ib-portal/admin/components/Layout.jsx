@@ -43,7 +43,7 @@ function Layout() {
   useEffect(() => {
     const pathname = location.pathname;
     const pageTitle = pathname.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'IB Dashboard';
-    document.title = `Solitaire IB Admin : ${pageTitle}`;
+    document.title = `fxbrokersuite IB Admin : ${pageTitle}`;
   }, [location.pathname]);
 
   return (

@@ -53,7 +53,7 @@ function StatCard({ title, value, subtitle, icon: Icon, color = "blue", progress
     green: "bg-green-50 text-green-600",
     red: "bg-red-50 text-red-600",
     yellow: "bg-yellow-50 text-yellow-600",
-    purple: "bg-brand-50 text-brand-600"
+    purple: "bg-brand-50 text-blue-700"
   };
 
   return (

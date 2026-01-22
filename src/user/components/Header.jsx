@@ -158,7 +158,7 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
 
                 {/* Header Logo - left aligned on mobile, hidden on desktop (managed by sidebar) */}
                 <Link to="/user/dashboard" className="lg:hidden flex items-center">
-                  <img src="/logo.png" alt="Solitaire Markets" className="h-6 md:h-7 w-auto" style={{ background: 'transparent' }} />
+                  <img src="/logo.png" alt="fxbrokersuite Markets" className="h-6 md:h-7 w-auto" style={{ background: 'transparent' }} />
                 </Link>
 
                 {/* Grid icon - hidden on mobile */}
@@ -260,7 +260,7 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
                 <div className="relative" ref={profileRef}>
                   <button
                     onClick={() => setProfileOpen(!profileOpen)}
-                    className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-[#c8f300] hover:bg-[#c8f300] text-black transition-all duration-200 shadow-sm hover:shadow-md"
+                    className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     <svg className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -296,7 +296,7 @@ function Header({ onMenuClick, onSidebarToggle, sidebarCollapsed = false }) {
                             setProfileOpen(false)
                           }}
                         >
-                          Solitaire Support
+                          fxbrokersuite Support
                         </Link>
                         <div className="border-t border-gray-200 my-1"></div>
                         <button
