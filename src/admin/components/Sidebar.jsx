@@ -146,7 +146,7 @@ export default function Sidebar({
   const { admin } = useAuth();
 
   const [customFeatures, setCustomFeatures] = useState(null); // null = unknown, [] = none
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api"; // Fixed for production deployment
 
   useEffect(() => {
     // Check if user is a country admin
