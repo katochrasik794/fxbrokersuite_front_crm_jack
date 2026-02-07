@@ -49,7 +49,7 @@ export default function SendEmails() {
   const [templateVariables, setTemplateVariables] = useState({});
   const [availableVariables, setAvailableVariables] = useState([]);
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   // Load templates on mount
   useEffect(() => {

@@ -25,7 +25,7 @@ export default function MT5Assign() {
     leverage: "",
   });
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   const filteredUsers = users.filter(user =>
     user.email.toLowerCase().includes(searchTerm.toLowerCase())

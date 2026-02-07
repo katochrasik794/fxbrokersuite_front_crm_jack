@@ -13,7 +13,7 @@ export default function ReportsAdminTransactions() {
 
   const BASE = import.meta.env.VITE_BACKEND_API_URL
     || import.meta.env.VITE_API_BASE_URL
-    || "http://localhost:5000/api";
+    || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => {
     let stop = false;

@@ -5,7 +5,7 @@ import Toast from '../../components/Toast.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import ProTable from '../../admin/components/ProTable.jsx'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api'
 const DAILY_TRANSFER_LIMIT = 10000 // Default daily limit in USD
 
 function Transfers() {

@@ -26,7 +26,7 @@ export default function GroupManagement() {
   const [savingLimits, setSavingLimits] = useState(false);
 
   // Backend base URL (Express server runs on 5000 with /api prefix)
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   const loadGroups = useCallback(async () => {
     try {

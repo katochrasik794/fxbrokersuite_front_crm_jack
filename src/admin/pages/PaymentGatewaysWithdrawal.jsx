@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import ProTable from "../components/ProTable.jsx";
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 const GATEWAY_TYPES = [
   { value: 'crypto', label: 'Cryptocurrency', icon: DollarSign, color: 'bg-orange-100 text-orange-800' },

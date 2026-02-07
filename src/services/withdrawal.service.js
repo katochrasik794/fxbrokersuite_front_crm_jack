@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from './auth';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
 
 class WithdrawalService {
     // Helper to get headers with token

@@ -126,7 +126,7 @@ function Ticker({ ticker, onClose }) {
               const fullImageUrl = ticker.image_url 
                 ? (ticker.image_url.startsWith('http') 
                     ? ticker.image_url 
-                    : `${(import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${ticker.image_url}`)
+                    : `${(import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api').replace('/api', '')}${ticker.image_url}`)
                 : null;
 
               return (

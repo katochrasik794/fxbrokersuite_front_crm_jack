@@ -5,7 +5,7 @@ import { RefreshCw, FileText, TrendingUp, TrendingDown, Users, DollarSign, Alert
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 // Format currency
 function fmtAmount(v) {

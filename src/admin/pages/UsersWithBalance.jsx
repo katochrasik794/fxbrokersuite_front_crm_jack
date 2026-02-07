@@ -24,7 +24,7 @@ export default function UsersWithBalance() {
   const [actionModal, setActionModal] = useState(null); // { type:'deposit'|'withdraw', accountId, amount:'', comment:'' }
   const [loadingId, setLoadingId] = useState(null); // Track which row is loading
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => {
     let stop = false;

@@ -16,7 +16,7 @@ export default function KycList() {
   const [addrFile, setAddrFile] = useState(null);
   const [docLink, setDocLink] = useState("");
   const [addrLink, setAddrLink] = useState("");
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   async function load() {
     setLoading(true); setErr("");

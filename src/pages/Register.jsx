@@ -4,7 +4,7 @@ import { Activity } from 'lucide-react'
 import authService from '../services/auth.js'
 import AuthLoader from '../components/AuthLoader.jsx'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
 
 function Register() {
   const [currentPage, setCurrentPage] = useState(1) // 1 = country selection, 2 = registration form, 3 = OTP verification

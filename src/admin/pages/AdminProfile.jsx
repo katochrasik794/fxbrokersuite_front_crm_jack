@@ -5,7 +5,7 @@ import Datatable from "../../components/Datatable.jsx";
 const BASE =
   import.meta.env.VITE_BACKEND_API_URL ||
   import.meta.env.VITE_API_URL ||
-  "http://localhost:5000/api";
+  "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 import {
   User,
   Mail,

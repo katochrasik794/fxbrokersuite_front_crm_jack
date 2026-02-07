@@ -2,7 +2,7 @@ import axios from 'axios'
 import authService from './auth'
 
 // Ensure API_URL includes /api if not already present
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const baseUrl = import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api'
 const API_URL = baseUrl.endsWith('/api') ? `${baseUrl}/support` : `${baseUrl}/api/support`
 
 // Debug: Log API URL in development

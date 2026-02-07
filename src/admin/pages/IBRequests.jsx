@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 import ProTable from '../components/ProTable.jsx';
 import Badge from '../components/Badge.jsx';
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api';
+const BASE = import.meta.env.VITE_BACKEND_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
 const IB_ADMIN_URL = import.meta.env.VITE_IB_ADMIN_URL || 'http://localhost:5173';
 
 export default function IBRequests() {

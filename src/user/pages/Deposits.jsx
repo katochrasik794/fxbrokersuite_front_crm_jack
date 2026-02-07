@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.js';
 import PageHeader from '../components/PageHeader.jsx';
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const BACKEND_URL = import.meta.env.VITE_BACKEND_API_URL?.replace('/api', '') || import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_API_URL?.replace('/api', '') || import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://fxbrokersuite-back-crm-jack.onrender.com';
 
 function Deposits() {
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ function Deposits() {
     }
 
     if (isLocalhost) {
-      const localBase = BACKEND_URL || 'http://localhost:5000';
+      const localBase = BACKEND_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com';
       return `${localBase}${url.startsWith('/') ? '' : '/'}${url}`;
     }
 

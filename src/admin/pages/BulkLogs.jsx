@@ -29,7 +29,7 @@ export default function BulkLogs() {
     search: "",
   });
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => {
     let stop = false;

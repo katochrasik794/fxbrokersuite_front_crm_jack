@@ -5,7 +5,7 @@ import { RefreshCw, Power, PowerOff, ListChecks, ChevronDown, ChevronRight } fro
 import Swal from "sweetalert2";
 import { clearMenuCache } from "../../services/menuService.js";
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 export default function MenuManagement() {
   const [rows, setRows] = useState([]);

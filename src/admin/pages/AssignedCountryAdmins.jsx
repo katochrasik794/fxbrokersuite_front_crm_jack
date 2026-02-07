@@ -49,7 +49,7 @@ export default function AssignedCountryAdmins() {
   const [rows, setRows] = useState([]);
   const [editing, setEditing] = useState(null);
   const [viewing, setViewing] = useState(null);
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => { fetchData(); }, []);
 
@@ -172,7 +172,7 @@ export default function AssignedCountryAdmins() {
 
 function EditCountryAdmin({ row, onClose }) {
   const [state, setState] = useState({ name: row.name, status: row.status, country: row.country, features: row.features || [] });
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
   const ALL = Object.keys(FEATURE_LABELS);
   async function save() {
     const token = localStorage.getItem('adminToken');

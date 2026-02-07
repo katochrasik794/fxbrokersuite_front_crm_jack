@@ -67,7 +67,7 @@ export default function SupportTicketsList({ status }) {
   const fetchRoles = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
       const response = await fetch(`${BASE}/admin/roles`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });

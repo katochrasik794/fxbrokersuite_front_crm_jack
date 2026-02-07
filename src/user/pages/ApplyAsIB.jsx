@@ -58,7 +58,7 @@ function ApplyAsIB() {
           return;
         }
 
-        const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api';
+        const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
         const response = await fetch(`${API_BASE_URL}/ib-requests/status`, {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -130,7 +130,7 @@ function ApplyAsIB() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api'}/ib-requests`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api'}/ib-requests`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

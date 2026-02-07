@@ -4,7 +4,7 @@ import Modal from "../../components/Modal.jsx";
 import { Plus, Edit, Trash2, Power, PowerOff, Image as ImageIcon, X } from "lucide-react";
 import Swal from "sweetalert2";
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 function fmtDate(v) {
   if (!v) return "-";

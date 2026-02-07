@@ -38,7 +38,7 @@ export default function Topbar({
   // Light theme: use plain white background (no gradient)
 
   // Resolve accessible menu (respects custom role features just like Sidebar)
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
   
   // Fetch country admin info if logged in as country admin
   useEffect(() => {

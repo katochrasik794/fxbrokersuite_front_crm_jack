@@ -29,7 +29,7 @@ export default function DepositsPending() {
   const [toast, setToast] = useState(null);
   const [approveComment, setApproveComment] = useState("");
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || import.meta.env.VITE_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => {
     let stop = false;

@@ -7,7 +7,7 @@ export default function AddUser() {
   const [state, setState] = useState({ name: '', email: '', phone: '', country: '', password: '', role: 'user', status: 'active', emailVerified: false, kycVerified: false });
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState('');
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api';
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
   const navigate = useNavigate(); // <-- for redirect
   const [countries, setCountries] = useState([]);
 

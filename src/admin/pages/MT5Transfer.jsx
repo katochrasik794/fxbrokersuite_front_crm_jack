@@ -4,7 +4,7 @@ import Toast from "../../components/Toast.jsx";
 import ProTable from "../components/ProTable.jsx";
 
 const API_BASE_URL =
-  import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 function SearchableSelect({ options, value, onChange, placeholder }) {
   const [open, setOpen] = useState(false);

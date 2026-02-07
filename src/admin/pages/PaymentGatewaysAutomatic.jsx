@@ -15,7 +15,7 @@ import {
   EyeOff
 } from "lucide-react";
 
-const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
 export default function PaymentGatewaysAutomatic() {
   const [gateways, setGateways] = useState([]);

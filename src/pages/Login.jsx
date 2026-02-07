@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom'
 import authService from '../services/auth.js'
 import AuthLoader from '../components/AuthLoader.jsx'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://fxbrokersuite-back-crm-jack.onrender.com/api';
 
 function Login() {
   const [email, setEmail] = useState('')

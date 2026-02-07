@@ -164,7 +164,7 @@ export default function AdminDashboard() {
   const [bulkLogsLoading, setBulkLogsLoading] = useState(true);
   const [bulkLogsError, setBulkLogsError] = useState("");
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
   const { admin } = useAuth();
   const navigate = useNavigate();
   const [countryScope, setCountryScope] = useState("");

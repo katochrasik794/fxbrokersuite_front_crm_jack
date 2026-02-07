@@ -20,7 +20,7 @@ export default function TemplateAssignments() {
   const [saving, setSaving] = useState({});
   const [assignments, setAssignments] = useState({});
 
-  const BASE = import.meta.env.VITE_BACKEND_API_URL || "http://localhost:5000/api";
+  const BASE = import.meta.env.VITE_BACKEND_API_URL || "https://fxbrokersuite-back-crm-jack.onrender.com/api";
 
   useEffect(() => {
     loadData();
